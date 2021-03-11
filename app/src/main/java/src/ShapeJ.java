@@ -15,4 +15,5 @@ public class ShapeJ extends Shape {
     public void rotateRight() {
 
     }
+
 }

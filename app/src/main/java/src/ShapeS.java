@@ -15,4 +15,5 @@ public class ShapeS extends Shape {
     public void rotateRight() {
 
     }
+
 }
