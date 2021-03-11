@@ -1,8 +1,8 @@
 package src;
 
 public class ShapeL extends Shape {
-    private static final int ROWS = 1;
-    private static final int COLUMNS = 4;
+    private static final int ROWS = 2;
+    private static final int COLUMNS = 3;
 
     /**
      *
@@ -13,7 +13,11 @@ public class ShapeL extends Shape {
         int[][] mat = new int[ROWS][COLUMNS];
         for (int i = 0; i < mat.length; i++) {
             for (int j = 0; j < mat[0].length; j++) {
-                mat[i][j] = 1;
+                if (i == 1 && j >= i) {
+                    mat[i][j] = 0;
+                } else {
+                    mat[i][j] = 1;
+                }
             }
         }
         return mat;
