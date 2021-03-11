@@ -1,8 +1,8 @@
 package src;
 
 public class ShapeO extends Shape {
-    private static final int ROWS = 1;
-    private static final int COLUMNS = 4;
+    private static final int ROWS = 2;
+    private static final int COLUMNS = 2;
 
     /**
      *
@@ -12,7 +12,7 @@ public class ShapeO extends Shape {
     public int[][]  draw() {
         int[][] mat = new int[ROWS][COLUMNS];
         for (int i = 0; i < mat.length; i++) {
-            for (int j = 0; j < mat[0].length; j++) {
+            for (int j = 0; j < mat.length; j++) {
                 mat[i][j] = 1;
             }
         }
