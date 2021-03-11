@@ -5,7 +5,7 @@ public abstract class Shape implements DrawableDelegate, MovableDelegate, Rotabl
     private int yPosition;
 
     @Override
-    public abstract void draw();
+    public abstract int[][] draw();
 
     @Override
     public void moveRight() {
