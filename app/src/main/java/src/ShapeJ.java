@@ -13,11 +13,13 @@ public class ShapeJ extends Shape {
         int[][] mat = new int[ROWS][COLUMNS];
         for (int i = 0; i < mat.length; i++) {
             for (int j = 0; j < mat[0].length; j++) {
-                mat[i][j] = 1;
+                if (i == 1 && i >= j) {
+                    mat[i][j] = 0;
+                } else {
+                    mat[i][j] = 1;
+                }
             }
         }
-        mat[1][0] = 0;
-        mat[1][1] = 0;
         return mat;
     }
 

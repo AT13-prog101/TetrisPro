@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class ShapeITest {
 
     @Test
-    public void draw() {
+    public void draw_DrawingShapeI_ArrayOfNumbers() {
         ShapeI shapeI = new ShapeI();
         int[][] actual = shapeI.draw();
         int[][] expected = {{ 1, 1, 1, 1}};
