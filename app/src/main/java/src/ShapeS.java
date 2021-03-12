@@ -4,9 +4,13 @@ public class ShapeS extends Shape {
     private static final int ROWS = 2;
     private static final int COLUMNS = 3;
 
+    public ShapeS(int xPos, int yPos) {
+        super(xPos, yPos);
+    }
+
     /**
      * Draws the shape S into an array.
-     * @return An array of int with of the form of figure.
+     * @return An array of int with the form of figure.
      */
     @Override
     public int[][]  draw() {
