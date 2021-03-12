@@ -10,7 +10,7 @@ public class ShapeZ extends Shape {
 
     /**
      * Draws the shape Z into an array.
-     * @return An array of int with of the form of figure.
+     * @return An array of int with the form of figure.
      */
     @Override
     public int[][]  draw() {
