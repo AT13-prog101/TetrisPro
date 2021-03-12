@@ -9,23 +9,23 @@ public class RandomShape {
      * Generates a class depending on a random number.
      * @return A class of shape.
      */
-    public Shape getShape(int random) {
+    public Shape getShape(int random, int posX, int posY) {
         int randomNumber = random;
         switch (randomNumber) {
             case 0:
-                return new ShapeI();
+                return new ShapeI(posX, posY);
             case 1:
-                return new ShapeJ();
+                return new ShapeJ(posX, posY);
             case 2:
-                return new ShapeL();
+                return new ShapeL(posX, posY);
             case 3:
-                return new ShapeO();
+                return new ShapeO(posX, posY);
             case 4:
-                return new ShapeS();
+                return new ShapeS(posX, posY);
             case 5:
-                return new ShapeT();
+                return new ShapeT(posX, posY);
             default:
-                return new ShapeZ();
+                return new ShapeZ(posX, posY);
         }
     }
 
