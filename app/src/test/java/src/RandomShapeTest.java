@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class RandomShapeTest {
 
     @Test
-    public void itShouldGetShape() {
+    public void getShape_GetRandomNumber_RandomShape() {
         RandomShape randomShape = new RandomShape();
         ShapeI shapeI = new ShapeI();
         ShapeJ shapeJ = new ShapeJ();
