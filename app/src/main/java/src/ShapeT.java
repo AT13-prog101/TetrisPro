@@ -1,8 +1,8 @@
 package src;
 
 public class ShapeT extends Shape {
-    private static final int ROWS = 1;
-    private static final int COLUMNS = 4;
+    private static final int ROWS = 2;
+    private static final int COLUMNS = 3;
 
     /**
      *
