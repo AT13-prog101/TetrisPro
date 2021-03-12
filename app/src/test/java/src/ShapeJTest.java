@@ -12,4 +12,5 @@ public class ShapeJTest {
         int[][] expected = {{ 1, 1, 1},{ 0, 0, 1}};
         assertArrayEquals(expected, actual);
     }
+
 }
