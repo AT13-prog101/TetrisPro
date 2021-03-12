@@ -22,7 +22,7 @@ public abstract class Shape implements DrawableDelegate, MovableDelegate, Rotabl
     }
 
     /**
-     * Adds one to yPosition.
+     * Less one to yPosition.
      * In order to represent to move left
      */
     @Override
