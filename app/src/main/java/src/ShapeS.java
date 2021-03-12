@@ -5,8 +5,8 @@ public class ShapeS extends Shape {
     private static final int COLUMNS = 3;
 
     /**
-     *
-     * @return
+     * Draws the shape S into an array.
+     * @return An array of int with of the form of figure.
      */
     @Override
     public int[][]  draw() {
