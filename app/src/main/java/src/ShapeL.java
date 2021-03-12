@@ -1,9 +1,26 @@
 package src;
 
 public class ShapeL extends Shape {
-    @Override
-    public void draw() {
+    private static final int ROWS = 2;
+    private static final int COLUMNS = 3;
 
+    /**
+     * Draws the shape L into an array.
+     * @return An array of int with of the form of figure.
+     */
+    @Override
+    public int[][]  draw() {
+        int[][] matrix = new int[ROWS][COLUMNS];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (i == 1 && j >= i) {
+                    matrix[i][j] = 0;
+                } else {
+                    matrix[i][j] = 1;
+                }
+            }
+        }
+        return matrix;
     }
 
     @Override
