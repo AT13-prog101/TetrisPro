@@ -36,4 +36,20 @@ public class GameBoard {
         }
         return gameBoardArray;
     }
+
+    /**
+     * Verifies if a certain row is full of 1
+     * @param gameBoardArray is the array to check
+     * @param row is the row to be verified
+     * @return a boolean according to the verification made
+     */
+    public boolean checkFullRow(final int[][] gameBoardArray, final int row) {
+        int notEmptyValueCounter = 0;
+        for (int j = 0; j < gameBoardArray[row].length; j++) {
+            if (gameBoardArray[row][j] == 1) {
+                notEmptyValueCounter += 1;
+            }
+        }
+        return (notEmptyValueCounter == gameBoardArray[row].length);
+    }
 }
