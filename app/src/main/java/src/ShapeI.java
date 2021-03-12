@@ -3,6 +3,11 @@ package src;
 public class ShapeI extends Shape {
     private static final int ROWS = 1;
     private static final int COLUMNS = 4;
+
+    public ShapeI(int xPos, int yPos) {
+        super(xPos, yPos);
+    }
+
     /**
      * Draws the shape I into an array.
      * @return An array of int with of the form of figure.

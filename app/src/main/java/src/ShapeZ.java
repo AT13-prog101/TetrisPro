@@ -4,6 +4,10 @@ public class ShapeZ extends Shape {
     private static final int ROWS = 2;
     private static final int COLUMNS = 3;
 
+    public ShapeZ(int xPos, int yPos) {
+        super(xPos, yPos);
+    }
+
     /**
      * Draws the shape Z into an array.
      * @return An array of int with of the form of figure.

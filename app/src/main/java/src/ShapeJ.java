@@ -4,6 +4,10 @@ public class ShapeJ extends Shape {
     private static final int ROWS = 2;
     private static final int COLUMNS = 3;
 
+    public ShapeJ(int xPos, int yPos) {
+        super(xPos, yPos);
+    }
+
     /**
      * Draws the shape J into an array.
      * @return An array of int with of the form of figure.
