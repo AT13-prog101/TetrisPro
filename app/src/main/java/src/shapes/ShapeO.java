@@ -1,22 +1,22 @@
-package src;
+package src.shapes;
 
-public class ShapeI extends Shape {
-    private static final int ROWS = 1;
-    private static final int COLUMNS = 4;
+public class ShapeO extends Shape {
+    private static final int ROWS = 2;
+    private static final int COLUMNS = 2;
 
-    public ShapeI(int xPos, int yPos) {
+    public ShapeO(final int xPos, final int yPos) {
         super(xPos, yPos);
     }
 
     /**
-     * Draws the shape I into an array.
+     * Draws the shape O into an array.
      * @return An array of int with the form of figure.
      */
     @Override
     public int[][]  draw() {
         int[][] matrix = new int[ROWS][COLUMNS];
         for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
+            for (int j = 0; j < matrix.length; j++) {
                 matrix[i][j] = 1;
             }
         }
@@ -32,4 +32,5 @@ public class ShapeI extends Shape {
     public void rotateRight() {
 
     }
+
 }
