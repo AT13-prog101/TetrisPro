@@ -13,8 +13,8 @@ public abstract class Shape implements DrawableDelegate, MovableDelegate, Rotabl
     public abstract int[][] draw();
 
     /**
-     * Adds one to yPosition.
-     * In order to represent to move right
+     * Increases xPosition in one.
+     * In order to represent movement to the right
      */
     @Override
     public void moveRight() {
@@ -22,8 +22,8 @@ public abstract class Shape implements DrawableDelegate, MovableDelegate, Rotabl
     }
 
     /**
-     * Less one to yPosition.
-     * In order to represent to move left
+     * Decreases xPposition in one.
+     * In order to represent movement to the left
      */
     @Override
     public void moveLeft() {
@@ -31,8 +31,8 @@ public abstract class Shape implements DrawableDelegate, MovableDelegate, Rotabl
     }
 
     /**
-     * Adds one to xPosition.
-     * In order to represent to move down
+     * Increases yPosition in one.
+     * In order to represent movement to the down
      */
     @Override
     public void moveDown() {
