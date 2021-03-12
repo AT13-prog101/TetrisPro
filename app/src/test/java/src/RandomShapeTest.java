@@ -1,5 +1,6 @@
 package src;
-
+import src.shapes.*;
+import src.utilities.*;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

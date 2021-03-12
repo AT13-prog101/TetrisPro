@@ -1,15 +1,15 @@
-package src;
+package src.shapes;
 
-public class ShapeJ extends Shape {
-    private static final int ROWS = 2;
-    private static final int COLUMNS = 3;
+public class ShapeI extends Shape {
+    private static final int ROWS = 1;
+    private static final int COLUMNS = 4;
 
-    public ShapeJ(int xPos, int yPos) {
+    public ShapeI(final int xPos, final int yPos) {
         super(xPos, yPos);
     }
 
     /**
-     * Draws the shape J into an array.
+     * Draws the shape I into an array.
      * @return An array of int with the form of figure.
      */
     @Override
@@ -17,11 +17,7 @@ public class ShapeJ extends Shape {
         int[][] matrix = new int[ROWS][COLUMNS];
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
-                if (i == 1 && i >= j) {
-                    matrix[i][j] = 0;
-                } else {
-                    matrix[i][j] = 1;
-                }
+                matrix[i][j] = 1;
             }
         }
         return matrix;
@@ -36,5 +32,4 @@ public class ShapeJ extends Shape {
     public void rotateRight() {
 
     }
-
 }

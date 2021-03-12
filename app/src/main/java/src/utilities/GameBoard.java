@@ -1,4 +1,4 @@
-package src;
+package src.utilities;
 
 public class GameBoard {
     private Player player;

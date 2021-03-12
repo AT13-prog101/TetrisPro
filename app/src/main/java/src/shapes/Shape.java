@@ -1,10 +1,11 @@
-package src;
+package src.shapes;
+import src.interfaces.*;
 
 public abstract class Shape implements DrawableDelegate, MovableDelegate, RotableDelegate {
     private int xPosition;
     private int yPosition;
 
-    public Shape(int xPos, int yPos) {
+    public Shape(final int xPos, final int yPos) {
         xPosition = xPos;
         yPosition = yPos;
     }
@@ -32,7 +33,7 @@ public abstract class Shape implements DrawableDelegate, MovableDelegate, Rotabl
 
     /**
      * Increases yPosition in one.
-     * In order to represent movement to the down
+     * In order to represent downwards movement
      */
     @Override
     public void moveDown() {

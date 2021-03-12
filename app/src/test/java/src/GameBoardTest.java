@@ -1,7 +1,7 @@
 package src;
 
-import junit.framework.TestCase;
 import org.junit.Test;
+import src.utilities.*;
 
 import static org.junit.Assert.*;
 

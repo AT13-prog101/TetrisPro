@@ -1,10 +1,10 @@
-package src;
+package src.shapes;
 
 public class ShapeS extends Shape {
     private static final int ROWS = 2;
     private static final int COLUMNS = 3;
 
-    public ShapeS(int xPos, int yPos) {
+    public ShapeS(final int xPos, final int yPos) {
         super(xPos, yPos);
     }
 

@@ -1,29 +1,26 @@
-package src;
+package src.shapes;
 
-public class ShapeZ extends Shape {
+public class ShapeL extends Shape {
     private static final int ROWS = 2;
     private static final int COLUMNS = 3;
 
-    public ShapeZ(int xPos, int yPos) {
+    public ShapeL(final int xPos, final int yPos) {
         super(xPos, yPos);
     }
 
     /**
-     * Draws the shape Z into an array.
+     * Draws the shape L into an array.
      * @return An array of int with the form of figure.
      */
     @Override
     public int[][]  draw() {
         int[][] matrix = new int[ROWS][COLUMNS];
-        System.out.println(matrix[0].length - 2);
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
-                if (i == 0 && j < matrix[0].length - 1) {
-                    matrix[i][j] = 1;
-                } else if (i == 1 &&  j > 0) {
-                    matrix[i][j] = 1;
-                } else {
+                if (i == 1 && j >= i) {
                     matrix[i][j] = 0;
+                } else {
+                    matrix[i][j] = 1;
                 }
             }
         }
@@ -39,4 +36,5 @@ public class ShapeZ extends Shape {
     public void rotateRight() {
 
     }
+
 }
