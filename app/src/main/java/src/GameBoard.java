@@ -1,11 +1,8 @@
 package src;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
 public class GameBoard {
-    Player player;
-    int speed;
+    private Player player;
+    private int speed;
     static final int GAME_BOARD_HEIGHT = 20;
     static final int GAME_BOARD_WIDTH = 10;
 
@@ -15,15 +12,28 @@ public class GameBoard {
      * Creates the game board array
      * @param height is the game board height
      * @param width is the game board width
-     * @return game board array
+     * @return the game board array
      */
     public int[][] createGameBoardArray(final int height, final int width) {
-        int[][] array = new int[height][width];
+        int[][] gameBoardArray = new int[height][width];
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                array[i][j] = 0;
+                gameBoardArray[i][j] = 0;
             }
         }
-        return array;
+        return gameBoardArray;
+    }
+
+    /**
+     * Sets all the values of a row to 0
+     * @param gameBoardArray is the array to set the values
+     * @param row is the row on the array to set the values
+     * @return the array with the values set
+     */
+    public int[][] cleanRowOnArray(final int[][] gameBoardArray, final int row) {
+        for (int j = 0; j < gameBoardArray[row].length; j++) {
+            gameBoardArray[row][j] = 0;
+        }
+        return gameBoardArray;
     }
 }
