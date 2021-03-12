@@ -9,13 +9,13 @@ public class ShapeI extends Shape {
      */
     @Override
     public int[][]  draw() {
-        int[][] mat = new int[ROWS][COLUMNS];
-        for (int i = 0; i < mat.length; i++) {
-            for (int j = 0; j < mat[0].length; j++) {
-                mat[i][j] = 1;
+        int[][] matrix = new int[ROWS][COLUMNS];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                matrix[i][j] = 1;
             }
         }
-        return mat;
+        return matrix;
     }
 
     @Override

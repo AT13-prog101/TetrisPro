@@ -10,19 +10,19 @@ public class ShapeS extends Shape {
      */
     @Override
     public int[][]  draw() {
-        int[][] mat = new int[ROWS][COLUMNS];
-        for (int i = 0; i < mat.length; i++) {
-            for (int j = 0; j < mat[0].length; j++) {
+        int[][] matrix = new int[ROWS][COLUMNS];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
                 if (i == 0 && j > 0) {
-                    mat[i][j] = 1;
+                    matrix[i][j] = 1;
                 } else if (i == 1 && i >= j) {
-                    mat[i][j] = 1;
+                    matrix[i][j] = 1;
                 } else {
-                    mat[i][j] = 0;
+                    matrix[i][j] = 0;
                 }
             }
         }
-        return mat;
+        return matrix;
     }
 
     @Override
