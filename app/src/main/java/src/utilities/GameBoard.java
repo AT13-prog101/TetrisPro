@@ -14,39 +14,39 @@ public class GameBoard {
      * @param width is the game board width
      * @return the game board array
      */
-    public int[][] createGameBoardArray(final int height, final int width) {
-        int[][] gameBoardArray = new int[height][width];
+    public boolean[][] createGameBoardArray(final int height, final int width) {
+        boolean[][] gameBoardArray = new boolean[height][width];
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                gameBoardArray[i][j] = 0;
+                gameBoardArray[i][j] = false;
             }
         }
         return gameBoardArray;
     }
 
     /**
-     * Sets all the values of a row to 0
+     * Sets all the values of a row to false
      * @param gameBoardArray is the array to set the values
      * @param row is the row on the array to set the values
      * @return the array with the values set
      */
-    public int[][] cleanRowOnArray(final int[][] gameBoardArray, final int row) {
+    public boolean[][] cleanRowOnArray(final boolean[][] gameBoardArray, final int row) {
         for (int j = 0; j < gameBoardArray[row].length; j++) {
-            gameBoardArray[row][j] = 0;
+            gameBoardArray[row][j] = false;
         }
         return gameBoardArray;
     }
 
     /**
-     * Verifies if a certain row is full of 1
+     * Verifies if a certain row is full of true
      * @param gameBoardArray is the array to check
      * @param row is the row to be verified
      * @return a boolean according to the verification made
      */
-    public boolean checkFullRow(final int[][] gameBoardArray, final int row) {
+    public boolean checkFullRow(final boolean[][] gameBoardArray, final int row) {
         int notEmptyValueCounter = 0;
         for (int j = 0; j < gameBoardArray[row].length; j++) {
-            if (gameBoardArray[row][j] == 1) {
+            if (gameBoardArray[row][j] == true) {
                 notEmptyValueCounter += 1;
             }
         }
