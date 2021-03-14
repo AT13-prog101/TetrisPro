@@ -6,6 +6,7 @@ public class ShapeS extends Shape {
 
     public ShapeS(final int xPos, final int yPos) {
         super(xPos, yPos);
+        setContainer(draw());
     }
 
     /**
@@ -13,16 +14,16 @@ public class ShapeS extends Shape {
      * @return An array of int with the form of figure.
      */
     @Override
-    public int[][]  draw() {
-        int[][] matrix = new int[ROWS][COLUMNS];
+    public boolean[][]  draw() {
+        boolean[][] matrix = new boolean[ROWS][COLUMNS];
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
                 if (i == 0 && j > 0) {
-                    matrix[i][j] = 1;
+                    matrix[i][j] = true;
                 } else if (i == 1 && i >= j) {
-                    matrix[i][j] = 1;
+                    matrix[i][j] = true;
                 } else {
-                    matrix[i][j] = 0;
+                    matrix[i][j] = false;
                 }
             }
         }

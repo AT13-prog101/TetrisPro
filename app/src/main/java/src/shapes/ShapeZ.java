@@ -6,6 +6,7 @@ public class ShapeZ extends Shape {
 
     public ShapeZ(final int xPos, final int yPos) {
         super(xPos, yPos);
+        setContainer(draw());
     }
 
     /**
@@ -13,17 +14,17 @@ public class ShapeZ extends Shape {
      * @return An array of int with the form of figure.
      */
     @Override
-    public int[][]  draw() {
-        int[][] matrix = new int[ROWS][COLUMNS];
+    public boolean[][]  draw() {
+        boolean[][] matrix = new boolean[ROWS][COLUMNS];
         System.out.println(matrix[0].length - 2);
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
                 if (i == 0 && j < matrix[0].length - 1) {
-                    matrix[i][j] = 1;
+                    matrix[i][j] = true;
                 } else if (i == 1 &&  j > 0) {
-                    matrix[i][j] = 1;
+                    matrix[i][j] = true;
                 } else {
-                    matrix[i][j] = 0;
+                    matrix[i][j] = false;
                 }
             }
         }
