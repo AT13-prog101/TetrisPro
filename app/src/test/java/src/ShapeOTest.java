@@ -10,7 +10,8 @@ public class ShapeOTest {
     public void draw_DrawingShapeO_ArrayOfNumbers() {
         ShapeO shapeO = new ShapeO(4, 4);
         boolean[][] actual = shapeO.draw();
-        boolean[][] expected = {{true, true},{true, true}};
+        boolean[][] expected = {{ true, true},
+                                { true, true}};
         assertArrayEquals(expected, actual);
     }
 }

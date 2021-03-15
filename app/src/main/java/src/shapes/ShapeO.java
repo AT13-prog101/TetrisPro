@@ -11,7 +11,7 @@ public class ShapeO extends Shape {
 
     /**
      * Draws the shape O into an array.
-     * @return An array of int with the form of figure.
+     * @return An array of boolean with the form of figure.
      */
     @Override
     public boolean[][]  draw() {
@@ -22,6 +22,7 @@ public class ShapeO extends Shape {
             }
         }
         return matrix;
+
     }
 
     @Override

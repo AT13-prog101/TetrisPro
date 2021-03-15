@@ -11,7 +11,7 @@ public class ShapeS extends Shape {
 
     /**
      * Draws the shape S into an array.
-     * @return An array of int with the form of figure.
+     * @return An array of boolean with the form of figure.
      */
     @Override
     public boolean[][]  draw() {

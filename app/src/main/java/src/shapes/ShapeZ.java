@@ -11,7 +11,7 @@ public class ShapeZ extends Shape {
 
     /**
      * Draws the shape Z into an array.
-     * @return An array of int with the form of figure.
+     * @return An array of boolean with the form of figure.
      */
     @Override
     public boolean[][]  draw() {
