@@ -10,7 +10,10 @@ public class ShapeLTest {
     public void draw_DrawingShapeL_ArrayOfNumbers() {
         ShapeL shapeL = new ShapeL(3, 3);
         boolean[][] actual = shapeL.draw();
-        boolean[][] expected = {{true, true, true},{true, false, false}};
+        boolean[][] expected = {{ true, true, true},
+                                { true, false, false},
+                                { false, false, false}};
         assertArrayEquals(expected, actual);
+
     }
 }
