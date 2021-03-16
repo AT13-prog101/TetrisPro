@@ -10,8 +10,11 @@ public class ShapeJTest {
     public void draw_DrawingShapeJ_ArrayOfNumbers() {
         ShapeJ shapeJ = new ShapeJ(2, 2);
         boolean[][] actual = shapeJ.draw();
-        boolean[][] expected = {{true, true, true},{false, false, true}};
+        boolean[][] expected = {{ true, true, true},
+                                { false, false, true},
+                                { false, false, false}};
         assertArrayEquals(expected, actual);
+
     }
 
 }

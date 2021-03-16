@@ -11,7 +11,10 @@ public class ShapeSTest {
     public void draw_DrawingShapeS_ArrayOfNumbers() {
         ShapeS shapeS = new ShapeS(5, 5);
         boolean[][] actual = shapeS.draw();
-        boolean[][] expected = {{false, true, true},{true, true, false}};
+        boolean[][] expected = {{ false, true, true},
+                                { true, true, false},
+                                { false, false, false}};
         assertArrayEquals(expected, actual);
+
     }
 }
