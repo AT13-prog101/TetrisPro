@@ -75,7 +75,7 @@ public class GameBoardTest {
         GameBoard gameBoard = new GameBoard();
         boolean[][] disorderedArray = {
                 {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
+                {true, false, false, true, false, true, false, true, false, false},
                 {false, false, false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false},
@@ -113,7 +113,7 @@ public class GameBoardTest {
                 {false, false, false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false},
                 {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
+                {true, false, false, true, false, true, false, true, false, false},
                 {true, false, false, false, false, false, false, false, false, false},
                 {true, true, false, false, false, false, false, false, false, false},
                 {true, false, false, false, true, false, false, false, false, true},

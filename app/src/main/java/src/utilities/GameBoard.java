@@ -81,6 +81,10 @@ public class GameBoard {
         return (valueCounter == gameBoardArray[row].length);
     }
 
+    /**
+     * Moves the lines to the bottom side when empty lines in between
+     * @param gameBoardArray the array to adjust
+     */
     public void adjustLines(final boolean[][] gameBoardArray) {
         int row = gameBoardArray.length - 1;
         int emptyRowCounter;
@@ -88,9 +92,13 @@ public class GameBoard {
             emptyRowCounter = 0;
             while (checkFullRow(gameBoardArray, row, false)) {
                 emptyRowCounter += 1;
-                row -= 1;
+                if (row == 0) {
+                    break;
+                } else {
+                    row -= 1;
+                }
             }
-            if (emptyRowCounter == 0) {
+            if (emptyRowCounter == 0 || row == 0) {
                 row -= 1;
             } else {
                 boolean[][] array = new boolean[1][gameBoardArray[row].length];
