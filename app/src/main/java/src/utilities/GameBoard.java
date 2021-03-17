@@ -158,12 +158,20 @@ public class GameBoard {
      * Prints the Game Board
      */
     public void printGameBoard() {
-        int[][] gameBoardArray = createGameBoardArray(GAME_BOARD_HEIGHT, GAME_BOARD_WIDTH);
+        boolean[][] gameBoardArray = createGameBoardArray(GAME_BOARD_HEIGHT, GAME_BOARD_WIDTH);
         for (int i = 0; i < gameBoardArray.length; i++) {
             for (int j = 0; j < gameBoardArray[i].length; j++) {
-                System.out.print(gameBoardArray[i][j] + " ");
+                System.out.print(toNumeralString(gameBoardArray[i][j]) + " ");
             }
             System.out.println();
+        }
+    }
+
+    public static String toNumeralString(final Boolean input) {
+        if (input == null) {
+            return "null";
+        } else {
+            return input.booleanValue() ? "1" : "0";
         }
     }
 }
