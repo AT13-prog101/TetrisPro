@@ -15,27 +15,51 @@ public class GameBoardTest {
     }
 
     @Test
-    public void cleanRowOnArray_ArrayOf2x3AndRowTrue_arrayOf2x3WithFalseOnRow1() {
+    public void cleanRowOnArray_Row1_GameBoardArrayWithRow1False() {
         GameBoard gameBoard = new GameBoard();
-        boolean[][] actual = {{true, true, true}, {true, true, true}};
-        actual = gameBoard.cleanRowOnArray(actual, 1);
-        boolean[][] expected = {{true, true, true}, {false, false, false}};
+        boolean[][] array = {
+                {true, true, true, true, true, true, true, true, true, true},
+                {true, true, true, true, true, true, true, true, true, true},
+                {true, true, true, true, true, true, true, true, true, true}};
+        gameBoard.setGameBoardArray(0, 0, array);
+        gameBoard.cleanRowOnArray(1);
+        boolean[][] actual = gameBoard.getGameBoardArray();
+        boolean [][] expected = {
+                {true, true, true, true, true, true, true, true, true, true},
+                {false, false, false, false, false, false, false, false, false, false},
+                {true, true, true, true, true, true, true, true, true, true},
+                {false, false, false, false, false, false, false, false, false, false},
+                {false, false, false, false, false, false, false, false, false, false},
+                {false, false, false, false, false, false, false, false, false, false},
+                {false, false, false, false, false, false, false, false, false, false},
+                {false, false, false, false, false, false, false, false, false, false},
+                {false, false, false, false, false, false, false, false, false, false},
+                {false, false, false, false, false, false, false, false, false, false},
+                {false, false, false, false, false, false, false, false, false, false},
+                {false, false, false, false, false, false, false, false, false, false},
+                {false, false, false, false, false, false, false, false, false, false},
+                {false, false, false, false, false, false, false, false, false, false},
+                {false, false, false, false, false, false, false, false, false, false},
+                {false, false, false, false, false, false, false, false, false, false},
+                {false, false, false, false, false, false, false, false, false, false},
+                {false, false, false, false, false, false, false, false, false, false},
+                {false, false, false, false, false, false, false, false, false, false},
+                {false, false, false, false, false, false, false, false, false, false}
+        };
         assertArrayEquals(expected, actual);
     }
 
     @Test
-    public void checkFullRow_ArrayOf2x5andRow0_True() {
+    public void checkFullRow_Row5AndValueFalse_True() {
         GameBoard gameBoard = new GameBoard();
-        boolean[][] array = {{true, true, true, true, true}, {false, true, false, true, false}};
-        boolean actual = gameBoard.checkFullRow(array,0, true);
+        boolean actual = gameBoard.checkFullRow(5, false);
         assertTrue(actual);
     }
 
     @Test
-    public void checkFullRow_ArrayOf2x5andRow1_False() {
+    public void checkFullRow_Row1AndValueTrue_False() {
         GameBoard gameBoard = new GameBoard();
-        boolean[][] array = {{true, true, true, true, true}, {false, true, false, true, false}};
-        boolean actual = gameBoard.checkFullRow(array,1, true);
+        boolean actual = gameBoard.checkFullRow(1, true);
         assertFalse(actual);
     }
 
@@ -96,7 +120,7 @@ public class GameBoardTest {
                 {true, false, true, false, false, false, true, false, false, false}
         };
         gameBoard.setGameBoardArray(0, 0, disorderedArray);
-        gameBoard.adjustLines(gameBoard.getGameBoardArray());
+        gameBoard.adjustLines();
         boolean[][] actual = gameBoard.getGameBoardArray();
         boolean [][] expected = {
                 {false, false, false, false, false, false, false, false, false, false},
@@ -120,6 +144,14 @@ public class GameBoardTest {
                 {true, false, true, false, false, true, false, false, true, false},
                 {true, false, true, false, false, false, true, false, false, false}
         };
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void getLineFromGameBoardArray_Row10_BooleanArrayFullWithFalse() {
+        GameBoard gameBoard = new GameBoard();
+        boolean[][] actual = gameBoard.getLineFromGameBoardArray(10);
+        boolean[][] expected = {{false, false, false, false, false, false, false, false, false, false}};
         assertArrayEquals(expected, actual);
     }
 }
