@@ -1,8 +1,6 @@
 package src.utilities;
 
 public class GameBoard {
-    private Player player;
-    private int speed;
     static final int GAME_BOARD_HEIGHT = 20;
     static final int GAME_BOARD_WIDTH = 10;
     private boolean[][] gameBoardArray;
@@ -33,8 +31,6 @@ public class GameBoard {
         return this.gameBoardArray;
     }
 
-    public void init() { }
-
     /**
      * Creates the game board array
      * @param height is the game board height
@@ -53,11 +49,10 @@ public class GameBoard {
 
     /**
      * Sets all the values of a row to false
-     * @param gameBoardArray is the array to set the values
      * @param row is the row on the array to set the values
      * @return the array with the values set
      */
-    public boolean[][] cleanRowOnArray(final boolean[][] gameBoardArray, final int row) {
+    public boolean[][] cleanRowOnArray(final int row) {
         for (int j = 0; j < gameBoardArray[row].length; j++) {
             gameBoardArray[row][j] = false;
         }
@@ -66,12 +61,11 @@ public class GameBoard {
 
     /**
      * Verifies if a certain row is full of a certain value
-     * @param gameBoardArray is the array to check
      * @param row is the row to be verified
      * @param arrayValue is the value to check
      * @return a boolean according to the verification made
      */
-    public boolean checkFullRow(final boolean[][] gameBoardArray, final int row, final boolean arrayValue) {
+    public boolean checkFullRow(final int row, final boolean arrayValue) {
         int valueCounter = 0;
         for (int j = 0; j < gameBoardArray[row].length; j++) {
             if (gameBoardArray[row][j] == arrayValue) {
@@ -83,14 +77,13 @@ public class GameBoard {
 
     /**
      * Moves the lines to the bottom side when empty lines in between
-     * @param gameBoardArray the array to adjust
      */
-    public void adjustLines(final boolean[][] gameBoardArray) {
+    public void adjustLines() {
         int row = gameBoardArray.length - 1;
         int emptyRowCounter;
         while (row >= 0) {
             emptyRowCounter = 0;
-            while (checkFullRow(gameBoardArray, row, false)) {
+            while (checkFullRow(row, false)) {
                 emptyRowCounter += 1;
                 if (row == 0) {
                     break;
@@ -101,15 +94,24 @@ public class GameBoard {
             if (emptyRowCounter == 0 || row == 0) {
                 row -= 1;
             } else {
-                boolean[][] newRow = new boolean[1][gameBoardArray[row].length];
-                for (int j = 0; j < gameBoardArray[row].length; j++) {
-                    newRow[0][j] = gameBoardArray[row][j];
-                }
+                boolean[][] newRow = getLineFromGameBoardArray(row);
                 setGameBoardArray(0, row + emptyRowCounter, newRow);
-                cleanRowOnArray(gameBoardArray, row);
-                setGameBoardArray(0, 0, gameBoardArray);
+                cleanRowOnArray(row);
                 row = row + emptyRowCounter - 1;
             }
         }
+    }
+
+    /**
+     * Gets the full line of the game board array
+     * @param row the row to get
+     * @return the array with the selected line
+     */
+    public boolean[][] getLineFromGameBoardArray(int row) {
+        boolean[][] line = new boolean[1][gameBoardArray[row].length];
+        for (int j = 0; j < gameBoardArray[row].length; j++) {
+            line[0][j] = gameBoardArray[row][j];
+        }
+        return line;
     }
 }
