@@ -101,11 +101,11 @@ public class GameBoard {
             if (emptyRowCounter == 0 || row == 0) {
                 row -= 1;
             } else {
-                boolean[][] array = new boolean[1][gameBoardArray[row].length];
+                boolean[][] newRow = new boolean[1][gameBoardArray[row].length];
                 for (int j = 0; j < gameBoardArray[row].length; j++) {
-                    array[0][j] = gameBoardArray[row][j];
+                    newRow[0][j] = gameBoardArray[row][j];
                 }
-                setGameBoardArray(0, row + emptyRowCounter, array);
+                setGameBoardArray(0, row + emptyRowCounter, newRow);
                 cleanRowOnArray(gameBoardArray, row);
                 setGameBoardArray(0, 0, gameBoardArray);
                 row = row + emptyRowCounter - 1;
