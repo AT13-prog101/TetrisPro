@@ -9,8 +9,11 @@ public class ShapeZTest {
     @Test
     public void draw_DrawingShapeZ_ArrayOfNumbers() {
         ShapeZ shapeZ = new ShapeZ(7, 7);
-        int[][] actual = shapeZ.draw();
-        int[][] expected = {{ 1, 1, 0},{ 0, 1, 1}};
+        boolean[][] actual = shapeZ.draw();
+        boolean[][] expected = {{ true, true, false},
+                                { false, true, true},
+                                { false, false, false}};
         assertArrayEquals(expected, actual);
+
     }
 }

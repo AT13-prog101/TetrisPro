@@ -4,6 +4,7 @@ import src.interfaces.*;
 public abstract class Shape implements DrawableDelegate, MovableDelegate, RotableDelegate {
     private int xPosition;
     private int yPosition;
+    private boolean[][] container;
 
     public Shape(final int xPos, final int yPos) {
         xPosition = xPos;
@@ -25,7 +26,9 @@ public abstract class Shape implements DrawableDelegate, MovableDelegate, Rotabl
      */
     @Override
     public void moveLeft() {
-        yPosition -= 1;
+        if (yPosition > 0) {
+            yPosition -= 1;
+        }
     }
 
     /**
@@ -49,5 +52,19 @@ public abstract class Shape implements DrawableDelegate, MovableDelegate, Rotabl
      */
     public int getyPosition() {
         return yPosition;
+    }
+
+    /**
+     * @return An arrray that is container of shape.
+     */
+    public boolean[][] getContainer() {
+        return container;
+    }
+
+    /**
+     * assigns values to container of shape.
+     */
+    public void setContainer(final boolean[][] cont) {
+        container = cont;
     }
 }

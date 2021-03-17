@@ -1,32 +1,30 @@
 package src.shapes;
 
 public class ShapeT extends Shape {
-    private static final int ROWS = 2;
+    private static final int ROWS = 3;
     private static final int COLUMNS = 3;
 
     public ShapeT(final int xPos, final int yPos) {
         super(xPos, yPos);
+        setContainer(draw());
     }
 
     /**
      * Draws the shape T into an array.
-     * @return An array of int with the form of figure.
+     * @return An array of boolean with the form of figure.
      */
     @Override
-    public int[][]  draw() {
-        int[][] matrix = new int[ROWS][COLUMNS];
+    public boolean[][]  draw() {
+        boolean[][] matrix = new boolean[ROWS][COLUMNS];
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
-                if (i == 0) {
-                    matrix[i][j] = 1;
-                } else if (i == 1 && i == j) {
-                    matrix[i][j] = 1;
-                } else {
-                    matrix[i][j] = 0;
+                if (i == 0 || (i == 1 && i == j)) {
+                    matrix[i][j] = true;
                 }
             }
         }
         return matrix;
+
     }
 
     @Override
