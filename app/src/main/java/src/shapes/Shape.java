@@ -5,10 +5,19 @@ public abstract class Shape implements DrawableDelegate, MovableDelegate, Rotabl
     private int xPosition;
     private int yPosition;
     private boolean[][] container;
+    private boolean firstColumnEmty;
+    private boolean lastColumhnEmpty;
+    private int horizontalLimit;
 
     public Shape(final int xPos, final int yPos) {
         xPosition = xPos;
         yPosition = yPos;
+    }
+
+    public Shape(final int xPos, final int yPos, final int horizontalL) {
+        xPosition = xPos;
+        yPosition = yPos;
+        horizontalLimit = horizontalL;
     }
 
     /**
@@ -17,7 +26,10 @@ public abstract class Shape implements DrawableDelegate, MovableDelegate, Rotabl
      */
     @Override
     public void moveRight() {
-        yPosition += 1;
+        if (yPosition < horizontalLimit - 3 && !lastColumhnEmpty
+                || yPosition < horizontalLimit - 2 && lastColumhnEmpty) {
+            yPosition += 1;
+        }
     }
 
     /**
@@ -26,7 +38,7 @@ public abstract class Shape implements DrawableDelegate, MovableDelegate, Rotabl
      */
     @Override
     public void moveLeft() {
-        if (yPosition > 0) {
+        if (yPosition > 0 && !firstColumnEmty || yPosition > -1 && firstColumnEmty) {
             yPosition -= 1;
         }
     }
