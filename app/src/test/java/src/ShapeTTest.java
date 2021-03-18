@@ -10,7 +10,7 @@ public class ShapeTTest {
     @Test
     public void draw_DrawingShapeT_ArrayOfNumbers() {
         ShapeT shapeT = new ShapeT(6, 6);
-        boolean[][] actual = shapeT.draw();
+        boolean[][] actual = shapeT.getShapeT();
         boolean[][] expected = {{ true, true, true},
                                 { false, true, false},
                                 { false, false, false}};

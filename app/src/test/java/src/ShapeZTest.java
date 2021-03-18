@@ -9,7 +9,7 @@ public class ShapeZTest {
     @Test
     public void draw_DrawingShapeZ_ArrayOfNumbers() {
         ShapeZ shapeZ = new ShapeZ(7, 7);
-        boolean[][] actual = shapeZ.draw();
+        boolean[][] actual = shapeZ.getShapeZ();
         boolean[][] expected = {{ true, true, false},
                                 { false, true, true},
                                 { false, false, false}};

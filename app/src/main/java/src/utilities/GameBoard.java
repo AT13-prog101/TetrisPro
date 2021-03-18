@@ -25,7 +25,7 @@ public class GameBoard {
      * @param y initial position on the y axis
      * @param array the array that contains the values to change
      */
-    public void setGameBoardArray(int x, int y, boolean[][] array) {
+    public void setGameBoardArray(final int x, final int y, final boolean[][] array) {
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
                 this.gameBoardArray[i + y][j + x] = array[i][j];
@@ -153,7 +153,7 @@ public class GameBoard {
      */
     public boolean[][] show() {
         RandomShape randomShape = new RandomShape();
-        boolean[][] shape = randomShape.getShape(randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE).draw();
+        boolean[][] shape = randomShape.getShape(randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE).getContainer();
         setGameBoardArray(INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE, shape);
         return this.gameBoardArray;
     }
@@ -162,7 +162,7 @@ public class GameBoard {
      * Prints an array of booleans
      * @param arrayOfBooleans is the array to print
      */
-    public void print(boolean[][] arrayOfBooleans) {
+    public void print(final boolean[][] arrayOfBooleans) {
         for (int i = 0; i < arrayOfBooleans.length; i++) {
             for (int j = 0; j < arrayOfBooleans[i].length; j++) {
                 System.out.print(toNumeralString(arrayOfBooleans[i][j]) + " ");
@@ -186,7 +186,7 @@ public class GameBoard {
      * @param input is the boolean to change
      * @return a 0 or 1
      */
-    public String toNumeralString(Boolean input) {
+    public String toNumeralString(final Boolean input) {
         return input.booleanValue() ? "1" : "0";
     }
     /**
@@ -194,7 +194,7 @@ public class GameBoard {
      * @param row the row to get
      * @return the array with the selected line
      */
-    public boolean[][] getLineFromGameBoardArray(int row) {
+    public boolean[][] getLineFromGameBoardArray(final int row) {
         boolean[][] line = new boolean[1][gameBoardArray[row].length];
         for (int j = 0; j < gameBoardArray[row].length; j++) {
             line[0][j] = gameBoardArray[row][j];
