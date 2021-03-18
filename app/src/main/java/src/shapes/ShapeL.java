@@ -1,39 +1,20 @@
 package src.shapes;
 
 public class ShapeL extends Shape {
-    private static final int ROWS = 3;
-    private static final int COLUMNS = 3;
+    private boolean[][] shapeL = {{true, false, false},
+                                  {true, false, false},
+                                  {true, true, false}};
 
     public ShapeL(final int xPos, final int yPos) {
         super(xPos, yPos);
-        setContainer(draw());
+        setContainer(getShapeL());
     }
 
     /**
      * Draws the shape L into an array.
      * @return An array of boolean with the form of figure.
      */
-    @Override
-    public boolean[][]  draw() {
-        boolean[][] matrix = new boolean[ROWS][COLUMNS];
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
-                if (i == 0 || (i == 1 && j == 0)) {
-                    matrix[i][j] = true;
-                }
-            }
-        }
-        return matrix;
+    public boolean[][] getShapeL() {
+        return shapeL;
     }
-
-    @Override
-    public void rotateLeft() {
-
-    }
-
-    @Override
-    public void rotateRight() {
-
-    }
-
 }
