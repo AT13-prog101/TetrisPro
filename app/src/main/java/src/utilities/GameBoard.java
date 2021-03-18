@@ -1,5 +1,6 @@
 package src.utilities;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class GameBoard {
@@ -11,9 +12,12 @@ public class GameBoard {
     private static final int OPTION_2 = 2;
     private static final int OPTION_3 = 3;
     private static final int OPTION_4 = 4;
+    private static final int MAX_RANDOM = 7;
+    private static final int INITIAL_POSX_SHAPE = 3;
+    private static final int INITIAL_POSY_SHAPE = 0;
     private boolean[][] gameBoardArray;
 
-    public GameBoard () {
+    public GameBoard() {
         this.gameBoardArray = createGameBoardArray(GAME_BOARD_HEIGHT, GAME_BOARD_WIDTH);
     }
 
@@ -155,19 +159,45 @@ public class GameBoard {
     }
 
     /**
-     * Prints the Game Board
+     * Creates the game board array with a shape on it
+     * @return the game board array with a shape on it
      */
-    public void printGameBoard() {
-        boolean[][] gameBoardArray = createGameBoardArray(GAME_BOARD_HEIGHT, GAME_BOARD_WIDTH);
-        for (int i = 0; i < gameBoardArray.length; i++) {
-            for (int j = 0; j < gameBoardArray[i].length; j++) {
-                System.out.print(toNumeralString(gameBoardArray[i][j]) + " ");
+    public boolean[][] show() {
+        RandomShape randomShape = new RandomShape();
+        boolean[][] shape = randomShape.getShape(randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE).draw();
+        setGameBoardArray(INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE, shape);
+        return this.gameBoardArray;
+    }
+
+    /**
+     * Prints an array of booleans
+     * @param arrayOfBooleans is the array to print
+     */
+    public void print(boolean[][] arrayOfBooleans) {
+        for (int i = 0; i < arrayOfBooleans.length; i++) {
+            for (int j = 0; j < arrayOfBooleans[i].length; j++) {
+                System.out.print(toNumeralString(arrayOfBooleans[i][j]) + " ");
             }
             System.out.println();
         }
     }
 
-    public static String toNumeralString(final Boolean input) {
+    /**
+     * Generates a random number
+     * @return a random number
+     */
+    private int randomNumberGenerator() {
+        Random random = new Random();
+        int randomNumber = random.nextInt(MAX_RANDOM);
+        return randomNumber;
+    }
+
+    /**
+     * Transforms a boolean into 0 or 1 according to its value
+     * @param input is the boolean to change
+     * @return a 0 or 1
+     */
+    public static String toNumeralString(Boolean input) {
         if (input == null) {
             return "null";
         } else {
