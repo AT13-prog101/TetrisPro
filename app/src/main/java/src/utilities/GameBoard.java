@@ -186,12 +186,8 @@ public class GameBoard {
      * @param input is the boolean to change
      * @return a 0 or 1
      */
-    public static String toNumeralString(Boolean input) {
-        if (input == null) {
-            return "null";
-        } else {
-            return input.booleanValue() ? "1" : "0";
-        }
+    public String toNumeralString(Boolean input) {
+        return input.booleanValue() ? "1" : "0";
     }
     /**
      * Gets the full line of the game board array
