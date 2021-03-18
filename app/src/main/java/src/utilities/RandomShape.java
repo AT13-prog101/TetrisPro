@@ -35,10 +35,4 @@ public class RandomShape {
                 return new ShapeZ(posX, posY);
         }
     }
-
-    private int randomNumberGenerator() {
-        Random random = new Random();
-        int randomNumber = random.nextInt(MAX_RANDOM);
-        return randomNumber;
-    }
 }

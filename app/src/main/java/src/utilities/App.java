@@ -4,7 +4,12 @@
 package src.utilities;
 
 public class App {
-    public static void main(String[] args) {
+
+    public static void main(final String[] args) {
         System.out.println("hola mundo");
+        GameBoard gameBoard = new GameBoard();
+        gameBoard.print(gameBoard.show());
     }
 }
+
+
