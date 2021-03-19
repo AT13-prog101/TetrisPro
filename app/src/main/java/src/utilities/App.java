@@ -9,6 +9,8 @@ public class App {
         System.out.println("hola mundo");
         GameBoard gameBoard = new GameBoard();
         gameBoard.print(gameBoard.show());
+        Menu menu = new Menu();
+        menu.showGameMenu();
     }
 }
 
