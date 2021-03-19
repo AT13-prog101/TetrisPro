@@ -31,7 +31,7 @@ public class Shape  {
      * In order to represent movement to the right
      */
     public void moveRight() {
-        if (yPosition < horizontalLimit - 3 && !lastColumnEmpty
+        if (yPosition < horizontalLimit - (1 + 1 + 1) && !lastColumnEmpty
                 || yPosition < horizontalLimit - 2 && lastColumnEmpty) {
             yPosition += 1;
         }
@@ -104,11 +104,9 @@ public class Shape  {
     public boolean[][] rotateShape(final boolean[][] matrix) {
         boolean[][] newMatrix;
         if (isRotationStatus()) {
-            System.out.println("ENTRO TRASPONER");
             newMatrix = transposeMatrix(matrix);
             setRotationStatus(false);
         } else {
-            System.out.println("ENTRO REVERSE");
             newMatrix = reverseMatrix(matrix);
             setRotationStatus(true);
         }

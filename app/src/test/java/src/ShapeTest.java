@@ -63,7 +63,8 @@ public class ShapeTest {
     @Test
     public void rotateShape_changePositionShapeS_shapeSHorizontal() {
         Shape shapeS = new Shape(7, 5, ShapeType.S);
-        boolean[][] actual = shapeS.rotateShape(shapeS.rotateShape(shapeS.getContainer()));
+        boolean[][] primer = shapeS.rotateShape(shapeS.getContainer());
+        boolean[][] actual = shapeS.rotateShape(primer);
         boolean[][] expected = {{true, false, false},
                                  {true, true, false},
                                  {false, true, false}};
