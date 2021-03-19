@@ -8,6 +8,7 @@ public class Shape  {
     private boolean firstColumnEmpty;
     private boolean lastColumnEmpty;
     private int horizontalLimit;
+    private int veticalLimit;
     private boolean rotationStatus;
 
     public Shape(final int xPos, final int yPos, final ShapeType type) {
@@ -17,13 +18,16 @@ public class Shape  {
         this.container = ShapeDefinition.generate(type);
     }
 
-    public Shape(final int xPos, final int yPos, final int horizontalL) {
+    public Shape(final int xPos, final int yPos, final int horizontalL, final int verticalL,
+                 final ShapeType type) {
         xPosition = xPos;
         yPosition = yPos;
         horizontalLimit = horizontalL;
+        veticalLimit = verticalL;
         firstColumnEmpty = false;
         lastColumnEmpty = false;
         this.rotationStatus = true;
+        this.container = ShapeDefinition.generate(type);
     }
 
     /**
@@ -33,7 +37,7 @@ public class Shape  {
     public void moveRight() {
         if (yPosition < horizontalLimit - (1 + 1 + 1) && !lastColumnEmpty
                 || yPosition < horizontalLimit - 2 && lastColumnEmpty) {
-            yPosition += 1;
+            xPosition += 1;
         }
     }
 
@@ -43,7 +47,7 @@ public class Shape  {
      */
     public void moveLeft() {
         if (yPosition > 0 && !firstColumnEmpty || yPosition > -1 && firstColumnEmpty) {
-            yPosition -= 1;
+            xPosition -= 1;
         }
     }
 
@@ -52,7 +56,9 @@ public class Shape  {
      * In order to represent downwards movement
      */
     public void moveDown() {
-        xPosition += 1;
+        if (yPosition < veticalLimit) {
+            yPosition += 1;
+        }
     }
 
     /**
@@ -138,5 +144,13 @@ public class Shape  {
             matrix[matrix.length - i - 1] = matrixAux;
         }
         return matrix;
+    }
+
+    public boolean getFirst() {
+        return firstColumnEmpty;
+    }
+
+    public boolean getLast() {
+        return lastColumnEmpty;
     }
 }
