@@ -12,7 +12,7 @@ public class RandomShapeTest {
         RandomShape randomShape = new RandomShape();
         int posX = 2;
         int posY = 2;
-        ShapeI shapeI = new ShapeI(posX, posY);
+        Shape shapeI = new Shape(posX, posY ,ShapeType.I);
         assertEquals(shapeI.getClass(),randomShape.getShape(0, posX, posY).getClass());
     }
 
@@ -21,7 +21,7 @@ public class RandomShapeTest {
         RandomShape randomShape = new RandomShape();
         int posX = 2;
         int posY = 2;
-        ShapeJ shapeJ = new ShapeJ(posX, posY);
+        Shape shapeJ = new Shape(posX, posY, ShapeType.J);
         assertEquals(shapeJ.getClass(),randomShape.getShape(1, posX, posY).getClass());
     }
 
@@ -30,7 +30,7 @@ public class RandomShapeTest {
         RandomShape randomShape = new RandomShape();
         int posX = 2;
         int posY = 2;
-        ShapeL shapeL = new ShapeL(posX, posY);
+        Shape shapeL = new Shape(posX, posY, ShapeType.L);
         assertEquals(shapeL.getClass(),randomShape.getShape(2, posX, posY).getClass());
     }
 
@@ -39,7 +39,7 @@ public class RandomShapeTest {
         RandomShape randomShape = new RandomShape();
         int posX = 2;
         int posY = 2;
-        ShapeO shapeO = new ShapeO(posX, posY);
+        Shape shapeO = new Shape(posX, posY, ShapeType.O);
         assertEquals(shapeO.getClass(),randomShape.getShape(3, posX, posY).getClass());
     }
 
@@ -48,7 +48,7 @@ public class RandomShapeTest {
         RandomShape randomShape = new RandomShape();
         int posX = 2;
         int posY = 2;
-        ShapeS shapeS = new ShapeS(posX, posY);
+        Shape shapeS = new Shape(posX, posY, ShapeType.S);
         assertEquals(shapeS.getClass(),randomShape.getShape(4, posX, posY).getClass());
     }
 
@@ -57,7 +57,7 @@ public class RandomShapeTest {
         RandomShape randomShape = new RandomShape();
         int posX = 2;
         int posY = 2;
-        ShapeT shapeT = new ShapeT(posX, posY);
+        Shape shapeT = new Shape(posX, posY, ShapeType.T);
         assertEquals(shapeT.getClass(),randomShape.getShape(5, posX, posY).getClass());
     }
 
@@ -66,7 +66,7 @@ public class RandomShapeTest {
         RandomShape randomShape = new RandomShape();
         int posX = 2;
         int posY = 2;
-        ShapeZ shapeZ = new ShapeZ(posX, posY);
+        Shape shapeZ = new Shape(posX, posY, ShapeType.Z);
         assertEquals(shapeZ.getClass(),randomShape.getShape(6, posX, posY).getClass());
     }
 }

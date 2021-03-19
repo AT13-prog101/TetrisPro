@@ -1,8 +1,6 @@
 package src.utilities;
 import src.shapes.*;
 
-import java.util.Random;
-
 public class RandomShape {
     private static final int MAX_RANDOM = 7;
     private static final int SHAPE_I_INT = 0;
@@ -20,19 +18,19 @@ public class RandomShape {
         int randomNumber = random;
         switch (randomNumber) {
             case SHAPE_I_INT:
-                return new ShapeI(posX, posY);
+                return new Shape(posX, posY, ShapeType.I);
             case SHAPE_J_INT:
-                return new ShapeJ(posX, posY);
+                return new Shape(posX, posY, ShapeType.J);
             case SHAPE_L_INT:
-                return new ShapeL(posX, posY);
+                return new Shape(posX, posY, ShapeType.L);
             case SHAPE_O_INT:
-                return new ShapeO(posX, posY);
+                return new Shape(posX, posY, ShapeType.O);
             case SHAPE_S_INT:
-                return new ShapeS(posX, posY);
+                return new Shape(posX, posY, ShapeType.S);
             case SHAPE_T_INT:
-                return new ShapeT(posX, posY);
+                return new Shape(posX, posY, ShapeType.T);
             default:
-                return new ShapeZ(posX, posY);
+                return new Shape(posX, posY, ShapeType.Z);
         }
     }
 }

@@ -10,11 +10,11 @@ public class Shape  {
     private int horizontalLimit;
     private boolean rotationStatus;
 
-
-    public Shape(final int xPos, final int yPos) {
-        xPosition = xPos;
-        yPosition = yPos;
+    public Shape(final int xPos, final int yPos, final ShapeType type) {
+        this.xPosition = xPos;
+        this.yPosition = yPos;
         this.rotationStatus = true;
+        this.container = ShapeDefinition.generate(type);
     }
 
     public Shape(final int xPos, final int yPos, final int horizontalL) {
@@ -31,7 +31,7 @@ public class Shape  {
      * In order to represent movement to the right
      */
     public void moveRight() {
-        if (yPosition < horizontalLimit - 3 && !lastColumnEmpty
+        if (yPosition < horizontalLimit - (1 + 1 + 1) && !lastColumnEmpty
                 || yPosition < horizontalLimit - 2 && lastColumnEmpty) {
             yPosition += 1;
         }
@@ -93,8 +93,8 @@ public class Shape  {
     /**
      * assigns values to rotate eje of shape.
      */
-    public void setRotationStatus(final boolean rotationStatus) {
-        this.rotationStatus = rotationStatus;
+    private void setRotationStatus(final boolean rotation) {
+        this.rotationStatus = rotation;
     }
 
     /**
@@ -104,11 +104,9 @@ public class Shape  {
     public boolean[][] rotateShape(final boolean[][] matrix) {
         boolean[][] newMatrix;
         if (isRotationStatus()) {
-            System.out.println("ENTRO TRASPONER");
             newMatrix = transposeMatrix(matrix);
             setRotationStatus(false);
         } else {
-            System.out.println("ENTRO REVERSE");
             newMatrix = reverseMatrix(matrix);
             setRotationStatus(true);
         }

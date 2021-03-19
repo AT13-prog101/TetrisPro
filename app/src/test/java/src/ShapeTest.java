@@ -1,37 +1,37 @@
 package src;
 
 import org.junit.Test;
-import src.shapes.ShapeI;
-import src.shapes.ShapeT;
+import src.shapes.Shape;
+import src.shapes.ShapeType;
 
 import static org.junit.Assert.*;
 
 public class ShapeTest {
     @Test
     public void moveRight_changePositionY5_y6() {
-        ShapeI shapeI = new ShapeI(4, 5);
+        Shape shapeI = new Shape(4, 5, ShapeType.I);
         shapeI.moveRight();
-        assertEquals(6, shapeI.getyPosition());
+        assertEquals(5, shapeI.getyPosition());
     }
 
     @Test
     public void moveLeft_changePositionY3_y2() {
-        ShapeI shapeI = new ShapeI(2, 3);
+        Shape shapeI = new Shape(2, 3, ShapeType.I);
         shapeI.moveLeft();
         assertEquals(2, shapeI.getyPosition());
     }
 
     @Test
     public void moveDown_changePositionX7_x8() {
-        ShapeI shapeI = new ShapeI(7, 5);
+        Shape shapeI = new Shape(7, 5, ShapeType.I);
         shapeI.moveDown();
         assertEquals(8, shapeI.getxPosition());
     }
 
     @Test
     public void transposeMatrix_changePositionShapeI_shapeIHorizontal() {
-        ShapeI shapeI = new ShapeI(7, 5);
-        boolean[][] actual = shapeI.transposeMatrix(shapeI.getShapeI());
+        Shape shapeI = new Shape(7, 5, ShapeType.I);
+        boolean[][] actual = shapeI.transposeMatrix(shapeI.getContainer());
         boolean[][] expected = {{ true, true, true, true},
                                 { false, false, false, false},
                                 { false, false, false, false},
@@ -41,8 +41,8 @@ public class ShapeTest {
 
     @Test
     public void reverseMatrix_changePositionShapeI_shapeIVertical() {
-        ShapeI shapeI = new ShapeI(7, 5);
-        boolean[][] actual = shapeI.reverseMatrix(shapeI.getShapeI());
+        Shape shapeI = new Shape(7, 5, ShapeType.I);
+        boolean[][] actual = shapeI.reverseMatrix(shapeI.getContainer());
         boolean[][] expected = {{ true, false, false, false},
                                 { true, false, false, false},
                                 { true, false, false, false},
@@ -52,11 +52,22 @@ public class ShapeTest {
 
     @Test
     public void rotateShape_changePositionShapeT_shapeTVertical() {
-        ShapeT shapeT = new ShapeT(7, 5);
-        boolean[][] actual = shapeT.rotateShape(shapeT.getShapeT());
+        Shape shapeT = new Shape(7, 5, ShapeType.T);
+        boolean[][] actual = shapeT.rotateShape(shapeT.getContainer());
         boolean[][] expected = {{true, false, false},
                                 {true, true, false},
                                 {true, false, false}};
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void rotateShape_changePositionShapeS_shapeSHorizontal() {
+        Shape shapeS = new Shape(7, 5, ShapeType.S);
+        boolean[][] primer = shapeS.rotateShape(shapeS.getContainer());
+        boolean[][] actual = shapeS.rotateShape(primer);
+        boolean[][] expected = {{true, false, false},
+                                 {true, true, false},
+                                 {false, true, false}};
         assertArrayEquals(expected, actual);
     }
 }
