@@ -2,6 +2,7 @@ package src.utilities;
 
 import java.util.Random;
 import java.util.Scanner;
+import src.shapes.*;
 
 public class GameBoard {
     static final int GAME_BOARD_HEIGHT = 20;
@@ -29,6 +30,28 @@ public class GameBoard {
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
                 this.gameBoardArray[i + y][j + x] = array[i][j];
+            }
+        }
+    }
+
+    /**
+     * Sets the values of the game board array according to a position and an array
+     * @param shape that contains the values to change
+     */
+    public void setGameBoardArray(final Shape shape) {
+        int xShape = 0;
+        int limitXShape = shape.getContainer()[0].length;
+        int y = shape.getyPosition();
+        int x = shape.getxPosition();
+        if (shape.getxPosition() == - 1){
+            xShape = 1;
+        }
+        if (shape.getxPosition() == gameBoardArray.length - 2){
+            limitXShape = limitXShape - 1;
+        }
+        for (int i = 0; i < shape.getContainer().length; i++) {
+            for (int j = xShape; j < limitXShape; j++) {
+                this.gameBoardArray[i + y][j + x] = shape.getContainer()[i][j];
             }
         }
     }
