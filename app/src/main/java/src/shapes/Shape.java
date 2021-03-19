@@ -10,11 +10,11 @@ public class Shape  {
     private int horizontalLimit;
     private boolean rotationStatus;
 
-
-    public Shape(final int xPos, final int yPos) {
-        xPosition = xPos;
-        yPosition = yPos;
+    public Shape(final int xPos, final int yPos, final ShapeType type) {
+        this.xPosition = xPos;
+        this.yPosition = yPos;
         this.rotationStatus = true;
+        this.container = ShapeDefinition.generate(type);
     }
 
     public Shape(final int xPos, final int yPos, final int horizontalL) {
@@ -93,8 +93,8 @@ public class Shape  {
     /**
      * assigns values to rotate eje of shape.
      */
-    public void setRotationStatus(final boolean rotationStatus) {
-        this.rotationStatus = rotationStatus;
+    private void setRotationStatus(final boolean rotation) {
+        this.rotationStatus = rotation;
     }
 
     /**
