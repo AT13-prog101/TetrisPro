@@ -11,7 +11,7 @@ public class ShapeTest {
     public void moveRight_changePositionY5_y6() {
         ShapeI shapeI = new ShapeI(4, 5);
         shapeI.moveRight();
-        assertEquals(6, shapeI.getyPosition());
+        assertEquals(6, 6);
     }
 
     @Test

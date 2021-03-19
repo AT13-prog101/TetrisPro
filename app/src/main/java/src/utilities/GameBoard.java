@@ -41,6 +41,16 @@ public class GameBoard {
         return this.gameBoardArray;
     }
 
+    public boolean[][] getPartialGameBoardArray(int xInitial, int yInitial, int shapeLength) {
+        boolean[][] partialArray = new boolean[shapeLength][shapeLength];
+        for (int i = 0; i < shapeLength; i++) {
+            for (int j = 0; j < shapeLength; j++) {
+                partialArray[i][j] = gameBoardArray[i + yInitial][j +xInitial];
+            }
+        }
+        return partialArray;
+    }
+
     /**
      * Creates the game board array
      * @param height is the game board height
