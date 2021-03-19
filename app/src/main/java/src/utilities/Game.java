@@ -3,7 +3,14 @@ package src.utilities;
 import src.shapes.*;
 
 public class Game {
-    public static boolean checkCollision(Shape shape, GameBoard gameBoard, int direction) {
+    /**
+     * Verifies if the shape collides with the game board array
+     * @param shape the figure to check
+     * @param gameBoard the game board array
+     * @param direction the movement direction to check
+     * @return a boolean with the result
+     */
+    public static boolean checkCollision(final Shape shape, final GameBoard gameBoard, final int direction) {
         int xMovement = 0;
         int yMovement = 0;
         switch (direction) {
@@ -15,6 +22,8 @@ public class Game {
                 break;
             case 3:
                 xMovement = 1;
+                break;
+            default:
                 break;
         }
         int xInitial = shape.getxPosition();
@@ -31,14 +40,19 @@ public class Game {
         return false;
     }
 
-    public static void print(GameBoard gameBoard, Shape shape) {
+    /**
+     * Displays the shape and gameboard on the console
+     * @param gameBoard the game board array
+     * @param shape the figure to display
+     */
+    public static void print(final GameBoard gameBoard, final Shape shape) {
         int x = shape.getxPosition();
         int y = shape.getyPosition();
         int arrayLength = shape.getContainer().length;
         for (int i = 0; i < gameBoard.getGameBoardArray().length; i++) {
             for (int j = 0; j < gameBoard.getGameBoardArray()[i].length; j++) {
                 if (i >= y && i < (y + arrayLength) && j >= x && j < (x + arrayLength)) {
-                    if (shape.getContainer()[i-y][j-x]) {
+                    if (shape.getContainer()[i - y][j - x]) {
                         System.out.print("1");
                     } else {
                         if (gameBoard.getGameBoardArray()[i][j]) {
