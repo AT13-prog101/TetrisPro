@@ -1,13 +1,13 @@
 package src.shapes;
 
 public abstract class ShapeDefinition {
-    private static final boolean[][] SHAPE_I = {{true, false, false, false},
-                                                {true, false, false, false},
-                                                {true, false, false, false},
-                                                {true, false, false, false}};
-    private static final boolean[][] SHAPE_J = {{false, false, true},
+    private static final boolean[][] SHAPE_I = {{true, true, true, true},
+                                                {false, false, false, false},
+                                                {false, false, false, false},
+                                                {false, false, false, false}};
+    private static final boolean[][] SHAPE_J = {{true, true, true},
                                                  {false, false, true},
-                                                 {false, true, true}};
+                                                 {false, false, false}};
     private static final boolean[][] SHAPE_T = {{true, true, true},
                                                 {false, true, false},
                                                 {false, false, false}};
@@ -17,9 +17,9 @@ public abstract class ShapeDefinition {
     private static final boolean[][] SHAPE_Z = {{true, true, false},
                                                 {false, true, true},
                                                 {false, false, false}};
-    private static final boolean[][] SHAPE_L = {{true, false, false},
+    private static final boolean[][] SHAPE_L = {{true, true, true},
                                                 {true, false, false},
-                                                {true, true, false}};
+                                                {false, false, false}};
     private static final boolean[][] SHAPE_O = {{true, true},
                                                 {true, true}};
 

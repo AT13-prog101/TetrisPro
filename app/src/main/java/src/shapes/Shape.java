@@ -107,7 +107,7 @@ public class Shape  {
      * rotate the matrix.
      * @return An array of boolean with the rotate form of figure.
      */
-    public boolean[][] rotateShape(final boolean[][] matrix) {
+    public boolean[][] rotateShape() {
         boolean[][] newMatrix;
         if (isRotationStatus()) {
             setRotationStatus(false);
