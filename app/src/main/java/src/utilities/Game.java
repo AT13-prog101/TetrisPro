@@ -45,7 +45,7 @@ public class Game {
      * @param gameBoard the game board array
      * @param shape the figure to display
      */
-    public static void print(final GameBoard gameBoard, final Shape shape) {
+    public void print(final GameBoard gameBoard, final Shape shape) {
         int x = shape.getxPosition();
         int y = shape.getyPosition();
         int arrayLength = shape.getContainer().length;

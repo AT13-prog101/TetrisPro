@@ -1,7 +1,6 @@
 package src.utilities;
 
 import java.util.Random;
-import java.util.Scanner;
 import src.shapes.*;
 
 public class GameBoard {
@@ -43,10 +42,10 @@ public class GameBoard {
         int limitXShape = shape.getContainer()[0].length;
         int y = shape.getyPosition();
         int x = shape.getxPosition();
-        if (shape.getxPosition() == - 1){
+        if (shape.getxPosition() == -1) {
             xShape = 1;
         }
-        if (shape.getxPosition() == gameBoardArray.length - 2){
+        if (shape.getxPosition() == gameBoardArray.length - 2) {
             limitXShape = limitXShape - 1;
         }
         for (int i = 0; i < shape.getContainer().length; i++) {

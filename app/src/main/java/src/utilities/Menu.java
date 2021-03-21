@@ -1,5 +1,8 @@
 package src.utilities;
 
+import src.shapes.Shape;
+
+import java.util.Random;
 import java.util.Scanner;
 
 public class Menu {
@@ -9,11 +12,22 @@ public class Menu {
     private static final int OPTION_4 = 4;
     private static final int OPTION_5 = 5;
     private static final int OPTION_6 = 6;
+    private static final int MAX_RANDOM = 7;
+    private static final int INITIAL_POSX_SHAPE = 3;
+    private static final int INITIAL_POSY_SHAPE = 0;
+    private GameBoard gameBoard;
+    private RandomShape randomShape;
+    private Shape shape;
+    private Game game;
 
     /**
      * Prints the initial Menu
      */
     public void showGameMenu() {
+        gameBoard = new GameBoard();
+        game = new Game();
+        randomShape = new RandomShape();
+        shape = randomShape.getShape(randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE);
         boolean gameInCourse = true;
         Scanner scanner = new Scanner(System.in);
 
@@ -26,11 +40,11 @@ public class Menu {
             switch (choice) {
                 case OPTION_1:
                     gameInCourse = false;
-                    showMovementMenu();
+                    showMovementMenu(game, gameBoard, shape);
                     break;
                 case OPTION_2:
                     gameInCourse = false;
-                    showDifficultyMenu();
+                    showDifficultyMenu(game, gameBoard, shape);
                     break;
                 case OPTION_3:
                     gameInCourse = false;
@@ -46,7 +60,7 @@ public class Menu {
     /**
      * Prints the difficulty Menu
      */
-    public void showDifficultyMenu() {
+    public void showDifficultyMenu(Game game, GameBoard gameBoard, Shape shape) {
         boolean difficultyInCourse = true;
         Scanner scanner = new Scanner(System.in);
 
@@ -62,17 +76,17 @@ public class Menu {
                 case OPTION_1:
                     difficultyInCourse = false;
                     System.out.println("Easy");
-                    showMovementMenu();
+                    showMovementMenu(game, gameBoard, shape);
                     break;
                 case OPTION_2:
                     difficultyInCourse = false;
                     System.out.println("Medium");
-                    showMovementMenu();
+                    showMovementMenu(game, gameBoard, shape);
                     break;
                 case OPTION_3:
                     difficultyInCourse = false;
                     System.out.println("Hard");
-                    showMovementMenu();
+                    showMovementMenu(game, gameBoard, shape);
                     break;
                 case OPTION_4:
                     difficultyInCourse = false;
@@ -88,10 +102,11 @@ public class Menu {
     /**
      * Prints the options for movement menu
      */
-    public void showMovementMenu() {
+    public void showMovementMenu(Game game, GameBoard gameBoard, Shape shape) {
         boolean gameInCourse = true;
         Scanner scanner = new Scanner(System.in);
         while (gameInCourse) {
+            game.print(gameBoard, shape);
             System.out.println("Press next numbers to");
             System.out.println("1.- Move to Right");
             System.out.println("2.- Move to Left");
@@ -103,9 +118,11 @@ public class Menu {
             switch (option) {
                 case OPTION_1:
                     System.out.println("Moved to right");
+                    shape.moveRight();
                     break;
                 case OPTION_2:
                     System.out.println("Moved to left");
+                    shape.moveLeft();
                     break;
                 case OPTION_3:
                     System.out.println("Rotated to right");
@@ -115,6 +132,7 @@ public class Menu {
                     break;
                 case OPTION_5:
                     System.out.println("Went Down");
+                    shape.moveDown();
                     break;
                 case OPTION_6:
                     gameInCourse = false;
@@ -126,4 +144,15 @@ public class Menu {
         }
         scanner.close();
     }
+
+    /**
+     * Generates a random number
+     * @return a random number
+     */
+    private int randomNumberGenerator() {
+        Random random = new Random();
+        int randomNumber = random.nextInt(MAX_RANDOM);
+        return randomNumber;
+    }
+
 }
