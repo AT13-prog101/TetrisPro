@@ -110,12 +110,13 @@ public class Shape  {
     public boolean[][] rotateShape(final boolean[][] matrix) {
         boolean[][] newMatrix;
         if (isRotationStatus()) {
-            newMatrix = transposeMatrix(matrix);
             setRotationStatus(false);
-        } else {
-            newMatrix = reverseMatrix(matrix);
-            setRotationStatus(true);
+            newMatrix = transposeMatrix(this.getContainer());
+            return newMatrix;
         }
+        newMatrix = reverseMatrix(this.getContainer());
+        setContainer(newMatrix);
+        setRotationStatus(true);
         return newMatrix;
     }
 
@@ -145,11 +146,17 @@ public class Shape  {
         }
         return matrix;
     }
-
+    /**
+     * reverse the matrix.
+     * @return An array of boolean with reverse form of figure.
+     */
     public boolean getFirst() {
         return firstColumnEmpty;
     }
-
+    /**
+     * reverse the matrix.
+     * @return An array of boolean with reverse form of figure.
+     */
     public boolean getLast() {
         return lastColumnEmpty;
     }
