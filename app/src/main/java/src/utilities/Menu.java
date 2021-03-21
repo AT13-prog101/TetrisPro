@@ -119,13 +119,16 @@ public class Menu {
                 case OPTION_1:
                     System.out.println("Moved to right");
                     shape.moveRight();
+                    shape.moveDown();
                     break;
                 case OPTION_2:
                     System.out.println("Moved to left");
                     shape.moveLeft();
+                    shape.moveDown();
                     break;
                 case OPTION_3:
                     System.out.println("Rotated to right");
+                    shape.rotateShape();
                     break;
                 case OPTION_4:
                     System.out.println("Rotated to left");
