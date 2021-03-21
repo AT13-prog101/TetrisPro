@@ -35,8 +35,8 @@ public class Shape  {
      * In order to represent movement to the right
      */
     public void moveRight() {
-        if (yPosition < horizontalLimit - (1 + 1 + 1) && !lastColumnEmpty
-                || yPosition < horizontalLimit - 2 && lastColumnEmpty) {
+        if (xPosition < horizontalLimit - (1 + 1 + 1) && !lastColumnEmpty
+                || xPosition < horizontalLimit - 2 && lastColumnEmpty) {
             xPosition += 1;
         }
     }
@@ -46,7 +46,7 @@ public class Shape  {
      * In order to represent movement to the left
      */
     public void moveLeft() {
-        if (yPosition > 0 && !firstColumnEmpty || yPosition > -1 && firstColumnEmpty) {
+        if (xPosition > 0 && !firstColumnEmpty || xPosition > -1 && firstColumnEmpty) {
             xPosition -= 1;
         }
     }
@@ -56,7 +56,7 @@ public class Shape  {
      * In order to represent downwards movement
      */
     public void moveDown() {
-        if (yPosition < veticalLimit) {
+        if (yPosition < veticalLimit - container.length - 1) {
             yPosition += 1;
         }
     }
