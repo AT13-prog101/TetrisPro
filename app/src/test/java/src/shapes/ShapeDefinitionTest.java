@@ -9,10 +9,10 @@ public class ShapeDefinitionTest {
     @Test
     public void generate_ShapeForm_I() {
         boolean[][] actual = ShapeDefinition.generate(ShapeType.I);
-        boolean[][] expected = {{ true, false, false, false},
-                                { true, false, false, false},
-                                { true, false, false, false},
-                                { true, false, false, false}};
+        boolean[][] expected = {{ true, true, true, true},
+                                { false, false, false, false},
+                                { false, false, false, false},
+                                { false, false, false, false}};
         assertArrayEquals(expected, actual);
     }
 
@@ -20,18 +20,18 @@ public class ShapeDefinitionTest {
     @Test
     public void generate_ShapeForm_J() {
         boolean[][] actual = ShapeDefinition.generate(ShapeType.J);
-        boolean[][] expected = {{false, false, true},
+        boolean[][] expected = {{true, true, true},
                                 {false, false, true},
-                                {false, true, true}};
+                                {false, false, false}};
         assertArrayEquals(expected, actual);
     }
 
     @Test
     public void generate_ShapeForm_L() {
         boolean[][] actual = ShapeDefinition.generate(ShapeType.L);
-        boolean[][] expected = {{ true, false, false},
+        boolean[][] expected = {{ true, true, true},
                                 { true, false, false},
-                                { true, true, false}};
+                                { false, false, false}};
         assertArrayEquals(expected, actual);
     }
 

@@ -4,18 +4,24 @@ package src.shapes;
 public class Shape  {
     private int xPosition;
     private int yPosition;
+    static final int X_POS_DEFAULT = 3;
+    static final int Y_POS_DEFAULT = 0;
+    static final int HOR_LIMIT_DEFAULT = 10;
+    static final int VER_LIMIT_DEFAULT = 20;
     private boolean[][] container;
-    private boolean firstColumnEmpty;
-    private boolean lastColumnEmpty;
     private int horizontalLimit;
-    private int veticalLimit;
+    private int verticalLimit;
     private boolean rotationStatus;
+    private int rightColumns;
+    private int leftColumns;
+    private int downColumns;
 
     public Shape(final int xPos, final int yPos, final ShapeType type) {
-        this.xPosition = xPos;
-        this.yPosition = yPos;
-        this.rotationStatus = true;
-        this.container = ShapeDefinition.generate(type);
+        this(xPos, yPos, HOR_LIMIT_DEFAULT, VER_LIMIT_DEFAULT, type);
+    }
+
+    public Shape(final ShapeType type) {
+        this(X_POS_DEFAULT, Y_POS_DEFAULT, HOR_LIMIT_DEFAULT, VER_LIMIT_DEFAULT, type);
     }
 
     public Shape(final int xPos, final int yPos, final int horizontalL, final int verticalL,
@@ -23,20 +29,19 @@ public class Shape  {
         xPosition = xPos;
         yPosition = yPos;
         horizontalLimit = horizontalL;
-        veticalLimit = verticalL;
-        firstColumnEmpty = false;
-        lastColumnEmpty = false;
+        verticalLimit = verticalL;
         this.rotationStatus = true;
         this.container = ShapeDefinition.generate(type);
+        rightColumns = reviewFromRight(container);
+        leftColumns = reviewFromLeft(container);
+        downColumns = reviewFromDown(container);
     }
-
     /**
      * Increases xPosition in one.
-     * In order to represent movement to the right
+     * In order to represent movement to the right.
      */
     public void moveRight() {
-        if (xPosition < horizontalLimit - (1 + 1 + 1) && !lastColumnEmpty
-                || xPosition < horizontalLimit - 2 && lastColumnEmpty) {
+        if (xPosition < horizontalLimit - container.length + rightColumns) {
             xPosition += 1;
         }
     }
@@ -46,7 +51,7 @@ public class Shape  {
      * In order to represent movement to the left
      */
     public void moveLeft() {
-        if (xPosition > 0 && !firstColumnEmpty || xPosition > -1 && firstColumnEmpty) {
+        if (xPosition > 0 - leftColumns) {
             xPosition -= 1;
         }
     }
@@ -56,7 +61,7 @@ public class Shape  {
      * In order to represent downwards movement
      */
     public void moveDown() {
-        if (yPosition < veticalLimit - container.length - 1) {
+        if (yPosition < verticalLimit - container.length + downColumns) {
             yPosition += 1;
         }
     }
@@ -146,18 +151,58 @@ public class Shape  {
         }
         return matrix;
     }
-    /**
-     * reverse the matrix.
-     * @return An array of boolean with reverse form of figure.
-     */
-    public boolean getFirst() {
-        return firstColumnEmpty;
+    static int reviewFromRight(final boolean[][] mat) {
+        boolean res = true;
+        int counter = 0;
+        int j = mat[0].length - 1;
+        while (res && j >= 0) {
+            int i = 0;
+            while (res && i < mat.length) {
+                res = res && !mat[i][j];
+                i++;
+            }
+            if (res) {
+                counter++;
+            }
+            j--;
+        }
+        return counter;
     }
-    /**
-     * reverse the matrix.
-     * @return An array of boolean with reverse form of figure.
-     */
-    public boolean getLast() {
-        return lastColumnEmpty;
+
+    static int reviewFromLeft(final boolean[][] mat) {
+        boolean res = true;
+        int counter = 0;
+        int j = 0;
+        while (res && j < mat[0].length) {
+            int i = 0;
+            while (res && i < mat.length) {
+                res = res && !mat[i][j];
+                i++;
+            }
+            if (res) {
+                counter++;
+            }
+            j++;
+        }
+        return counter;
     }
+
+    static int reviewFromDown(final boolean[][] mat) {
+        boolean res = true;
+        int counter = 0;
+        int i = mat[0].length - 1;
+        while (res && i >= 0) {
+            int j = 0;
+            while (res && j < mat.length) {
+                res = res && !mat[i][j];
+                j++;
+            }
+            if (res) {
+                counter++;
+            }
+            i--;
+        }
+        return counter;
+    }
+
 }
