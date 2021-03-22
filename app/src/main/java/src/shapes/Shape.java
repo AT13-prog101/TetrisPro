@@ -105,51 +105,6 @@ public class Shape  {
     private void setRotationStatus(final boolean rotation) {
         this.rotationStatus = rotation;
     }
-
-    /**
-     * rotate the matrix.
-     * @return An array of boolean with the rotate form of figure.
-     */
-    public boolean[][] rotateShape() {
-        boolean[][] newMatrix;
-        if (isRotationStatus()) {
-            setRotationStatus(false);
-            newMatrix = transposeMatrix(this.getContainer());
-            return newMatrix;
-        }
-        newMatrix = reverseMatrix(this.getContainer());
-        setContainer(newMatrix);
-        setRotationStatus(true);
-        return newMatrix;
-    }
-
-    /**
-     * transpose the matrix.
-     * @return An array of boolean with the transpose form of figure.
-     */
-    public boolean[][] transposeMatrix(final boolean[][] matrix)  {
-        boolean[][] newMatrix = new boolean[matrix[0].length][matrix.length];
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
-                newMatrix[j][i] = matrix[i][j];
-            }
-        }
-        return newMatrix;
-    }
-    /**
-     * reverse the matrix.
-     * @return An array of boolean with reverse form of figure.
-     */
-    public boolean[][] reverseMatrix(final boolean[][] matrix) {
-        int middle = matrix.length / 2;
-        for (int i = 0; i < middle; i++) {
-            boolean[] matrixAux = matrix[i];
-            matrix[i] = matrix[matrix.length - i - 1];
-            matrix[matrix.length - i - 1] = matrixAux;
-        }
-        return matrix;
-    }
-
     /**
      * calculates free columns from right.
      * @return An integer that represents how many free columns shape container has.
@@ -227,7 +182,7 @@ public class Shape  {
                 rotatedMatrix[i][rotatedMatrix.length - 1 - j] = container[j][i];
             }
         }
-        container = rotatedMatrix;
+        setContainer(rotatedMatrix);
         updateColumnsReviewer();
     }
 
