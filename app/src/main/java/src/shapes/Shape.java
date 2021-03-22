@@ -32,9 +32,7 @@ public class Shape  {
         verticalLimit = verticalL;
         this.rotationStatus = true;
         this.container = ShapeDefinition.generate(type);
-        rightColumns = reviewFromRight(container);
-        leftColumns = reviewFromLeft(container);
-        downColumns = reviewFromDown(container);
+        updateColumnsReviewer();
     }
     /**
      * Increases xPosition in one.
@@ -151,7 +149,12 @@ public class Shape  {
         }
         return matrix;
     }
-    static int reviewFromRight(final boolean[][] mat) {
+
+    /**
+     * calculates free columns from right.
+     * @return An integer that represents how many free columns shape container has.
+     */
+    public int reviewFromRight(final boolean[][] mat) {
         boolean res = true;
         int counter = 0;
         int j = mat[0].length - 1;
@@ -169,7 +172,11 @@ public class Shape  {
         return counter;
     }
 
-    static int reviewFromLeft(final boolean[][] mat) {
+    /**
+     * calculates free columns from left.
+     * @return An integer that represents how many free columns shape container has.
+     */
+    public int reviewFromLeft(final boolean[][] mat) {
         boolean res = true;
         int counter = 0;
         int j = 0;
@@ -187,7 +194,11 @@ public class Shape  {
         return counter;
     }
 
-    static int reviewFromDown(final boolean[][] mat) {
+    /**
+     * calculates free columns from down.
+     * @return An integer that represents how many free columns shape container has.
+     */
+    public int reviewFromDown(final boolean[][] mat) {
         boolean res = true;
         int counter = 0;
         int i = mat[0].length - 1;
@@ -205,4 +216,27 @@ public class Shape  {
         return counter;
     }
 
+    /**
+     * rotate the matrix.
+     * @return An array of boolean with the rotate form of figure.
+     */
+    public void rotate() {
+        boolean[][] rotatedMatrix = new boolean[container.length][container.length];
+        for (int i = 0; i < rotatedMatrix.length; i++) {
+            for (int j = 0; j < rotatedMatrix.length; j++) {
+                rotatedMatrix[i][rotatedMatrix.length - 1 - j] = container[j][i];
+            }
+        }
+        container = rotatedMatrix;
+        updateColumnsReviewer();
+    }
+
+    /**
+     * does column controllers are updated.
+     */
+    public void updateColumnsReviewer() {
+        rightColumns = reviewFromRight(container);
+        leftColumns = reviewFromLeft(container);
+        downColumns = reviewFromDown(container);
+    }
 }
