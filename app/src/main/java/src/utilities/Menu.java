@@ -60,7 +60,7 @@ public class Menu {
     /**
      * Prints the difficulty Menu
      */
-    public void showDifficultyMenu(Game game, GameBoard gameBoard, Shape shape) {
+    public void showDifficultyMenu(final Game game, final GameBoard gameBoard, final Shape shape) {
         boolean difficultyInCourse = true;
         Scanner scanner = new Scanner(System.in);
 
@@ -102,7 +102,7 @@ public class Menu {
     /**
      * Prints the options for movement menu
      */
-    public void showMovementMenu(Game game, GameBoard gameBoard, Shape shape) {
+    public void showMovementMenu(final Game game, final GameBoard gameBoard, final Shape shape) {
         boolean gameInCourse = true;
         Scanner scanner = new Scanner(System.in);
         while (gameInCourse) {
@@ -110,10 +110,9 @@ public class Menu {
             System.out.println("Press next numbers to");
             System.out.println("1.- Move to Right");
             System.out.println("2.- Move to Left");
-            System.out.println("3.- Rotate to Right");
-            System.out.println("4.- Rotate to Left");
-            System.out.println("5.- Go Down");
-            System.out.println("6.- Exit");
+            System.out.println("3.- Rotate shape");
+            System.out.println("4.- Go Down");
+            System.out.println("5.- Exit");
             int option = scanner.nextInt();
             switch (option) {
                 case OPTION_1:
@@ -127,17 +126,15 @@ public class Menu {
                     shape.moveDown();
                     break;
                 case OPTION_3:
-                    System.out.println("Rotated to right");
-                    shape.rotateShape();
+                    System.out.println("Rotated shape");
+                    shape.rotate();
+                    shape.moveDown();
                     break;
                 case OPTION_4:
-                    System.out.println("Rotated to left");
-                    break;
-                case OPTION_5:
                     System.out.println("Went Down");
                     shape.moveDown();
                     break;
-                case OPTION_6:
+                case OPTION_5:
                     gameInCourse = false;
                     System.out.println("Good bye");
                     break;

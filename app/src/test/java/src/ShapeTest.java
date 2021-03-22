@@ -73,77 +73,60 @@ public class ShapeTest {
     }
 
     @Test
-    public void transposeMatrix_changePositionShapeI_shapeIHorizontal() {
-        Shape shapeI = new Shape(7, 5, 10, 20, ShapeType.I);
-        boolean[][] actual = shapeI.transposeMatrix(shapeI.getContainer());
-        boolean[][] expected = {{ true, false, false, false},
-                                { true, false, false, false},
-                                { true, false, false, false},
-                                { true, false, false, false}};
-        assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    public void reverseMatrix_changePositionShapeI_shapeIVertical() {
-        Shape shapeI = new Shape(7, 5,10, 20, ShapeType.I);
-        boolean[][] actual = shapeI.reverseMatrix(shapeI.getContainer());
-        boolean[][] expected = {{ false, false, false, false},
-                                { false, false, false, false},
-                                { false, false, false, false},
-                                { true, true, true, true}};
-        assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    public void rotateShape_changePositionShapeT_shapeTVertical() {
+    public void rotate_changePositionShapeT_shapeTVertical() {
         Shape shapeT = new Shape(7, 5,10, 20, ShapeType.T);
-        boolean[][] actual = shapeT.rotateShape();
-        boolean[][] expected = {{true, false, false},
-                                {true, true, false},
-                                {true, false, false}};
+        shapeT.rotate();
+        boolean[][] actual = shapeT.getContainer();
+        boolean[][] expected = {{false, false, true},
+                                {false, true, true},
+                                {false, false, true}};
         assertArrayEquals(expected, actual);
     }
 
     @Test
     public void rotateShape_changePositionShapeSOneMove_shapeSVertical() {
         Shape shapeS = new Shape(7, 5,10, 20, ShapeType.S);
-        boolean[][] actual = shapeS.rotateShape();
+        shapeS.rotate();
+        boolean[][] actual = shapeS.getContainer();
         boolean[][] expected = {{false, true, false},
-                                {true, true, false},
-                                {true, false, false}};
+                                {false, true, true},
+                                {false, false, true}};
         assertArrayEquals(expected, actual);
     }
 
     @Test
     public void rotateShape_changePositionShapeSTwoMoves_shapeSHorizontal() {
         Shape shapeS = new Shape(7, 5,10, 20, ShapeType.S);
-        shapeS.rotateShape();
-        boolean[][] actual = shapeS.rotateShape();
+        shapeS.rotate();
+        shapeS.rotate();
+        boolean[][] actual = shapeS.getContainer();
         boolean[][] expected = {{false, false, false},
-                                 {true, true, false},
-                                 {false, true, true}};
+                                {false, true, true},
+                                {true, true, false}};
         assertArrayEquals(expected, actual);
     }
 
     @Test
     public void rotateShape_changePositionShapeSThreeMoves_shapeSVertical() {
         Shape shapeS = new Shape(7, 5,10, 20, ShapeType.S);
-        shapeS.rotateShape();
-        shapeS.rotateShape();
-        boolean[][] actual = shapeS.rotateShape();
-        boolean[][] expected = {{false, true, false},
-                                 {false, true, true},
-                                 {false, false, true}};
+        shapeS.rotate();
+        shapeS.rotate();
+        shapeS.rotate();
+        boolean[][] actual = shapeS.getContainer();
+        boolean[][] expected = {{true, false, false},
+                                {true, true, false},
+                                {false, true, false}};
         assertArrayEquals(expected, actual);
     }
 
     @Test
-    public void rotateShape_changePositionShapeSFourMoves_shapeSVertical() {
+    public void rotateShape_changePositionShapeSFourMoves_shapeSHorizontal() {
         Shape shapeS = new Shape(7, 5,10, 20, ShapeType.S);
-        shapeS.rotateShape();
-        shapeS.rotateShape();
-        shapeS.rotateShape();
-        boolean[][] actual = shapeS.rotateShape();
+        shapeS.rotate();
+        shapeS.rotate();
+        shapeS.rotate();
+        shapeS.rotate();
+        boolean[][] actual = shapeS.getContainer();
         boolean[][] expected = {{false, true, true},
                                 {true, true, false},
                                 {false, false, false}};
