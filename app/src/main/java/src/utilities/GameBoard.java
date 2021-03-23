@@ -38,19 +38,13 @@ public class GameBoard {
      * @param shape that contains the values to change
      */
     public void setGameBoardArray(final Shape shape) {
-        int xShape = 0;
-        int limitXShape = shape.getContainer()[0].length;
         int y = shape.getyPosition();
         int x = shape.getxPosition();
-        if (shape.getxPosition() == -1) {
-            xShape = 1;
-        }
-        if (shape.getxPosition() == gameBoardArray.length - 2) {
-            limitXShape = limitXShape - 1;
-        }
-        for (int i = 0; i < shape.getContainer().length; i++) {
-            for (int j = xShape; j < limitXShape; j++) {
-                this.gameBoardArray[i + y][j + x] = shape.getContainer()[i][j];
+        for (int i = 0; i < shape.getContainer().length - shape.getDownRows(); i++) {
+            for (int j = shape.getLeftColumns(); j < shape.getContainer()[0].length - shape.getRightColumns(); j++) {
+                if (shape.getContainer()[i][j]) {
+                    this.gameBoardArray[i + y][j + x] = shape.getContainer()[i][j];
+                }
             }
         }
     }
@@ -70,10 +64,10 @@ public class GameBoard {
      * @param shapeLength the shape's length
      * @return the partial game board array
      */
-    public boolean[][] getPartialGameBoardArray(final int xInitial, final int yInitial, final int shapeLength) {
-        boolean[][] partialArray = new boolean[shapeLength][shapeLength];
-        for (int i = 0; i < shapeLength; i++) {
-            for (int j = 0; j < shapeLength; j++) {
+    public boolean[][] getPartialGameBoardArray(final int xInitial, final int yInitial, final int shapeHeight, final int shapeWidth) {
+        boolean[][] partialArray = new boolean[shapeHeight][shapeWidth];
+        for (int i = 0; i < shapeHeight; i++) {
+            for (int j = 0; j < shapeWidth; j++) {
                 partialArray[i][j] = gameBoardArray[i + yInitial][j + xInitial];
             }
         }
