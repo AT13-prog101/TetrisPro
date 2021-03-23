@@ -38,18 +38,10 @@ public class GameBoard {
      * @param shape that contains the values to change
      */
     public void setGameBoardArray(final Shape shape) {
-        int xShape = 0;
-        int limitXShape = shape.getContainer()[0].length;
         int y = shape.getyPosition();
         int x = shape.getxPosition();
-        if (shape.getxPosition() == -1) {
-            xShape = 1;
-        }
-        if (shape.getxPosition() == gameBoardArray.length - 2) {
-            limitXShape = limitXShape - 1;
-        }
-        for (int i = 0; i < shape.getContainer().length; i++) {
-            for (int j = xShape; j < limitXShape; j++) {
+        for (int i = 0; i < shape.getContainer().length - shape.getDownRows(); i++) {
+            for (int j = shape.getLeftColumns(); j < shape.getContainer()[0].length - shape.getRightColumns(); j++) {
                 this.gameBoardArray[i + y][j + x] = shape.getContainer()[i][j];
             }
         }

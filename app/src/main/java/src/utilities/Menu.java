@@ -100,11 +100,14 @@ public class Menu {
     public void showMovementMenu() {
         gameBoard = new GameBoard();
         game = new Game();
+        randomShape = new RandomShape();
+        shape = randomShape.getShape(randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE);
         boolean gameInCourse = true;
-        boolean collision = true;
+        boolean collision = false;
         Scanner scanner = new Scanner(System.in);
         while (gameInCourse) {
             if (collision) {
+                gameBoard.setGameBoardArray(shape);
                 randomShape = new RandomShape();
                 shape = randomShape.getShape(randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE);
                 collision = false;
@@ -121,7 +124,6 @@ public class Menu {
                 case OPTION_1:
                     if (game.checkCollision(shape, gameBoard, 2 + 1)) {
                         collision = true;
-                        gameBoard.setGameBoardArray(shape);
                     } else {
                         System.out.println("Moved to right");
                         shape.moveRight();
@@ -131,7 +133,6 @@ public class Menu {
                 case OPTION_2:
                     if (game.checkCollision(shape, gameBoard, 2 + 1)) {
                         collision = true;
-                        gameBoard.setGameBoardArray(shape);
                     } else {
                         System.out.println("Moved to left");
                         shape.moveLeft();
@@ -146,7 +147,6 @@ public class Menu {
                 case OPTION_4:
                     if (game.checkCollision(shape, gameBoard, 2)) {
                         collision = true;
-                        gameBoard.setGameBoardArray(shape);
                     } else {
                         System.out.println("Went Down");
                         shape.moveDown();

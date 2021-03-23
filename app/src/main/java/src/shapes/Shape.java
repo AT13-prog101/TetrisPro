@@ -11,10 +11,9 @@ public class Shape  {
     private boolean[][] container;
     private int horizontalLimit;
     private int verticalLimit;
-    private boolean rotationStatus;
     private int rightColumns;
     private int leftColumns;
-    private int downColumns;
+    private int downRows;
 
     public Shape(final int xPos, final int yPos, final ShapeType type) {
         this(xPos, yPos, HOR_LIMIT_DEFAULT, VER_LIMIT_DEFAULT, type);
@@ -30,7 +29,6 @@ public class Shape  {
         yPosition = yPos;
         horizontalLimit = horizontalL;
         verticalLimit = verticalL;
-        this.rotationStatus = true;
         this.container = ShapeDefinition.generate(type);
         updateColumnsReviewer();
     }
@@ -42,6 +40,26 @@ public class Shape  {
         if (xPosition < horizontalLimit - container.length + rightColumns) {
             xPosition += 1;
         }
+    }
+
+    public int getDownRows() {
+        return downRows;
+    }
+
+    public int getRightColumns() {
+        return rightColumns;
+    }
+
+    public int getLeftColumns() {
+        return leftColumns;
+    }
+
+    public boolean checkDownLimit() {
+        return yPosition == verticalLimit - container.length + downRows;
+    }
+
+    public boolean checkRightLimit() {
+        return xPosition == horizontalLimit - container.length + rightColumns;
     }
 
     /**
@@ -59,7 +77,7 @@ public class Shape  {
      * In order to represent downwards movement
      */
     public void moveDown() {
-        if (yPosition < verticalLimit - container.length + downColumns) {
+        if (yPosition < verticalLimit - container.length + downRows) {
             yPosition += 1;
         }
     }
@@ -92,19 +110,6 @@ public class Shape  {
         container = cont;
     }
 
-    /**
-     * @return An bolean that is eje of shape.
-     */
-    public boolean isRotationStatus() {
-        return rotationStatus;
-    }
-
-    /**
-     * assigns values to rotate eje of shape.
-     */
-    private void setRotationStatus(final boolean rotation) {
-        this.rotationStatus = rotation;
-    }
     /**
      * calculates free columns from right.
      * @return An integer that represents how many free columns shape container has.
@@ -150,8 +155,8 @@ public class Shape  {
     }
 
     /**
-     * calculates free columns from down.
-     * @return An integer that represents how many free columns shape container has.
+     * calculates free rows from down.
+     * @return An integer that represents how many free rows shape container has.
      */
     public int reviewFromDown(final boolean[][] mat) {
         boolean res = true;
@@ -192,6 +197,6 @@ public class Shape  {
     public void updateColumnsReviewer() {
         rightColumns = reviewFromRight(container);
         leftColumns = reviewFromLeft(container);
-        downColumns = reviewFromDown(container);
+        downRows = reviewFromDown(container);
     }
 }

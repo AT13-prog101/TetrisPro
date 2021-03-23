@@ -11,6 +11,9 @@ public class Game {
      * @return a boolean with the result
      */
     public boolean checkCollision(final Shape shape, final GameBoard gameBoard, final int direction) {
+        if (shape.checkDownLimit()) {
+            return true;
+        }
         int xMovement = 0;
         int yMovement = 0;
         switch (direction) {
@@ -25,6 +28,9 @@ public class Game {
                 break;
             default:
                 break;
+        }
+        if (shape.checkRightLimit()) {
+            xMovement = 0;
         }
         int xInitial = shape.getxPosition();
         int yInitial = shape.getyPosition();
