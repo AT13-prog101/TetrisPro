@@ -107,14 +107,17 @@ public class Menu {
 //        game = new Game();
 //        randomShape = new RandomShape();
 //        shape = randomShape.getShape(randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE);
+//        gameBoard.setGameBoardArray(shape);
+        gameBoard = new GameBoard();
+//        boolean[][] joelXD = {{true, true, true, true, true, true}};
+//        gameBoard.setGameBoardArray(0, 6, joelXD);
+        game = new Game();
 
         boolean gameInCourse = true;
         boolean collision = true;
         Scanner scanner = new Scanner(System.in);
         while (gameInCourse) {
             if (collision) {
-                gameBoard = new GameBoard();
-                game = new Game();
                 randomShape = new RandomShape();
                 shape = randomShape.getShape(randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE);
                 collision = false;
@@ -122,8 +125,7 @@ public class Menu {
             } else {
                 System.out.println("es false");
             }
-            boolean[][] joelXD = {{true, true, true, true, true, true}};
-            gameBoard.setGameBoardArray(0, 3, joelXD);
+
             game.print(gameBoard, shape);
             System.out.println("Press next numbers to");
             System.out.println("1.- Move to Right");
@@ -136,33 +138,37 @@ public class Menu {
                 case OPTION_1:
                     if (game.checkCollision(shape, gameBoard, 2 + 1)) {
                         collision = true;
+                        gameBoard.setGameBoardArray(shape.getxPosition(), shape.getyPosition(), shape.getContainer());
                     } else {
                         System.out.println("Moved to right");
                         shape.moveRight();
                         shape.moveDown();
                     }
                     break;
-
                 case OPTION_2:
-                    System.out.println("Moved to left");
-                    shape.moveLeft();
-                    shape.moveDown();
+                    if (game.checkCollision(shape, gameBoard, 2 + 1)) {
+                        collision = true;
+                        gameBoard.setGameBoardArray(shape.getxPosition(), shape.getyPosition(), shape.getContainer());
+                    } else {
+                        System.out.println("Moved to left");
+                        shape.moveLeft();
+                        shape.moveDown();
+                    }
                     break;
                 case OPTION_3:
                     System.out.println("Rotated shape");
-//                    shape.rotate();
-//                    shape.moveDown();
-                    collision = true;
+                    shape.rotate();
+                    shape.moveDown();
                     break;
                 case OPTION_4:
                     if (game.checkCollision(shape, gameBoard, 2)) {
                         collision = true;
-                        gameBoard.setGameBoardArray(shape);
+                        gameBoard.setGameBoardArray(shape.getxPosition(), shape.getyPosition(), shape.getContainer());
                     } else {
                         System.out.println("Went Down");
                         shape.moveDown();
-                        break;
                     }
+                    break;
                 case OPTION_5:
                     gameInCourse = false;
                     System.out.println("Good bye");
