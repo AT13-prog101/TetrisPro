@@ -108,6 +108,12 @@ public class Menu {
         while (gameInCourse) {
             if (collision) {
                 gameBoard.setGameBoardArray(shape);
+                for (int i = 0; i < gameBoard.getGameBoardArray().length; i++) {
+                    if (gameBoard.checkFullRow(i, true)) {
+                        gameBoard.cleanRowOnArray(i);
+                    }
+                }
+                gameBoard.adjustLines();
                 randomShape = new RandomShape();
                 shape = randomShape.getShape(randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE);
                 collision = false;
@@ -127,22 +133,19 @@ public class Menu {
                     } else {
                         System.out.println("Moved to right");
                         shape.moveRight();
-                        shape.moveDown();
                     }
                     break;
                 case OPTION_2:
-                    if (game.checkCollision(shape, gameBoard, 2 + 1)) {
+                    if (game.checkCollision(shape, gameBoard,  1)) {
                         collision = true;
                     } else {
                         System.out.println("Moved to left");
                         shape.moveLeft();
-                        shape.moveDown();
                     }
                     break;
                 case OPTION_3:
                     System.out.println("Rotated shape");
                     shape.rotate();
-                    shape.moveDown();
                     break;
                 case OPTION_4:
                     if (game.checkCollision(shape, gameBoard, 2)) {

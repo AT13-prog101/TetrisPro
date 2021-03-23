@@ -34,10 +34,11 @@ public class Game {
         }
         int xInitial = shape.getxPosition();
         int yInitial = shape.getyPosition();
-        int shapeLength = shape.getContainer().length;
-        boolean[][] matchArray = gameBoard.getPartialGameBoardArray(xInitial + xMovement, yInitial + yMovement, shapeLength);
-        for (int i = 0; i < shapeLength; i++) {
-            for (int j = 0; j < shapeLength; j++) {
+        int shapeHeight = shape.getContainer().length - shape.getDownRows();
+        int shapeWidth = shape.getContainer().length - shape.getRightColumns();
+        boolean[][] matchArray = gameBoard.getPartialGameBoardArray(xInitial + xMovement, yInitial + yMovement, shapeHeight, shapeWidth);
+        for (int i = 0; i < shapeHeight; i++) {
+            for (int j = 0; j < shapeWidth; j++) {
                 if (shape.getContainer()[i][j] && matchArray[i][j]) {
                     return true;
                 }

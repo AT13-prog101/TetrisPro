@@ -63,7 +63,12 @@ public class Shape  {
     }
 
     /**
-     * Decreases xPposition in one.
+     * @return if container is at left limit.
+     */
+    public boolean checkLeftLimit() { return xPosition + leftColumns == 0; }
+
+    /**
+     * Decreases xPosition in one.
      * In order to represent movement to the left
      */
     public void moveLeft() {
