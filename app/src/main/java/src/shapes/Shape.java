@@ -221,7 +221,7 @@ public class Shape  {
     }
 
     /**
-     * @return if container is one position before right limit.
+     * @return if container is one position before down limit.
      */
     public boolean checkDownLimit() {
         return yPosition == verticalLimit - container.length + downRows - 1;
