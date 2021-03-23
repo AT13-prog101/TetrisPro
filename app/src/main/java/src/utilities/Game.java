@@ -10,7 +10,7 @@ public class Game {
      * @param direction the movement direction to check
      * @return a boolean with the result
      */
-    public static boolean checkCollision(final Shape shape, final GameBoard gameBoard, final int direction) {
+    public boolean checkCollision(final Shape shape, final GameBoard gameBoard, final int direction) {
         int xMovement = 0;
         int yMovement = 0;
         switch (direction) {

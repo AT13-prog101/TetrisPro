@@ -11,7 +11,6 @@ public class Menu {
     private static final int OPTION_3 = 3;
     private static final int OPTION_4 = 4;
     private static final int OPTION_5 = 5;
-    private static final int OPTION_6 = 6;
     private static final int MAX_RANDOM = 7;
     private static final int INITIAL_POSX_SHAPE = 3;
     private static final int INITIAL_POSY_SHAPE = 0;
@@ -24,10 +23,6 @@ public class Menu {
      * Prints the initial Menu
      */
     public void showGameMenu() {
-        gameBoard = new GameBoard();
-        game = new Game();
-        randomShape = new RandomShape();
-        shape = randomShape.getShape(randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE);
         boolean gameInCourse = true;
         Scanner scanner = new Scanner(System.in);
 
@@ -40,11 +35,11 @@ public class Menu {
             switch (choice) {
                 case OPTION_1:
                     gameInCourse = false;
-                    showMovementMenu(game, gameBoard, shape);
+                    showMovementMenu();
                     break;
                 case OPTION_2:
                     gameInCourse = false;
-                    showDifficultyMenu(game, gameBoard, shape);
+                    showDifficultyMenu();
                     break;
                 case OPTION_3:
                     gameInCourse = false;
@@ -60,7 +55,7 @@ public class Menu {
     /**
      * Prints the difficulty Menu
      */
-    public void showDifficultyMenu(final Game game, final GameBoard gameBoard, final Shape shape) {
+    public void showDifficultyMenu() {
         boolean difficultyInCourse = true;
         Scanner scanner = new Scanner(System.in);
 
@@ -76,17 +71,17 @@ public class Menu {
                 case OPTION_1:
                     difficultyInCourse = false;
                     System.out.println("Easy");
-                    showMovementMenu(game, gameBoard, shape);
+                    showMovementMenu();
                     break;
                 case OPTION_2:
                     difficultyInCourse = false;
                     System.out.println("Medium");
-                    showMovementMenu(game, gameBoard, shape);
+                    showMovementMenu();
                     break;
                 case OPTION_3:
                     difficultyInCourse = false;
                     System.out.println("Hard");
-                    showMovementMenu(game, gameBoard, shape);
+                    showMovementMenu();
                     break;
                 case OPTION_4:
                     difficultyInCourse = false;
@@ -102,10 +97,18 @@ public class Menu {
     /**
      * Prints the options for movement menu
      */
-    public void showMovementMenu(final Game game, final GameBoard gameBoard, final Shape shape) {
+    public void showMovementMenu() {
+        gameBoard = new GameBoard();
+        game = new Game();
         boolean gameInCourse = true;
+        boolean collision = true;
         Scanner scanner = new Scanner(System.in);
         while (gameInCourse) {
+            if (collision) {
+                randomShape = new RandomShape();
+                shape = randomShape.getShape(randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE);
+                collision = false;
+            }
             game.print(gameBoard, shape);
             System.out.println("Press next numbers to");
             System.out.println("1.- Move to Right");
@@ -116,14 +119,24 @@ public class Menu {
             int option = scanner.nextInt();
             switch (option) {
                 case OPTION_1:
-                    System.out.println("Moved to right");
-                    shape.moveRight();
-                    shape.moveDown();
+                    if (game.checkCollision(shape, gameBoard, 2 + 1)) {
+                        collision = true;
+                        gameBoard.setGameBoardArray(shape);
+                    } else {
+                        System.out.println("Moved to right");
+                        shape.moveRight();
+                        shape.moveDown();
+                    }
                     break;
                 case OPTION_2:
-                    System.out.println("Moved to left");
-                    shape.moveLeft();
-                    shape.moveDown();
+                    if (game.checkCollision(shape, gameBoard, 2 + 1)) {
+                        collision = true;
+                        gameBoard.setGameBoardArray(shape);
+                    } else {
+                        System.out.println("Moved to left");
+                        shape.moveLeft();
+                        shape.moveDown();
+                    }
                     break;
                 case OPTION_3:
                     System.out.println("Rotated shape");
@@ -131,8 +144,13 @@ public class Menu {
                     shape.moveDown();
                     break;
                 case OPTION_4:
-                    System.out.println("Went Down");
-                    shape.moveDown();
+                    if (game.checkCollision(shape, gameBoard, 2)) {
+                        collision = true;
+                        gameBoard.setGameBoardArray(shape);
+                    } else {
+                        System.out.println("Went Down");
+                        shape.moveDown();
+                    }
                     break;
                 case OPTION_5:
                     gameInCourse = false;
