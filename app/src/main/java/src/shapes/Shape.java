@@ -14,7 +14,7 @@ public class Shape  {
     private boolean rotationStatus;
     private int rightColumns;
     private int leftColumns;
-    private int downColumns;
+    private int downRows;
 
     public Shape(final int xPos, final int yPos, final ShapeType type) {
         this(xPos, yPos, HOR_LIMIT_DEFAULT, VER_LIMIT_DEFAULT, type);
@@ -59,7 +59,7 @@ public class Shape  {
      * In order to represent downwards movement
      */
     public void moveDown() {
-        if (yPosition < verticalLimit - container.length + downColumns) {
+        if (yPosition < verticalLimit - container.length + downRows) {
             yPosition += 1;
         }
     }
@@ -107,16 +107,15 @@ public class Shape  {
     }
     /**
      * calculates free columns from right.
-     * @return An integer that represents how many free columns shape container has.
      */
-    public int reviewFromRight(final boolean[][] mat) {
+    public void reviewFromRight() {
         boolean res = true;
         int counter = 0;
-        int j = mat[0].length - 1;
+        int j = container[0].length - 1;
         while (res && j >= 0) {
             int i = 0;
-            while (res && i < mat.length) {
-                res = res && !mat[i][j];
+            while (res && i < container.length) {
+                res = res && !container[i][j];
                 i++;
             }
             if (res) {
@@ -124,21 +123,20 @@ public class Shape  {
             }
             j--;
         }
-        return counter;
+        rightColumns = counter;
     }
 
     /**
      * calculates free columns from left.
-     * @return An integer that represents how many free columns shape container has.
      */
-    public int reviewFromLeft(final boolean[][] mat) {
+    public void reviewFromLeft() {
         boolean res = true;
         int counter = 0;
         int j = 0;
-        while (res && j < mat[0].length) {
+        while (res && j < container[0].length) {
             int i = 0;
-            while (res && i < mat.length) {
-                res = res && !mat[i][j];
+            while (res && i < container.length) {
+                res = res && !container[i][j];
                 i++;
             }
             if (res) {
@@ -146,21 +144,20 @@ public class Shape  {
             }
             j++;
         }
-        return counter;
+        leftColumns = counter;
     }
 
     /**
-     * calculates free columns from down.
-     * @return An integer that represents how many free columns shape container has.
+     * calculates free rows from down.
      */
-    public int reviewFromDown(final boolean[][] mat) {
+    public void reviewFromDown() {
         boolean res = true;
         int counter = 0;
-        int i = mat[0].length - 1;
+        int i = container[0].length - 1;
         while (res && i >= 0) {
             int j = 0;
-            while (res && j < mat.length) {
-                res = res && !mat[i][j];
+            while (res && j < container.length) {
+                res = res && !container[i][j];
                 j++;
             }
             if (res) {
@@ -168,7 +165,7 @@ public class Shape  {
             }
             i--;
         }
-        return counter;
+        downRows = counter;
     }
 
     /**
@@ -190,8 +187,29 @@ public class Shape  {
      * does column controllers are updated.
      */
     public void updateColumnsReviewer() {
-        rightColumns = reviewFromRight(container);
-        leftColumns = reviewFromLeft(container);
-        downColumns = reviewFromDown(container);
+        reviewFromRight();
+        reviewFromLeft();
+        reviewFromDown();
+    }
+
+    /**
+     * @retunr free right columns of container.
+     */
+    public int getRightColumns() {
+        return rightColumns;
+    }
+
+    /**
+     * @return free left columns of container.
+     */
+    public int getLeftColumns() {
+        return leftColumns;
+    }
+
+    /**
+     * @return free down rows of container.
+     */
+    public int getDownRows() {
+        return downRows;
     }
 }
