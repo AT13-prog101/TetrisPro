@@ -1,6 +1,8 @@
 package src.utilities;
 import src.shapes.*;
 
+import java.util.Random;
+
 public class RandomShape {
     private static final int MAX_RANDOM = 7;
     private static final int SHAPE_I_INT = 0;
@@ -32,5 +34,14 @@ public class RandomShape {
             default:
                 return new Shape(posX, posY, ShapeType.Z);
         }
+    }
+    /**
+     * Generates a random number
+     * @return a random number
+     */
+    public int randomNumberGenerator() {
+        Random random = new Random();
+        int randomNumber = random.nextInt(MAX_RANDOM);
+        return randomNumber;
     }
 }

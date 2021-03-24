@@ -199,4 +199,18 @@ public class GameBoard {
         }
         return line;
     }
+
+    /**
+     * @return the gameBoard Height
+     */
+    public int getGameBoardHeight() {
+        return GAME_BOARD_HEIGHT;
+    }
+
+    /**
+     * @return the gameBoard Width
+     */
+    public int getGameBoardWidth() {
+        return GAME_BOARD_WIDTH;
+    }
 }
