@@ -61,7 +61,7 @@ public class GameBoard {
      * Gets a part of the game board array
      * @param xInitial the initial position on x axis
      * @param yInitial the initial position on y axis
-     * @param shapeLength the shape's length
+     * @param shapeHeight the shape's length
      * @return the partial game board array
      */
     public boolean[][] getPartialGameBoardArray(final int xInitial, final int yInitial, final int shapeHeight, final int shapeWidth) {
@@ -81,13 +81,7 @@ public class GameBoard {
      * @return the game board array
      */
     public boolean[][] createGameBoardArray(final int height, final int width) {
-        boolean[][] gameBoardArray = new boolean[height][width];
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                gameBoardArray[i][j] = false;
-            }
-        }
-        return gameBoardArray;
+        return new boolean[height][width];
     }
 
     /**
