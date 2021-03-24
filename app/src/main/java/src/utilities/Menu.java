@@ -2,7 +2,6 @@ package src.utilities;
 
 import src.shapes.Shape;
 
-import java.util.Random;
 import java.util.Scanner;
 
 public class Menu {
@@ -11,7 +10,6 @@ public class Menu {
     private static final int OPTION_3 = 3;
     private static final int OPTION_4 = 4;
     private static final int OPTION_5 = 5;
-    private static final int MAX_RANDOM = 7;
     private static final int INITIAL_POSX_SHAPE = 3;
     private static final int INITIAL_POSY_SHAPE = 0;
     private GameBoard gameBoard;
@@ -104,7 +102,7 @@ public class Menu {
         gameBoard = new GameBoard();
         game = new Game();
         randomShape = new RandomShape();
-        shape = randomShape.getShape(randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE);
+        shape = randomShape.getShape(randomShape.randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE);
         boolean gameInCourse = true;
         boolean collision = false;
         Scanner scanner = new Scanner(System.in);
@@ -152,7 +150,7 @@ public class Menu {
                         gameBoard.setGameBoardArray(shape);
                         gameBoard.updateLinesOnGameBoard();
                         randomShape = new RandomShape();
-                        shape = randomShape.getShape(randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE);
+                        shape = randomShape.getShape(randomShape.randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE);
                     } else {
                         System.out.println("Went Down");
                         onlyOneMovement++;
@@ -173,17 +171,6 @@ public class Menu {
         }
         scanner.close();
     }
-
-    /**
-     * Generates a random number
-     * @return a random number
-     */
-    private int randomNumberGenerator() {
-        Random random = new Random();
-        int randomNumber = random.nextInt(MAX_RANDOM);
-        return randomNumber;
-    }
-
     /**
      * Method to check if there is enough space to put the shape.
      */

@@ -8,6 +8,8 @@ public class App {
     public static void main(final String[] args) {
         Menu menu = new Menu();
         menu.showGameMenu();
+        Interface tetris = new Interface();
+        tetris.init();
     }
 }
 
