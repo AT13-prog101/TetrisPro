@@ -114,10 +114,6 @@ public class Menu {
         }
         while (gameInCourse) {
             if (collision) {
-                gameBoard.setGameBoardArray(shape);
-                gameBoard.updateLinesOnGameBoard();
-                randomShape = new RandomShape();
-                shape = randomShape.getShape(randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE);
                 collision = false;
                 onlyOneMovement = 0;
             }
@@ -153,6 +149,10 @@ public class Menu {
                 case OPTION_4:
                     if (game.checkCollision(shape, gameBoard, 2)) {
                         collision = true;
+                        gameBoard.setGameBoardArray(shape);
+                        gameBoard.updateLinesOnGameBoard();
+                        randomShape = new RandomShape();
+                        shape = randomShape.getShape(randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE);
                     } else {
                         System.out.println("Went Down");
                         onlyOneMovement++;
