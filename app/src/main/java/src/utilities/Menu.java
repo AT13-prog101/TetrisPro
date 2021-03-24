@@ -18,6 +18,7 @@ public class Menu {
     private RandomShape randomShape;
     private Shape shape;
     private Game game;
+    private int onlyOneMovement = 0;
 
     /**
      * Prints the initial Menu
@@ -100,11 +101,17 @@ public class Menu {
     public void showMovementMenu() {
         gameBoard = new GameBoard();
         game = new Game();
+        boolean[][] linea = {{true, true, true, true, false, true, true, true, true, true}};
         randomShape = new RandomShape();
         shape = randomShape.getShape(randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE);
+        gameBoard.setGameBoardArray(0, 2, linea);
         boolean gameInCourse = true;
         boolean collision = false;
         Scanner scanner = new Scanner(System.in);
+        if (!validSpace()) {
+            gameInCourse = false;
+            System.out.println("You Lose");
+        }
         while (gameInCourse) {
             if (collision) {
                 gameBoard.setGameBoardArray(shape);
@@ -117,6 +124,7 @@ public class Menu {
                 randomShape = new RandomShape();
                 shape = randomShape.getShape(randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE);
                 collision = false;
+                onlyOneMovement = 0;
             }
             game.print(gameBoard, shape);
             System.out.println("Press next numbers to");
@@ -136,7 +144,7 @@ public class Menu {
                     }
                     break;
                 case OPTION_2:
-                    if (game.checkCollision(shape, gameBoard,  1)) {
+                    if (game.checkCollision(shape, gameBoard, 1)) {
                         collision = true;
                     } else {
                         System.out.println("Moved to left");
@@ -152,7 +160,12 @@ public class Menu {
                         collision = true;
                     } else {
                         System.out.println("Went Down");
+                        onlyOneMovement++;
                         shape.moveDown();
+                    }
+                    if (collision && onlyOneMovement == 0) {
+                        System.out.println("You Lose");
+                        gameInCourse = false;
                     }
                     break;
                 case OPTION_5:
@@ -168,6 +181,7 @@ public class Menu {
 
     /**
      * Generates a random number
+     *
      * @return a random number
      */
     private int randomNumberGenerator() {
@@ -176,4 +190,22 @@ public class Menu {
         return randomNumber;
     }
 
+    /**
+     * Method Lose.
+     */
+    private boolean validSpace() {
+        boolean valido = false;
+        int count = 0;
+        for (int i = 0; i < 2; i++) {
+            for (int j = 3; j < gameBoard.getGameBoardArray()[i].length - 3; j++) {
+                if (valido == gameBoard.getGameBoardArray()[i][j]) {
+                    count++;
+                }
+            }
+        }
+        if (count == 8) {
+            return true;
+        }
+        return false;
+    }
 }
