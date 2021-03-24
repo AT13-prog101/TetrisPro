@@ -19,6 +19,8 @@ public class Menu {
     private Shape shape;
     private Game game;
     private int onlyOneMovement = 0;
+    private static final int SAFE_SPACE = 3;
+    private static final int SAFE_ZONE = 8;
 
     /**
      * Prints the initial Menu
@@ -101,10 +103,8 @@ public class Menu {
     public void showMovementMenu() {
         gameBoard = new GameBoard();
         game = new Game();
-        boolean[][] linea = {{true, true, true, true, false, true, true, true, true, true}};
         randomShape = new RandomShape();
         shape = randomShape.getShape(randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE);
-        gameBoard.setGameBoardArray(0, 2, linea);
         boolean gameInCourse = true;
         boolean collision = false;
         Scanner scanner = new Scanner(System.in);
@@ -191,19 +191,19 @@ public class Menu {
     }
 
     /**
-     * Method Lose.
+     * Method to check if there is enough space to put the shape.
      */
     private boolean validSpace() {
         boolean valido = false;
         int count = 0;
         for (int i = 0; i < 2; i++) {
-            for (int j = 3; j < gameBoard.getGameBoardArray()[i].length - 3; j++) {
+            for (int j = SAFE_SPACE; j < gameBoard.getGameBoardArray()[i].length - SAFE_SPACE; j++) {
                 if (valido == gameBoard.getGameBoardArray()[i][j]) {
                     count++;
                 }
             }
         }
-        if (count == 8) {
+        if (count == SAFE_ZONE) {
             return true;
         }
         return false;
