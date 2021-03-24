@@ -41,31 +41,43 @@ public class Shape  {
             xPosition += 1;
         }
     }
-
+    /**
+     * @return .
+     */
     public int getDownRows() {
         return downRows;
     }
-
+    /**
+     * @return an integer with the number of columns to right
+     */
     public int getRightColumns() {
         return rightColumns;
     }
-
+    /**
+     * @return an integer with the number of columns to left.
+     */
     public int getLeftColumns() {
         return leftColumns;
     }
-
+    /**
+     * @return a boolean that checks the lower bound
+     */
     public boolean checkDownLimit() {
         return yPosition == verticalLimit - container.length + downRows;
     }
-
+    /**
+     * @return a boolean that checks the right limit
+     */
     public boolean checkRightLimit() {
         return xPosition == horizontalLimit - container.length + rightColumns;
     }
 
     /**
-     * @return if container is at left limit.
+     * @return a boolean that checks the right limit
      */
-    public boolean checkLeftLimit() { return xPosition + leftColumns == 0; }
+    public boolean checkLeftLimit() {
+        return xPosition + leftColumns == 0;
+    }
 
     /**
      * Decreases xPosition in one.
