@@ -18,6 +18,9 @@ public class Menu {
     private RandomShape randomShape;
     private Shape shape;
     private Game game;
+    private int onlyOneMovement = 0;
+    private static final int SAFE_SPACE = 3;
+    private static final int SAFE_ZONE = 8;
 
     /**
      * Prints the initial Menu
@@ -105,6 +108,10 @@ public class Menu {
         boolean gameInCourse = true;
         boolean collision = false;
         Scanner scanner = new Scanner(System.in);
+        if (!validSpace()) {
+            gameInCourse = false;
+            System.out.println("You Lose");
+        }
         while (gameInCourse) {
             if (collision) {
                 gameBoard.setGameBoardArray(shape);
@@ -112,6 +119,7 @@ public class Menu {
                 randomShape = new RandomShape();
                 shape = randomShape.getShape(randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE);
                 collision = false;
+                onlyOneMovement = 0;
             }
             game.print(gameBoard, shape);
             System.out.println("Press next numbers to");
@@ -131,7 +139,7 @@ public class Menu {
                     }
                     break;
                 case OPTION_2:
-                    if (game.checkCollision(shape, gameBoard,  1)) {
+                    if (game.checkCollision(shape, gameBoard, 1)) {
                         collision = true;
                     } else {
                         System.out.println("Moved to left");
@@ -147,7 +155,12 @@ public class Menu {
                         collision = true;
                     } else {
                         System.out.println("Went Down");
+                        onlyOneMovement++;
                         shape.moveDown();
+                    }
+                    if (collision && onlyOneMovement == 0) {
+                        System.out.println("You Lose");
+                        gameInCourse = false;
                     }
                     break;
                 case OPTION_5:
@@ -163,6 +176,7 @@ public class Menu {
 
     /**
      * Generates a random number
+     *
      * @return a random number
      */
     private int randomNumberGenerator() {
@@ -171,4 +185,22 @@ public class Menu {
         return randomNumber;
     }
 
+    /**
+     * Method to check if there is enough space to put the shape.
+     */
+    private boolean validSpace() {
+        boolean valido = false;
+        int count = 0;
+        for (int i = 0; i < 2; i++) {
+            for (int j = SAFE_SPACE; j < gameBoard.getGameBoardArray()[i].length - SAFE_SPACE; j++) {
+                if (valido == gameBoard.getGameBoardArray()[i][j]) {
+                    count++;
+                }
+            }
+        }
+        if (count == SAFE_ZONE) {
+            return true;
+        }
+        return false;
+    }
 }

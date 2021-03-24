@@ -78,8 +78,7 @@ public class GameBoard {
      * @return the game board array
      */
     public boolean[][] createGameBoardArray(final int height, final int width) {
-        boolean[][] gameBoardArray = new boolean[height][width];
-        return gameBoardArray;
+        return new boolean[height][width];
     }
 
     /**
