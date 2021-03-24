@@ -6,10 +6,6 @@ import src.shapes.*;
 public class GameBoard {
     static final int GAME_BOARD_HEIGHT = 20;
     static final int GAME_BOARD_WIDTH = 10;
-    private static final int OPTION_1 = 1;
-    private static final int OPTION_2 = 2;
-    private static final int OPTION_3 = 3;
-    private static final int OPTION_4 = 4;
     private static final int MAX_RANDOM = 7;
     private static final int INITIAL_POSX_SHAPE = 3;
     private static final int INITIAL_POSY_SHAPE = 0;
@@ -162,19 +158,6 @@ public class GameBoard {
         boolean[][] shape = randomShape.getShape(randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE).getContainer();
         setGameBoardArray(INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE, shape);
         return this.gameBoardArray;
-    }
-
-    /**
-     * Prints an array of booleans
-     * @param arrayOfBooleans is the array to print
-     */
-    public void print(final boolean[][] arrayOfBooleans) {
-        for (int i = 0; i < arrayOfBooleans.length; i++) {
-            for (int j = 0; j < arrayOfBooleans[i].length; j++) {
-                System.out.print(toNumeralString(arrayOfBooleans[i][j]) + " ");
-            }
-            System.out.println();
-        }
     }
 
     /**

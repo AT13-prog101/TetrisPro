@@ -83,6 +83,20 @@ public class GameBoardTest {
     }
 
     @Test
+    public void updateLinesOnGameBoard_GameBoardArray_EmptyGameBoardArray() {
+        GameBoard gameBoard = new GameBoard();
+        boolean[][] array = createArray(1,10);
+        gameBoard.setGameBoardArray(0, 1, array);
+        gameBoard.setGameBoardArray(0, 10, array);
+        gameBoard.setGameBoardArray(0, 18, array);
+        gameBoard.setGameBoardArray(0, 19, array);
+        gameBoard.updateLinesOnGameBoard();
+        boolean[][] actual = gameBoard.getGameBoardArray();
+        boolean[][] expected = new boolean[20][10];
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
     public void convertBooleanToNumber_True_1() {
         GameBoard gameBoard = new GameBoard();
         boolean value = true;
