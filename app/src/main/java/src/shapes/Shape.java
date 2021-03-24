@@ -38,7 +38,7 @@ public class Shape  {
      * Increases xPosition in one.
      * In order to represent movement to the right.
      */
-    public void moveRight() {;
+    public void moveRight() {
         if (xPosition < horizontalLimit - container.length + rightColumns) {
             xPosition += 1;
         }
@@ -214,16 +214,23 @@ public class Shape  {
     }
 
     /**
-     * @return if container is one position before right limit.
+     * @return if container is at right limit.
      */
     public boolean checkRightLimit() {
         return xPosition == horizontalLimit - container.length + rightColumns - 1;
     }
 
     /**
-     * @return if container is one position before down limit.
+     * @return if container is at down limit.
      */
     public boolean checkDownLimit() {
         return yPosition == verticalLimit - container.length + downRows - 1;
+    }
+
+    /**
+     * @return if container is at left limit.
+     */
+    public boolean checkLeftLimit() {
+        return xPosition + leftColumns == 0;
     }
 }
