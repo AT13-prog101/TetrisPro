@@ -1,56 +1,30 @@
 package src;
 
 import org.junit.Test;
+import src.shapes.Shape;
+import src.shapes.ShapeType;
 import src.utilities.*;
-
-import java.lang.reflect.Array;
-
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.junit.Assert.assertThat;
-
 
 public class GameBoardTest {
     @Test
     public void createGameBoardArray_Height2AndWidth4_arrayOf2x4() {
         GameBoard gameBoard = new GameBoard();
         boolean[][] actual = gameBoard.createGameBoardArray(2, 4);
-        boolean[][] expected = {{false, false, false, false}, {false, false, false, false}};
+        boolean[][] expected = new boolean[2][4];
         assertArrayEquals(expected, actual);
     }
 
     @Test
     public void cleanRowOnArray_Row1_GameBoardArrayWithRow1False() {
         GameBoard gameBoard = new GameBoard();
-        boolean[][] array = {
-                {true, true, true, true, true, true, true, true, true, true},
-                {true, true, true, true, true, true, true, true, true, true},
-                {true, true, true, true, true, true, true, true, true, true}};
+        boolean[][] array = createArray(3,10);
         gameBoard.setGameBoardArray(0, 0, array);
         gameBoard.cleanRowOnArray(1);
         boolean[][] actual = gameBoard.getGameBoardArray();
-        boolean [][] expected = {
-                {true, true, true, true, true, true, true, true, true, true},
-                {false, false, false, false, false, false, false, false, false, false},
-                {true, true, true, true, true, true, true, true, true, true},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false}
-        };
+        boolean [][] expected = new boolean[20][10];
+        updateRowOnArray(0,expected);
+        updateRowOnArray(2,expected);
         assertArrayEquals(expected, actual);
     }
 
@@ -71,84 +45,32 @@ public class GameBoardTest {
     @Test
     public void setGameBoardArray_1And2AndArrayOf2x2_UpdatedArray() {
         GameBoard gameBoard = new GameBoard();
-        boolean[][] arrayToChange = {{true, true}, {true, true}};
-        gameBoard.setGameBoardArray(1, 2, arrayToChange);
+        Shape shape = new Shape(1,2, ShapeType.O);
+        gameBoard.setGameBoardArray(shape);
         boolean[][] actual = gameBoard.getGameBoardArray();
-        boolean [][] expected = {
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, true, true, false, false, false, false, false, false, false},
-                {false, true, true, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false}
-        };
+        boolean [][] expected = new boolean[20][10];
+        updatePositionOnArray(1,2, expected);
+        updatePositionOnArray(2,2, expected);
+        updatePositionOnArray(1,3, expected);
+        updatePositionOnArray(2,3, expected);
         assertArrayEquals(expected, actual);
     }
 
     @Test
     public void adjustLines_GameBoardArray_OrderedGameBoardArray() {
         GameBoard gameBoard = new GameBoard();
-        boolean[][] disorderedArray = {
-                {false, false, false, false, false, false, false, false, false, false},
-                {true, false, false, true, false, true, false, true, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {true, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {true, true, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {true, false, false, false, true, false, false, false, false, true},
-                {true, false, true, false, false, true, false, false, true, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {true, false, true, false, false, false, true, false, false, false}
-        };
-        gameBoard.setGameBoardArray(0, 0, disorderedArray);
+        boolean[][] array = createArray(1,10);
+        gameBoard.setGameBoardArray(0, 1, array);
+        gameBoard.setGameBoardArray(0, 5, array);
+        gameBoard.setGameBoardArray(0, 10, array);
+        gameBoard.setGameBoardArray(0, 15, array);
         gameBoard.adjustLines();
         boolean[][] actual = gameBoard.getGameBoardArray();
-        boolean [][] expected = {
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false, false, false},
-                {true, false, false, true, false, true, false, true, false, false},
-                {true, false, false, false, false, false, false, false, false, false},
-                {true, true, false, false, false, false, false, false, false, false},
-                {true, false, false, false, true, false, false, false, false, true},
-                {true, false, true, false, false, true, false, false, true, false},
-                {true, false, true, false, false, false, true, false, false, false}
-        };
+        boolean [][] expected = new boolean[20][10];
+        updateRowOnArray(16, expected);
+        updateRowOnArray(17, expected);
+        updateRowOnArray(18, expected);
+        updateRowOnArray(19, expected);
         assertArrayEquals(expected, actual);
     }
 
@@ -156,7 +78,7 @@ public class GameBoardTest {
     public void getLineFromGameBoardArray_Row10_BooleanArrayFullWithFalse() {
         GameBoard gameBoard = new GameBoard();
         boolean[][] actual = gameBoard.getLineFromGameBoardArray(10);
-        boolean[][] expected = {{false, false, false, false, false, false, false, false, false, false}};
+        boolean[][] expected = new boolean[1][10];
         assertArrayEquals(expected, actual);
     }
 
@@ -185,4 +107,56 @@ public class GameBoardTest {
         boolean[][] expected = new boolean[20][10];
         assertEquals(actual.length, expected.length);
     }
+
+    /**
+     * Creates an array full of true values
+     * @param height of the array
+     * @param width of the array
+     * @return the array with dimensions and values set
+     */
+    public static boolean[][] createArray(int height, int width) {
+        boolean[][] array = new boolean[height][width];
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                array[i][j] = true;
+            }
+        }
+        return array;
+    }
+
+    /**
+     * Sets a row of an array to true
+     * @param row to set
+     * @param array to set
+     * @return array with the row changed
+     */
+    public static boolean[][] updateRowOnArray(int row, boolean[][] array) {
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                if (i == row) {
+                    array[i][j] = true;
+                }
+            }
+        }
+        return array;
+    }
+
+    /**
+     * Sets a position on the array to true
+     * @param x position on x axis
+     * @param y position on y axis
+     * @param array to set
+     * @return the array with the value set
+     */
+    public static boolean[][] updatePositionOnArray(int x, int y, boolean[][] array) {
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                if (i == y && j ==x) {
+                    array[i][j] = true;
+                }
+            }
+        }
+        return array;
+    }
+
 }

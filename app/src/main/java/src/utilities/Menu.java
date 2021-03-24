@@ -108,12 +108,7 @@ public class Menu {
         while (gameInCourse) {
             if (collision) {
                 gameBoard.setGameBoardArray(shape);
-                for (int i = 0; i < gameBoard.getGameBoardArray().length; i++) {
-                    if (gameBoard.checkFullRow(i, true)) {
-                        gameBoard.cleanRowOnArray(i);
-                    }
-                }
-                gameBoard.adjustLines();
+                gameBoard.updateLinesOnGameBoard();
                 randomShape = new RandomShape();
                 shape = randomShape.getShape(randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE);
                 collision = false;

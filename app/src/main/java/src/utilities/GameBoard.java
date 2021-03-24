@@ -61,7 +61,8 @@ public class GameBoard {
      * Gets a part of the game board array
      * @param xInitial the initial position on x axis
      * @param yInitial the initial position on y axis
-     * @param shapeLength the shape's length
+     * @param shapeHeight the shape's height
+     * @param shapeWidth the shape's width
      * @return the partial game board array
      */
     public boolean[][] getPartialGameBoardArray(final int xInitial, final int yInitial, final int shapeHeight, final int shapeWidth) {
@@ -82,11 +83,6 @@ public class GameBoard {
      */
     public boolean[][] createGameBoardArray(final int height, final int width) {
         boolean[][] gameBoardArray = new boolean[height][width];
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                gameBoardArray[i][j] = false;
-            }
-        }
         return gameBoardArray;
     }
 
@@ -143,6 +139,18 @@ public class GameBoard {
                 row = row + emptyRowCounter - 1;
             }
         }
+    }
+
+    /**
+     * Checks full lines on game board and adjust it
+     */
+    public void updateLinesOnGameBoard() {
+        for (int i = 0; i < gameBoardArray.length; i++) {
+            if (checkFullRow(i, true)) {
+                cleanRowOnArray(i);
+            }
+        }
+        adjustLines();
     }
 
     /**

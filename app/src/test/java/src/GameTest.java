@@ -15,7 +15,7 @@ public class GameTest {
         GameBoard gameBoard = new GameBoard();
         Shape shape = new Shape(5,0,ShapeType.I);
         boolean[][] fullRow = {{true, true, true, true, true,true, true, true, true, true}};
-        gameBoard.setGameBoardArray(0, 4,fullRow);
+        gameBoard.setGameBoardArray(0, 1,fullRow);
         boolean actual = game.checkCollision(shape, gameBoard, 2);
         assertTrue(actual);
     }
