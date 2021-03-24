@@ -1,18 +1,11 @@
 package src.utilities;
 
-import java.util.Random;
+import java.util.Arrays;
 import src.shapes.*;
 
 public class GameBoard {
     static final int GAME_BOARD_HEIGHT = 20;
     static final int GAME_BOARD_WIDTH = 10;
-    private static final int OPTION_1 = 1;
-    private static final int OPTION_2 = 2;
-    private static final int OPTION_3 = 3;
-    private static final int OPTION_4 = 4;
-    private static final int MAX_RANDOM = 7;
-    private static final int INITIAL_POSX_SHAPE = 3;
-    private static final int INITIAL_POSY_SHAPE = 0;
     private boolean[][] gameBoardArray;
 
     public GameBoard() {
@@ -61,7 +54,8 @@ public class GameBoard {
      * Gets a part of the game board array
      * @param xInitial the initial position on x axis
      * @param yInitial the initial position on y axis
-     * @param shapeHeight the shape's length
+     * @param shapeHeight the shape's height
+     * @param shapeWidth the shape's width
      * @return the partial game board array
      */
     public boolean[][] getPartialGameBoardArray(final int xInitial, final int yInitial, final int shapeHeight, final int shapeWidth) {
@@ -87,13 +81,9 @@ public class GameBoard {
     /**
      * Sets all the values of a row to false
      * @param row is the row on the array to set the values
-     * @return the array with the values set
      */
-    public boolean[][] cleanRowOnArray(final int row) {
-        for (int j = 0; j < gameBoardArray[row].length; j++) {
-            gameBoardArray[row][j] = false;
-        }
-        return gameBoardArray;
+    public void cleanRowOnArray(final int row) {
+        Arrays.fill(gameBoardArray[row], false);
     }
 
     /**
@@ -140,47 +130,17 @@ public class GameBoard {
     }
 
     /**
-     * Creates the game board array with a shape on it
-     * @return the game board array with a shape on it
+     * Checks full lines on game board and adjust it
      */
-    public boolean[][] show() {
-        RandomShape randomShape = new RandomShape();
-        boolean[][] shape = randomShape.getShape(randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE).getContainer();
-        setGameBoardArray(INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE, shape);
-        return this.gameBoardArray;
-    }
-
-    /**
-     * Prints an array of booleans
-     * @param arrayOfBooleans is the array to print
-     */
-    public void print(final boolean[][] arrayOfBooleans) {
-        for (int i = 0; i < arrayOfBooleans.length; i++) {
-            for (int j = 0; j < arrayOfBooleans[i].length; j++) {
-                System.out.print(toNumeralString(arrayOfBooleans[i][j]) + " ");
+    public void updateLinesOnGameBoard() {
+        for (int i = 0; i < gameBoardArray.length; i++) {
+            if (checkFullRow(i, true)) {
+                cleanRowOnArray(i);
             }
-            System.out.println();
         }
+        adjustLines();
     }
 
-    /**
-     * Generates a random number
-     * @return a random number
-     */
-    private int randomNumberGenerator() {
-        Random random = new Random();
-        int randomNumber = random.nextInt(MAX_RANDOM);
-        return randomNumber;
-    }
-
-    /**
-     * Transforms a boolean into 0 or 1 according to its value
-     * @param input is the boolean to change
-     * @return a 0 or 1
-     */
-    public String toNumeralString(final Boolean input) {
-        return input.booleanValue() ? "1" : "0";
-    }
     /**
      * Gets the full line of the game board array
      * @param row the row to get

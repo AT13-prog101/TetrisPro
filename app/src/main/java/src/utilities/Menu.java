@@ -114,15 +114,6 @@ public class Menu {
         }
         while (gameInCourse) {
             if (collision) {
-                gameBoard.setGameBoardArray(shape);
-                for (int i = 0; i < gameBoard.getGameBoardArray().length; i++) {
-                    if (gameBoard.checkFullRow(i, true)) {
-                        gameBoard.cleanRowOnArray(i);
-                    }
-                }
-                gameBoard.adjustLines();
-                randomShape = new RandomShape();
-                shape = randomShape.getShape(randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE);
                 collision = false;
                 onlyOneMovement = 0;
             }
@@ -158,6 +149,10 @@ public class Menu {
                 case OPTION_4:
                     if (game.checkCollision(shape, gameBoard, 2)) {
                         collision = true;
+                        gameBoard.setGameBoardArray(shape);
+                        gameBoard.updateLinesOnGameBoard();
+                        randomShape = new RandomShape();
+                        shape = randomShape.getShape(randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE);
                     } else {
                         System.out.println("Went Down");
                         onlyOneMovement++;
@@ -181,7 +176,6 @@ public class Menu {
 
     /**
      * Generates a random number
-     *
      * @return a random number
      */
     private int randomNumberGenerator() {
@@ -194,18 +188,14 @@ public class Menu {
      * Method to check if there is enough space to put the shape.
      */
     private boolean validSpace() {
-        boolean valido = false;
         int count = 0;
         for (int i = 0; i < 2; i++) {
             for (int j = SAFE_SPACE; j < gameBoard.getGameBoardArray()[i].length - SAFE_SPACE; j++) {
-                if (valido == gameBoard.getGameBoardArray()[i][j]) {
+                if (!gameBoard.getGameBoardArray()[i][j]) {
                     count++;
                 }
             }
         }
-        if (count == SAFE_ZONE) {
-            return true;
-        }
-        return false;
+        return count == SAFE_ZONE;
     }
 }
