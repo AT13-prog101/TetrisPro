@@ -1,8 +1,7 @@
 package src;
 
 import org.junit.Test;
-import src.shapes.Shape;
-import src.shapes.ShapeType;
+import src.shapes.*;
 import src.utilities.*;
 import static org.junit.Assert.*;
 
