@@ -41,23 +41,33 @@ public class Shape  {
             xPosition += 1;
         }
     }
-
+    /**
+     * @return if container is at left limit.
+     */
     public int getDownRows() {
         return downRows;
     }
-
+    /**
+     * @return if container is at left limit.
+     */
     public int getRightColumns() {
         return rightColumns;
     }
-
+    /**
+     * @return if container is at left limit.
+     */
     public int getLeftColumns() {
         return leftColumns;
     }
-
+    /**
+     * @return if container is at left limit.
+     */
     public boolean checkDownLimit() {
         return yPosition == verticalLimit - container.length + downRows;
     }
-
+    /**
+     * @return if container is at left limit.
+     */
     public boolean checkRightLimit() {
         return xPosition == horizontalLimit - container.length + rightColumns;
     }
@@ -65,7 +75,9 @@ public class Shape  {
     /**
      * @return if container is at left limit.
      */
-    public boolean checkLeftLimit() { return xPosition + leftColumns == 0; }
+    public boolean checkLeftLimit() {
+        return xPosition + leftColumns == 0;
+    }
 
     /**
      * Decreases xPosition in one.
