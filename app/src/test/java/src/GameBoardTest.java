@@ -3,6 +3,9 @@ package src;
 import org.junit.Test;
 import src.shapes.*;
 import src.utilities.*;
+
+import java.util.Arrays;
+
 import static org.junit.Assert.*;
 
 public class GameBoardTest {
@@ -22,8 +25,8 @@ public class GameBoardTest {
         gameBoard.cleanRowOnArray(1);
         boolean[][] actual = gameBoard.getGameBoardArray();
         boolean [][] expected = new boolean[20][10];
-        updateRowOnArray(0,expected);
-        updateRowOnArray(2,expected);
+        Arrays.fill(expected[0], true);
+        Arrays.fill(expected[2], true);
         assertArrayEquals(expected, actual);
     }
 
@@ -48,10 +51,10 @@ public class GameBoardTest {
         gameBoard.setGameBoardArray(shape);
         boolean[][] actual = gameBoard.getGameBoardArray();
         boolean [][] expected = new boolean[20][10];
-        updatePositionOnArray(1,2, expected);
-        updatePositionOnArray(2,2, expected);
-        updatePositionOnArray(1,3, expected);
-        updatePositionOnArray(2,3, expected);
+        expected[2][1] = true;
+        expected[2][2] = true;
+        expected[3][1] = true;
+        expected[3][2] = true;
         assertArrayEquals(expected, actual);
     }
 
@@ -66,10 +69,10 @@ public class GameBoardTest {
         gameBoard.adjustLines();
         boolean[][] actual = gameBoard.getGameBoardArray();
         boolean [][] expected = new boolean[20][10];
-        updateRowOnArray(16, expected);
-        updateRowOnArray(17, expected);
-        updateRowOnArray(18, expected);
-        updateRowOnArray(19, expected);
+        Arrays.fill(expected[16], true);
+        Arrays.fill(expected[17], true);
+        Arrays.fill(expected[18], true);
+        Arrays.fill(expected[19], true);
         assertArrayEquals(expected, actual);
     }
 
@@ -95,32 +98,6 @@ public class GameBoardTest {
         assertArrayEquals(expected, actual);
     }
 
-    @Test
-    public void convertBooleanToNumber_True_1() {
-        GameBoard gameBoard = new GameBoard();
-        boolean value = true;
-        String actual = gameBoard.toNumeralString(value);
-        String expected = "1";
-        assertEquals(actual, expected);
-    }
-
-    @Test
-    public void convertBooleanToNumber_False_0() {
-        GameBoard gameBoard = new GameBoard();
-        boolean value = false;
-        String actual = gameBoard.toNumeralString(value);
-        String expected = "0";
-        assertEquals(actual, expected);
-    }
-
-    @Test
-    public void show_RandomShapeGameBoard_GameBoardWithShape() {
-        GameBoard gameBoard = new GameBoard();
-        boolean[][] actual = gameBoard.show();
-        boolean[][] expected = new boolean[20][10];
-        assertEquals(actual.length, expected.length);
-    }
-
     /**
      * Creates an array full of true values
      * @param height of the array
@@ -136,40 +113,4 @@ public class GameBoardTest {
         }
         return array;
     }
-
-    /**
-     * Sets a row of an array to true
-     * @param row to set
-     * @param array to set
-     * @return array with the row changed
-     */
-    public static boolean[][] updateRowOnArray(int row, boolean[][] array) {
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array[i].length; j++) {
-                if (i == row) {
-                    array[i][j] = true;
-                }
-            }
-        }
-        return array;
-    }
-
-    /**
-     * Sets a position on the array to true
-     * @param x position on x axis
-     * @param y position on y axis
-     * @param array to set
-     * @return the array with the value set
-     */
-    public static boolean[][] updatePositionOnArray(int x, int y, boolean[][] array) {
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array[i].length; j++) {
-                if (i == y && j ==x) {
-                    array[i][j] = true;
-                }
-            }
-        }
-        return array;
-    }
-
 }

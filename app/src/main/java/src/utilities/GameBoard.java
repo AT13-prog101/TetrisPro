@@ -1,14 +1,11 @@
 package src.utilities;
 
-import java.util.Random;
+import java.util.Arrays;
 import src.shapes.*;
 
 public class GameBoard {
     static final int GAME_BOARD_HEIGHT = 20;
     static final int GAME_BOARD_WIDTH = 10;
-    private static final int MAX_RANDOM = 7;
-    private static final int INITIAL_POSX_SHAPE = 3;
-    private static final int INITIAL_POSY_SHAPE = 0;
     private boolean[][] gameBoardArray;
 
     public GameBoard() {
@@ -84,13 +81,9 @@ public class GameBoard {
     /**
      * Sets all the values of a row to false
      * @param row is the row on the array to set the values
-     * @return the array with the values set
      */
-    public boolean[][] cleanRowOnArray(final int row) {
-        for (int j = 0; j < gameBoardArray[row].length; j++) {
-            gameBoardArray[row][j] = false;
-        }
-        return gameBoardArray;
+    public void cleanRowOnArray(final int row) {
+        Arrays.fill(gameBoardArray[row], false);
     }
 
     /**
@@ -148,35 +141,6 @@ public class GameBoard {
         adjustLines();
     }
 
-    /**
-     * Creates the game board array with a shape on it
-     * @return the game board array with a shape on it
-     */
-    public boolean[][] show() {
-        RandomShape randomShape = new RandomShape();
-        boolean[][] shape = randomShape.getShape(randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE).getContainer();
-        setGameBoardArray(INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE, shape);
-        return this.gameBoardArray;
-    }
-
-    /**
-     * Generates a random number
-     * @return a random number
-     */
-    private int randomNumberGenerator() {
-        Random random = new Random();
-        int randomNumber = random.nextInt(MAX_RANDOM);
-        return randomNumber;
-    }
-
-    /**
-     * Transforms a boolean into 0 or 1 according to its value
-     * @param input is the boolean to change
-     * @return a 0 or 1
-     */
-    public String toNumeralString(final Boolean input) {
-        return input.booleanValue() ? "1" : "0";
-    }
     /**
      * Gets the full line of the game board array
      * @param row the row to get
