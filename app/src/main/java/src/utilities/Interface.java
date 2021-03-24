@@ -90,8 +90,6 @@ public class Interface extends JFrame implements KeyListener {
 //        }
         if (e.getKeyCode() == KeyEvent.VK_DOWN) {
             shape.moveDown();
-            System.out.println(gameBoard.getGameBoardArray());
-            gameBoard.print(gameBoard.getGameBoardArray());
         }
     }
 
