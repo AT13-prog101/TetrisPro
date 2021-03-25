@@ -2,6 +2,7 @@ package src;
 
 import org.junit.Test;
 import src.shapes.*;
+import src.utilities.DirectionType;
 import src.utilities.Game;
 import src.utilities.GameBoard;
 
@@ -16,7 +17,7 @@ public class GameTest {
         Shape shape = new Shape(5,0,ShapeType.I);
         boolean[][] fullRow = {{true, true, true, true, true,true, true, true, true, true}};
         gameBoard.setGameBoardArray(0, 1,fullRow);
-        boolean actual = game.checkCollision(shape, gameBoard, 2);
+        boolean actual = game.checkCollision(shape, gameBoard, DirectionType.Down);
         assertTrue(actual);
     }
 
@@ -27,7 +28,7 @@ public class GameTest {
         Shape shape = new Shape(5,0,ShapeType.I);
         boolean[][] fullRow = {{true, true, true, true, true, false, true, true, true, true}};
         gameBoard.setGameBoardArray(0, 4,fullRow);
-        boolean actual = game.checkCollision(shape, gameBoard, 2);
+        boolean actual = game.checkCollision(shape, gameBoard, DirectionType.Down);
         assertFalse(actual);
     }
 
@@ -38,7 +39,7 @@ public class GameTest {
         Shape shape = new Shape(5,0,ShapeType.J);
         boolean[][] fullColumn = {{true}, {true}, {true}, {true}, {true}, {true}, {true}, {true}, {true}, {true}};
         gameBoard.setGameBoardArray(8, 0,fullColumn);
-        boolean actual = game.checkCollision(shape, gameBoard, 3);
+        boolean actual = game.checkCollision(shape, gameBoard, DirectionType.Right);
         assertTrue(actual);
     }
 
@@ -49,7 +50,7 @@ public class GameTest {
         Shape shape = new Shape(5,0,ShapeType.J);
         boolean[][] fullColumn = {{true}, {true}, {true}, {true}, {true}, {true}, {true}, {true}, {true}, {true}};
         gameBoard.setGameBoardArray(9, 0,fullColumn);
-        boolean actual = game.checkCollision(shape, gameBoard, 3);
+        boolean actual = game.checkCollision(shape, gameBoard, DirectionType.Right);
         assertFalse(actual);
     }
 
@@ -60,7 +61,7 @@ public class GameTest {
         Shape shape = new Shape(5,0,ShapeType.L);
         boolean[][] fullColumn = {{true}, {true}, {true}, {true}, {true}, {true}, {true}, {true}, {true}, {true}};
         gameBoard.setGameBoardArray(4, 0,fullColumn);
-        boolean actual = game.checkCollision(shape, gameBoard, 1);
+        boolean actual = game.checkCollision(shape, gameBoard, DirectionType.Left);
         assertTrue(actual);
     }
 
@@ -71,7 +72,7 @@ public class GameTest {
         Shape shape = new Shape(5,0, ShapeType.L);
         boolean[][] fullColumn = {{true}, {true}, {true}, {true}, {true}, {true}, {true}, {true}, {true}, {true}};
         gameBoard.setGameBoardArray(3, 0,fullColumn);
-        boolean actual = game.checkCollision(shape, gameBoard, 1);
+        boolean actual = game.checkCollision(shape, gameBoard, DirectionType.Left);
         assertFalse(actual);
     }
 }
