@@ -125,7 +125,7 @@ public class Menu {
             int option = scanner.nextInt();
             switch (option) {
                 case OPTION_1:
-                    if (game.checkCollision(shape, gameBoard, 2 + 1)) {
+                    if (game.checkCollision(shape, gameBoard, DirectionType.Right)) {
                         collision = true;
                     } else {
                         System.out.println("Moved to right");
@@ -133,7 +133,7 @@ public class Menu {
                     }
                     break;
                 case OPTION_2:
-                    if (game.checkCollision(shape, gameBoard, 1)) {
+                    if (game.checkCollision(shape, gameBoard, DirectionType.Left)) {
                         collision = true;
                     } else {
                         System.out.println("Moved to left");
@@ -145,7 +145,7 @@ public class Menu {
                     shape.rotate();
                     break;
                 case OPTION_4:
-                    if (game.checkCollision(shape, gameBoard, 2)) {
+                    if (game.checkCollision(shape, gameBoard, DirectionType.Down)) {
                         collision = true;
                         gameBoard.setGameBoardArray(shape);
                         gameBoard.updateLinesOnGameBoard();
