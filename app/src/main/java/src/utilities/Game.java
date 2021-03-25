@@ -3,10 +3,27 @@ package src.utilities;
 import src.shapes.*;
 
 public class Game {
-    int xMovement;
-    int yMovement;
-    int leftEmptyColumns;
-    boolean downLimitReached = false;
+    private int xMovement;
+    private int yMovement;
+    private int leftEmptyColumns;
+    private boolean downLimitReached = false;
+
+    public int getyMovement() {
+        return yMovement;
+    }
+
+    public boolean getdownLimitReached() {
+        return downLimitReached;
+    }
+
+    public int getxMovement() {
+        return xMovement;
+    }
+
+    public int getLeftEmptyColumns() {
+        return leftEmptyColumns;
+    }
+
     /**
      * Verifies if the shape collides with the game board array
      * @param shape the figure to check
