@@ -11,32 +11,40 @@ public class Game {
      * @return a boolean with the result
      */
     public boolean checkCollision(final Shape shape, final GameBoard gameBoard, final int direction) {
-        if (shape.checkDownLimit()) {
-            return true;
-        }
         int xMovement = 0;
         int yMovement = 0;
+        int a = 0;
         switch (direction) {
             case 1:
-                xMovement = -1;
+                if (shape.checkLeftLimit()) {
+                    xMovement = 0;
+                } else {
+                    xMovement = -1;
+                }
                 break;
             case 2:
-                yMovement = 1;
+                if (shape.checkDownLimit()) {
+                    return true;
+                } else {
+                    yMovement = 1;
+                }
                 break;
             case 3:
-                xMovement = 1;
+                if (shape.checkRightLimit()) {
+                    xMovement = 0;
+                } else {
+                    xMovement = 1;
+                }
                 break;
-            default:
-                break;
-        }
-        if (shape.checkRightLimit()) {
-            xMovement = 0;
         }
         int xInitial = shape.getxPosition();
+        if (xInitial <= 0) {
+            a = shape.getLeftColumns();
+        }
         int yInitial = shape.getyPosition();
         int shapeHeight = shape.getContainer().length - shape.getDownRows();
         int shapeWidth = shape.getContainer().length - shape.getRightColumns();
-        boolean[][] matchArray = gameBoard.getPartialGameBoardArray(xInitial + xMovement, yInitial + yMovement, shapeHeight, shapeWidth);
+        boolean[][] matchArray = gameBoard.getPartialGameBoardArray(xInitial + xMovement + a, yInitial + yMovement, shapeHeight, shapeWidth);
         for (int i = 0; i < shapeHeight; i++) {
             for (int j = 0; j < shapeWidth; j++) {
                 if (shape.getContainer()[i][j] && matchArray[i][j]) {
