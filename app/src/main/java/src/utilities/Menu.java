@@ -105,6 +105,8 @@ public class Menu {
         shape = randomShape.getShape(randomShape.randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE);
         boolean gameInCourse = true;
         boolean collision = false;
+        boolean[][] linea = {{true, true, true, true, true}};
+        gameBoard.setGameBoardArray(0, 2, linea);
         Scanner scanner = new Scanner(System.in);
         if (!validSpace()) {
             gameInCourse = false;
@@ -148,6 +150,11 @@ public class Menu {
                     if (game.checkCollision(shape, gameBoard, 2)) {
                         collision = true;
                         gameBoard.setGameBoardArray(shape);
+                        if (!validSpace()) {
+                            gameInCourse = false;
+                            System.out.println("You Lose");
+                            break;
+                        }
                         gameBoard.updateLinesOnGameBoard();
                         randomShape = new RandomShape();
                         shape = randomShape.getShape(randomShape.randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE);
