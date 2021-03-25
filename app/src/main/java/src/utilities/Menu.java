@@ -148,6 +148,11 @@ public class Menu {
                     if (game.checkCollision(shape, gameBoard, DirectionType.Down)) {
                         collision = true;
                         gameBoard.setGameBoardArray(shape);
+                        if (!validSpace()) {
+                            gameInCourse = false;
+                            System.out.println("You Lose");
+                            break;
+                        }
                         gameBoard.updateLinesOnGameBoard();
                         randomShape = new RandomShape();
                         shape = randomShape.getShape(randomShape.randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE);
