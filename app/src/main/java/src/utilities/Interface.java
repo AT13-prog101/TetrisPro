@@ -101,6 +101,7 @@ public class Interface extends JFrame implements KeyListener {
             System.out.println("pos x: " + shape.getxPosition());
         }
         if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            updateShape(Color.black);
             shape.moveDown();
             System.out.println("pos y: " + shape.getyPosition());
         }
