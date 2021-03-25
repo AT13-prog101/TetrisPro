@@ -130,21 +130,25 @@ public class Interface extends JFrame implements KeyListener {
         };
         timer.scheduleAtFixedRate(task, 0, SPEED);
     }
-    /** */
+    /**
+     * updates shape in UI.
+     */
     public void updateShape(final Color color) {
         int y = shape.getyPosition();
         int x = shape.getxPosition();
         for (int i = 0; i < shape.getContainer().length - shape.getDownRows(); i++) {
             for (int j = shape.getLeftColumns(); j < shape.getContainer()[0].length - shape.getRightColumns(); j++) {
                 if (shape.getContainer()[i][j]) {
-                    updateShape3(this.labelArray[i + y][j + x], color);
+                    updateColorOfLabel(this.labelArray[i + y][j + x], color);
                 }
             }
         }
     }
 
-    /** */
-    public void updateShape3(final JLabel label, final Color color) {
+    /**
+     * changes color of the label to other.
+     */
+    public void updateColorOfLabel(final JLabel label, final Color color) {
         label.setBackground(color);
     }
 
