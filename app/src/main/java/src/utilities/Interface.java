@@ -93,17 +93,14 @@ public class Interface extends JFrame implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             updateShape(Color.black);
             shape.moveRight();
-            System.out.println("pos x: " + shape.getxPosition());
         }
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             updateShape(Color.black);
             shape.moveLeft();
-            System.out.println("pos x: " + shape.getxPosition());
         }
         if (e.getKeyCode() == KeyEvent.VK_DOWN) {
             updateShape(Color.black);
             shape.moveDown();
-            System.out.println("pos y: " + shape.getyPosition());
         }
     }
 
@@ -124,7 +121,6 @@ public class Interface extends JFrame implements KeyListener {
             public void run() {
                 updateShape(Color.black);
                 shape.moveDown();
-                System.out.println("pos y: " + shape.getyPosition());
                 updateShape(Color.green);
             }
         };
