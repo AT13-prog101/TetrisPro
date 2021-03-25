@@ -7,6 +7,8 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.TimerTask;
+import java.util.Timer;
 
 public class Interface extends JFrame implements KeyListener {
     private GameBoard gameBoard = new GameBoard();
@@ -20,7 +22,9 @@ public class Interface extends JFrame implements KeyListener {
     private int sizeWindowHeight = scaleHeight * SIZE_IMAGE;
     private static final int INITIAL_POSX_SHAPE = 3;
     private static final int INITIAL_POSY_SHAPE = 0;
+    private static final int SPEED = 500;
     private static JLabel[][] labelArray;
+    private Timer timer;
 
     public Interface() { }
 
@@ -28,10 +32,11 @@ public class Interface extends JFrame implements KeyListener {
      * Method initialize the graphical interface.
      */
     public void init() {
+        timer = new Timer();
         setSize(sizeWindowWidth, sizeWindowHeight);
         setTitle("TETRIS");
         setLocationRelativeTo(null);
-        setVisible(true);
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setFocusable(true);
         shape();
@@ -44,7 +49,7 @@ public class Interface extends JFrame implements KeyListener {
                 label.setName("Tetris");
                 label.setOpaque(true);
                 if (gameBoard.getGameBoardArray()[row][col]) {
-                    label.setBackground(Color.gray);
+                    label.setBackground(Color.red);
                 } else {
                     label.setBackground(Color.black);
                 }
@@ -53,9 +58,10 @@ public class Interface extends JFrame implements KeyListener {
                 add(label);
             }
         }
+        setVisible(true);
         addKeyListener(this);
+        start();
     }
-
     /**
      * Method to initialize and show a shape.
      */
@@ -75,7 +81,7 @@ public class Interface extends JFrame implements KeyListener {
      * @Override keyTyped.
      */
     @Override
-    public void keyTyped(KeyEvent e) {
+    public void keyTyped(final KeyEvent e) {
         return;
     }
 
@@ -84,11 +90,16 @@ public class Interface extends JFrame implements KeyListener {
      */
     @Override
     public void keyPressed(final KeyEvent e) {
-//        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-//        }
-//        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-//        }
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            updateShape(Color.black);
+            shape.moveRight();
+        }
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            updateShape(Color.black);
+            shape.moveLeft();
+        }
         if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            updateShape(Color.black);
             shape.moveDown();
         }
     }
@@ -97,7 +108,44 @@ public class Interface extends JFrame implements KeyListener {
      * @Override keyReleased.
      */
     @Override
-    public void keyReleased(KeyEvent e) {
+    public void keyReleased(final KeyEvent e) {
         return;
     }
+
+    /**
+     * Method to initialize timer.
+     */
+    public void start() {
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                updateShape(Color.black);
+                shape.moveDown();
+                updateShape(Color.green);
+            }
+        };
+        timer.scheduleAtFixedRate(task, 0, SPEED);
+    }
+    /**
+     * updates shape in UI.
+     */
+    public void updateShape(final Color color) {
+        int y = shape.getyPosition();
+        int x = shape.getxPosition();
+        for (int i = 0; i < shape.getContainer().length - shape.getDownRows(); i++) {
+            for (int j = shape.getLeftColumns(); j < shape.getContainer()[0].length - shape.getRightColumns(); j++) {
+                if (shape.getContainer()[i][j]) {
+                    updateColorOfLabel(this.labelArray[i + y][j + x], color);
+                }
+            }
+        }
+    }
+
+    /**
+     * changes color of the label to other.
+     */
+    public void updateColorOfLabel(final JLabel label, final Color color) {
+        label.setBackground(color);
+    }
+
 }
