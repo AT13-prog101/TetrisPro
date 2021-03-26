@@ -14,9 +14,6 @@ public class Menu {
     private RandomShape randomShape;
     private Shape shape;
     private Game game;
-    private int onlyOneMovement = 0;
-    private static final int SAFE_SPACE = 3;
-    private static final int SAFE_ZONE = 8;
 
     /**
      * Prints the initial Menu
@@ -102,16 +99,11 @@ public class Menu {
         randomShape = new RandomShape();
         shape = randomShape.getShape(randomShape.randomNumberGenerator());
         boolean gameInCourse = true;
-        boolean collision = false;
         Scanner scanner = new Scanner(System.in);
-        if (!validSpace()) {
-            gameInCourse = false;
-            System.out.println("You Lose");
-        }
         while (gameInCourse) {
-            if (collision) {
-                collision = false;
-                onlyOneMovement = 0;
+            if (game.checkCollision(shape, gameBoard, DirectionType.Hold)) {
+                System.out.println("You Lose");
+                break;
             }
             game.print(gameBoard, shape);
             System.out.println("Press next numbers to");
@@ -124,7 +116,6 @@ public class Menu {
             switch (option) {
                 case OPTION_1:
                     if (game.checkCollision(shape, gameBoard, DirectionType.Right)) {
-                        collision = true;
                     } else {
                         System.out.println("Moved to right");
                         shape.moveRight();
@@ -132,7 +123,6 @@ public class Menu {
                     break;
                 case OPTION_2:
                     if (game.checkCollision(shape, gameBoard, DirectionType.Left)) {
-                        collision = true;
                     } else {
                         System.out.println("Moved to left");
                         shape.moveLeft();
@@ -143,32 +133,19 @@ public class Menu {
                         shape.rotate();
                         shape.rotate();
                         shape.rotate();
-                        collision = true;
                     } else {
                         System.out.println("Rotated shape");
-//                        shape.rotate();
                     }
                     break;
                 case OPTION_4:
                     if (game.checkCollision(shape, gameBoard, DirectionType.Down)) {
-                        collision = true;
                         gameBoard.setGameBoardArray(shape);
-                        if (!validSpace()) {
-                            gameInCourse = false;
-                            System.out.println("You Lose");
-                            break;
-                        }
                         gameBoard.updateLinesOnGameBoard();
                         randomShape = new RandomShape();
                         shape = randomShape.getShape(randomShape.randomNumberGenerator());
                     } else {
                         System.out.println("Went Down");
-                        onlyOneMovement++;
                         shape.moveDown();
-                    }
-                    if (collision && onlyOneMovement == 0) {
-                        System.out.println("You Lose");
-                        gameInCourse = false;
                     }
                     break;
                 case OPTION_5:
@@ -180,19 +157,5 @@ public class Menu {
             }
         }
         scanner.close();
-    }
-    /**
-     * Method to check if there is enough space to put the shape.
-     */
-    private boolean validSpace() {
-        int count = 0;
-        for (int i = 0; i < 2; i++) {
-            for (int j = SAFE_SPACE; j < gameBoard.getGameBoardArray()[i].length - SAFE_SPACE; j++) {
-                if (!gameBoard.getGameBoardArray()[i][j]) {
-                    count++;
-                }
-            }
-        }
-        return count == SAFE_ZONE;
     }
 }
