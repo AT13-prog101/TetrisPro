@@ -6,6 +6,8 @@ import src.utilities.DirectionType;
 import src.utilities.Game;
 import src.utilities.GameBoard;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.*;
 
 public class GameTest {
@@ -93,7 +95,7 @@ public class GameTest {
         Game game = new Game();
         Shape shape = new Shape(ShapeType.J);
         game.selectDirection(DirectionType.Down,shape);
-        int actual = game.getyMovement();
+        int actual = game.getYMovement();
         int expected = 1;
         assertEquals(expected, actual);
     }
@@ -106,7 +108,7 @@ public class GameTest {
             shape.moveDown();
         }
         game.selectDirection(DirectionType.Down,shape);
-        boolean actual = game.getdownLimitReached();
+        boolean actual = game.getDownLimitReached();
         assertTrue(actual);
     }
 
@@ -118,7 +120,7 @@ public class GameTest {
             shape.moveLeft();
         }
         game.selectDirection(DirectionType.Left,shape);
-        int actual = game.getxMovement();
+        int actual = game.getXMovement();
         int expected = 0;
         assertEquals(expected, actual);
     }
@@ -128,7 +130,7 @@ public class GameTest {
         Game game = new Game();
         Shape shape = new Shape(ShapeType.J);
         game.selectDirection(DirectionType.Left,shape);
-        int actual = game.getxMovement();
+        int actual = game.getXMovement();
         int expected = -1;
         assertEquals(expected, actual);
     }
@@ -141,7 +143,7 @@ public class GameTest {
             shape.moveRight();
         }
         game.selectDirection(DirectionType.Right, shape);
-        int actual = game.getxMovement();
+        int actual = game.getXMovement();
         int expected = 0;
         assertEquals(expected, actual);
     }
@@ -151,8 +153,48 @@ public class GameTest {
         Game game = new Game();
         Shape shape = new Shape(ShapeType.J);
         game.selectDirection(DirectionType.Right,shape);
-        int actual = game.getxMovement();
+        int actual = game.getXMovement();
         int expected = 1;
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void checkCollision_ShapeIInitialPosition_False() {
+        Game game = new Game();
+        Shape shape = new Shape(ShapeType.I);
+        GameBoard gameBoard = new GameBoard();
+        boolean[][] fullRow = {{true, true, true, true, true, true, true, true, true, true}};
+        gameBoard.setGameBoardArray(0, 1, fullRow);
+        assertFalse(game.checkCollision(shape, gameBoard, DirectionType.Hold));
+    }
+
+    @Test
+    public void checkCollision_ShapeIInitialPosition_True() {
+        Game game = new Game();
+        Shape shape = new Shape(ShapeType.I);
+        GameBoard gameBoard = new GameBoard();
+        boolean[][] fullRow = {{true, true, true, true, true, true, true, true, true, true}};
+        gameBoard.setGameBoardArray(0, 0, fullRow);
+        assertTrue(game.checkCollision(shape, gameBoard, DirectionType.Hold));
+    }
+
+    @Test
+    public void checkCollision_ShapeLInitialPosition_False() {
+        Game game = new Game();
+        Shape shape = new Shape(ShapeType.L);
+        GameBoard gameBoard = new GameBoard();
+        boolean[][] fullRow = {{true, true, true, true, true, true, true, true, true, true}};
+        gameBoard.setGameBoardArray(0, 2, fullRow);
+        assertFalse(game.checkCollision(shape, gameBoard, DirectionType.Hold));
+    }
+
+    @Test
+    public void checkCollision_ShapeLInitialPosition_True() {
+        Game game = new Game();
+        Shape shape = new Shape(ShapeType.L);
+        GameBoard gameBoard = new GameBoard();
+        boolean[][] fullRow = {{true, true, true, true, true, true, true, true, true, true}};
+        gameBoard.setGameBoardArray(0, 1, fullRow);
+        assertTrue(game.checkCollision(shape, gameBoard, DirectionType.Hold));
     }
 }
