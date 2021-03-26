@@ -5,7 +5,6 @@ import src.shapes.*;
 public class Game {
     private int xMovement;
     private int yMovement;
-    private int leftEmptyColumns;
     private boolean downLimitReached = false;
 
     public int getyMovement() {
@@ -20,10 +19,6 @@ public class Game {
         return xMovement;
     }
 
-    public int getLeftEmptyColumns() {
-        return leftEmptyColumns;
-    }
-
     /**
      * Verifies if the shape collides with the game board array
      * @param shape the figure to check
@@ -36,17 +31,24 @@ public class Game {
         if (downLimitReached) {
             return true;
         }
-        int xInitial = shape.getxPosition();
-        if (xInitial <= 0) {
-            leftEmptyColumns = shape.getLeftColumns();
-        }
-        int yInitial = shape.getyPosition();
-        int shapeHeight = shape.getContainer().length - shape.getDownRows();
-        int shapeWidth = shape.getContainer().length - shape.getRightColumns();
-        boolean[][] matchArray = gameBoard.getPartialGameBoardArray(xInitial + xMovement + leftEmptyColumns, yInitial + yMovement, shapeHeight, shapeWidth);
-        for (int i = 0; i < shapeHeight; i++) {
-            for (int j = 0; j < shapeWidth; j++) {
-                if (shape.getContainer()[i][j] && matchArray[i][j]) {
+        int shapeHeight = shape.getPartialShape().length;
+        int shapeWidth = shape.getPartialShape()[0].length;
+        boolean[][] matchArray = gameBoard.getPartialGameBoardArray(shape.getxPosition() + xMovement + shape.getLeftColumns(), shape.getyPosition() + yMovement + shape.getTopRows(), shapeHeight, shapeWidth);
+        return compareArrays(matchArray, shape.getPartialShape(), shapeHeight, shapeWidth);
+    }
+
+    /**
+     * Checks if two arrays have a similar value on a same position
+     * @param firstArray to compare
+     * @param secondArray to compare
+     * @param height of the arrays
+     * @param width of the arrays
+     * @return
+     */
+    public boolean compareArrays(boolean[][] firstArray, boolean[][] secondArray, int height, int width) {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                if (firstArray[i][j] && secondArray[i][j]) {
                     return true;
                 }
             }
@@ -62,7 +64,6 @@ public class Game {
     public void selectDirection(DirectionType direction, Shape shape) {
         xMovement = 0;
         yMovement = 0;
-        leftEmptyColumns = 0;
         downLimitReached = false;
         switch (direction) {
             case Left:

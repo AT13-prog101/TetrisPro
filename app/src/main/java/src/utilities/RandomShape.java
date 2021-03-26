@@ -16,23 +16,23 @@ public class RandomShape {
      * Generates a class depending on a random number.
      * @return A class of shape.
      */
-    public Shape getShape(final int random, final int posX, final int posY) {
+    public Shape getShape(final int random) {
         int randomNumber = random;
         switch (randomNumber) {
             case SHAPE_I_INT:
-                return new Shape(posX, posY, ShapeType.I);
+                return new Shape(ShapeType.I);
             case SHAPE_J_INT:
-                return new Shape(posX, posY, ShapeType.J);
+                return new Shape(ShapeType.J);
             case SHAPE_L_INT:
-                return new Shape(posX, posY, ShapeType.L);
+                return new Shape(ShapeType.L);
             case SHAPE_O_INT:
-                return new Shape(posX, posY, ShapeType.O);
+                return new Shape(ShapeType.O);
             case SHAPE_S_INT:
-                return new Shape(posX, posY, ShapeType.S);
+                return new Shape(ShapeType.S);
             case SHAPE_T_INT:
-                return new Shape(posX, posY, ShapeType.T);
+                return new Shape(ShapeType.T);
             default:
-                return new Shape(posX, posY, ShapeType.Z);
+                return new Shape(ShapeType.Z);
         }
     }
     /**
