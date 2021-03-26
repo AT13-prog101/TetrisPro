@@ -95,29 +95,24 @@ public class Interface extends JFrame implements KeyListener {
     @Override
     public void keyPressed(final KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                updateShape(Color.black);
-                shape.moveRight();
-                updateShape(Color.green);
-
+                if (!game.checkCollision(shape, gameBoard, DirectionType.Right)) {
+                    updateShape(Color.black);
+                    shape.moveRight();
+                    updateShape(Color.green);
+                }
         }
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                updateShape(Color.black);
-                shape.moveLeft();
-                updateShape(Color.green);
-
+                if (!game.checkCollision(shape, gameBoard, DirectionType.Left)) {
+                    updateShape(Color.black);
+                    shape.moveLeft();
+                    updateShape(Color.green);
+                }
         }
         if (e.getKeyCode() == KeyEvent.VK_DOWN) {
             if (!game.checkCollision(shape, gameBoard, DirectionType.Down)) {
                 updateShape(Color.black);
                 shape.moveDown();
                 updateShape(Color.green);
-            } else {
-                gameBoard.setGameBoardArray(shape);
-                gameBoard.updateLinesOnGameBoard();
-                game.print(gameBoard, shape);
-                //shape();
-                updateGameboard();
-                shape();
             }
         }
         if (e.getKeyCode() == KeyEvent.VK_UP) {
