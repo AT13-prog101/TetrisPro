@@ -10,7 +10,7 @@ public class GameBoard {
     public GameBoard() {
         this.gameBoardArray = createGameBoardArray(GAME_BOARD_HEIGHT, GAME_BOARD_WIDTH);
     }
-
+    private int score;
     /**
      * Sets the values of the game board array according to a position and an array
      * @param x initial position on the x axis
@@ -135,6 +135,7 @@ public class GameBoard {
         for (int i = 0; i < gameBoardArray.length; i++) {
             if (checkFullRow(i, true)) {
                 cleanRowOnArray(i);
+                this.score++;
             }
         }
         adjustLines();
@@ -165,5 +166,11 @@ public class GameBoard {
      */
     public int getGameBoardWidth() {
         return GAME_BOARD_WIDTH;
+    }
+    /**
+     * @return the score of game
+     */
+    public int getScore() {
+        return score;
     }
 }
