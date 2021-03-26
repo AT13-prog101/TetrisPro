@@ -198,6 +198,15 @@ public class Shape  {
      * @return An array of boolean with the rotate form of figure.
      */
     public void rotate() {
+        if (checkRightLimit()) {
+            xPosition -= rightColumns;
+        }
+        if (checkLeftLimit()) {
+            xPosition += leftColumns;
+        }
+        if (checkDownLimit()) {
+            yPosition -= downRows;
+        }
         boolean[][] rotatedMatrix = new boolean[container.length][container.length];
         for (int i = 0; i < rotatedMatrix.length; i++) {
             for (int j = 0; j < rotatedMatrix.length; j++) {

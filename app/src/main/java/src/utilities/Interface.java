@@ -93,14 +93,22 @@ public class Interface extends JFrame implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             updateShape(Color.black);
             shape.moveRight();
+            updateShape(Color.green);
         }
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             updateShape(Color.black);
             shape.moveLeft();
+            updateShape(Color.green);
         }
         if (e.getKeyCode() == KeyEvent.VK_DOWN) {
             updateShape(Color.black);
             shape.moveDown();
+            updateShape(Color.green);
+        }
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
+            updateShape(Color.black);
+            shape.rotate();
+            updateShape(Color.green);
         }
     }
 
