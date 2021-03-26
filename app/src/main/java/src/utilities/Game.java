@@ -7,6 +7,7 @@ public class Game {
     private int yMovement;
     private int leftEmptyColumns;
     private boolean downLimitReached = false;
+    private boolean[][] rotatedArray;
 
     public int getyMovement() {
         return yMovement;

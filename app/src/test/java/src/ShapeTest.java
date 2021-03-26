@@ -8,73 +8,73 @@ import static org.junit.Assert.*;
 
 public class ShapeTest {
     @Test
-    public void moveRight_changePositionX5_x6() {
-        Shape shapeI = new Shape(5, 0, ShapeType.I);
+    public void moveRight_changePositionX3_x4() {
+        Shape shapeI = new Shape(ShapeType.I);
         shapeI.moveRight();
+        assertEquals(4, shapeI.getxPosition());
+    }
+
+    @Test
+    public void moveRight_move10timesFromX3_x6() {
+        Shape shapeI = new Shape(ShapeType.I);
+        for (int i = 0; i < 10; i++) {
+            shapeI.moveRight();
+        }
         assertEquals(6, shapeI.getxPosition());
     }
 
     @Test
-    public void moveRight_move3timesFromX5_x6() {
-        Shape shapeI = new Shape(5, 0, ShapeType.I);
-        shapeI.moveRight();
-        shapeI.moveRight();
-        shapeI.moveRight();
-        assertEquals(6, shapeI.getxPosition());
+    public void moveLeft_changePositionX3_x2() {
+        Shape shapeI = new Shape(ShapeType.S);
+        shapeI.moveLeft();
+        assertEquals(2, shapeI.getxPosition());
     }
 
     @Test
-    public void moveLeft_changePositionX2_x1() {
-        Shape shapeI = new Shape(2, 3, ShapeType.S);
-        shapeI.moveLeft();
-        assertEquals(1, shapeI.getxPosition());
-    }
-
-    @Test
-    public void moveLeft_move3timesFromX2_x0() {
-        Shape shapeI = new Shape(2, 3, ShapeType.S);
-        shapeI.moveLeft();
-        shapeI.moveLeft();
-        shapeI.moveLeft();
+    public void moveLeft_move10timesFromX3_x0() {
+        Shape shapeI = new Shape(ShapeType.S);
+        for (int i = 0; i < 10; i++) {
+            shapeI.moveLeft();
+        }
         assertEquals(0, shapeI.getxPosition());
     }
 
     @Test
-    public void moveDown_changePositionY7_y8() {
-        Shape shapeI = new Shape(5, 7, ShapeType.Z);
+    public void moveDown_changePositionY0_y1() {
+        Shape shapeI = new Shape(ShapeType.Z);
         shapeI.moveDown();
-        assertEquals(8, shapeI.getyPosition());
+        assertEquals(1, shapeI.getyPosition());
     }
 
     @Test
-    public void moveDown_moveShapeI4timesFromY16_y19() {
-        Shape shapeI = new Shape(5, 16, 10, 20, ShapeType.I);
-        shapeI.moveDown();
-        shapeI.moveDown();
-        shapeI.moveDown();
-        shapeI.moveDown();
+    public void moveDown_moveShapeI25timesFromY0_y19() {
+        Shape shapeI = new Shape(ShapeType.I);
+        for (int i = 0; i < 25; i++) {
+            shapeI.moveDown();
+        }
         assertEquals(19, shapeI.getyPosition());
     }
     @Test
-    public void moveDown_moveShapeS3timesFromY16_y18() {
-        Shape shapeI = new Shape(5, 16, 10, 20, ShapeType.S);
-        shapeI.moveDown();
-        shapeI.moveDown();
-        shapeI.moveDown();
+    public void moveDown_moveShapeS25timesFromY0_y18() {
+        Shape shapeI = new Shape(ShapeType.S);
+        for (int i = 0; i < 25; i++) {
+            shapeI.moveDown();
+        }
         assertEquals(18, shapeI.getyPosition());
     }
 
     @Test
-    public void moveDown_moveShapeO2timesFromY17_y18() {
-        Shape shapeI = new Shape(5, 17, 10, 20, ShapeType.O);
-        shapeI.moveDown();
-        shapeI.moveDown();
+    public void moveDown_moveShapeO25timesFromY0y18() {
+        Shape shapeI = new Shape(ShapeType.O);
+        for (int i = 0; i < 25; i++) {
+            shapeI.moveDown();
+        }
         assertEquals(18, shapeI.getyPosition());
     }
 
     @Test
     public void rotate_changePositionShapeT_shapeTVertical() {
-        Shape shapeT = new Shape(7, 5,10, 20, ShapeType.T);
+        Shape shapeT = new Shape(ShapeType.T);
         shapeT.rotate();
         boolean[][] actual = shapeT.getContainer();
         boolean[][] expected = {{false, false, true},
@@ -85,7 +85,7 @@ public class ShapeTest {
 
     @Test
     public void rotateShape_changePositionShapeSOneMove_shapeSVertical() {
-        Shape shapeS = new Shape(7, 5,10, 20, ShapeType.S);
+        Shape shapeS = new Shape(ShapeType.S);
         shapeS.rotate();
         boolean[][] actual = shapeS.getContainer();
         boolean[][] expected = {{false, true, false},
@@ -96,7 +96,7 @@ public class ShapeTest {
 
     @Test
     public void rotateShape_changePositionShapeSTwoMoves_shapeSHorizontal() {
-        Shape shapeS = new Shape(7, 5,10, 20, ShapeType.S);
+        Shape shapeS = new Shape(ShapeType.S);
         shapeS.rotate();
         shapeS.rotate();
         boolean[][] actual = shapeS.getContainer();
@@ -108,7 +108,7 @@ public class ShapeTest {
 
     @Test
     public void rotateShape_changePositionShapeSThreeMoves_shapeSVertical() {
-        Shape shapeS = new Shape(7, 5,10, 20, ShapeType.S);
+        Shape shapeS = new Shape(ShapeType.S);
         shapeS.rotate();
         shapeS.rotate();
         shapeS.rotate();
@@ -121,7 +121,7 @@ public class ShapeTest {
 
     @Test
     public void rotateShape_changePositionShapeSFourMoves_shapeSHorizontal() {
-        Shape shapeS = new Shape(7, 5,10, 20, ShapeType.S);
+        Shape shapeS = new Shape(ShapeType.S);
         shapeS.rotate();
         shapeS.rotate();
         shapeS.rotate();

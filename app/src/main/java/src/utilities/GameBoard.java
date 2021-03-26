@@ -7,7 +7,6 @@ public class GameBoard {
     static final int GAME_BOARD_HEIGHT = 20;
     static final int GAME_BOARD_WIDTH = 10;
     private boolean[][] gameBoardArray;
-
     public GameBoard() {
         this.gameBoardArray = createGameBoardArray(GAME_BOARD_HEIGHT, GAME_BOARD_WIDTH);
     }

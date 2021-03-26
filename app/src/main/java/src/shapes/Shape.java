@@ -15,23 +15,15 @@ public class Shape  {
     private int leftColumns;
     private int downRows;
 
-    public Shape(final int xPos, final int yPos, final ShapeType type) {
-        this(xPos, yPos, HOR_LIMIT_DEFAULT, VER_LIMIT_DEFAULT, type);
-    }
-
     public Shape(final ShapeType type) {
-        this(X_POS_DEFAULT, Y_POS_DEFAULT, HOR_LIMIT_DEFAULT, VER_LIMIT_DEFAULT, type);
-    }
-
-    public Shape(final int xPos, final int yPos, final int horizontalL, final int verticalL,
-                 final ShapeType type) {
-        xPosition = xPos;
-        yPosition = yPos;
-        horizontalLimit = horizontalL;
-        verticalLimit = verticalL;
+        xPosition = X_POS_DEFAULT;
+        yPosition = Y_POS_DEFAULT;
+        horizontalLimit = HOR_LIMIT_DEFAULT;
+        verticalLimit = VER_LIMIT_DEFAULT;
         this.container = ShapeDefinition.generate(type);
         updateColumnsReviewer();
     }
+
     /**
      * Increases xPosition in one.
      * In order to represent movement to the right.
@@ -132,21 +124,21 @@ public class Shape  {
      * @return An integer that represents how many free columns shape container has.
      */
     public int reviewFromRight(final boolean[][] mat) {
-        boolean res = true;
-        int counter = 0;
+        boolean rightColumnEmpty = true;
+        int columnCounter = 0;
         int j = mat[0].length - 1;
-        while (res && j >= 0) {
+        while (rightColumnEmpty && j >= 0) {
             int i = 0;
-            while (res && i < mat.length) {
-                res = res && !mat[i][j];
+            while (rightColumnEmpty && i < mat.length) {
+                rightColumnEmpty = rightColumnEmpty && !mat[i][j];
                 i++;
             }
-            if (res) {
-                counter++;
+            if (rightColumnEmpty) {
+                columnCounter++;
             }
             j--;
         }
-        return counter;
+        return columnCounter;
     }
 
     /**
@@ -154,21 +146,21 @@ public class Shape  {
      * @return An integer that represents how many free columns shape container has.
      */
     public int reviewFromLeft(final boolean[][] mat) {
-        boolean res = true;
-        int counter = 0;
+        boolean leftColumnEmpty = true;
+        int columnCounter = 0;
         int j = 0;
-        while (res && j < mat[0].length) {
+        while (leftColumnEmpty && j < mat[0].length) {
             int i = 0;
-            while (res && i < mat.length) {
-                res = res && !mat[i][j];
+            while (leftColumnEmpty && i < mat.length) {
+                leftColumnEmpty = leftColumnEmpty && !mat[i][j];
                 i++;
             }
-            if (res) {
-                counter++;
+            if (leftColumnEmpty) {
+                columnCounter++;
             }
             j++;
         }
-        return counter;
+        return columnCounter;
     }
 
     /**
@@ -176,21 +168,21 @@ public class Shape  {
      * @return An integer that represents how many free rows shape container has.
      */
     public int reviewFromDown(final boolean[][] mat) {
-        boolean res = true;
-        int counter = 0;
+        boolean downRowEmpty = true;
+        int rowCounter = 0;
         int i = mat[0].length - 1;
-        while (res && i >= 0) {
+        while (downRowEmpty && i >= 0) {
             int j = 0;
-            while (res && j < mat.length) {
-                res = res && !mat[i][j];
+            while (downRowEmpty && j < mat.length) {
+                downRowEmpty = downRowEmpty && !mat[i][j];
                 j++;
             }
-            if (res) {
-                counter++;
+            if (downRowEmpty) {
+                rowCounter++;
             }
             i--;
         }
-        return counter;
+        return rowCounter;
     }
 
     /**

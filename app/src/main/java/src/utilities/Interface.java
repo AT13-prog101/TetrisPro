@@ -67,7 +67,7 @@ public class Interface extends JFrame implements KeyListener {
      */
     public void shape() {
         randomShape = new RandomShape();
-        shape = randomShape.getShape(randomShape.randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE);
+        shape = randomShape.getShape(randomShape.randomNumberGenerator());
         printShape();
     }
     /**
