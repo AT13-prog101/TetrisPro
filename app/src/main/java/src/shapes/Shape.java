@@ -1,8 +1,5 @@
 package src.shapes;
 
-
-import src.utilities.GameBoard;
-
 public class Shape  {
     private int xPosition;
     private int yPosition;
@@ -59,7 +56,8 @@ public class Shape  {
      *
      * @return an integer with the number of columns from above
      */
-    public int getTopRows() { return topRows; }
+    public int getTopRows() {
+        return topRows; }
 
     /**
      * @return a boolean that checks the lower bound
@@ -81,10 +79,14 @@ public class Shape  {
         return xPosition + leftColumns == 0;
     }
 
+    /**
+     * Verifies if rotation is possible.
+     * @return the result
+     */
     public boolean checkRotation() {
-        if (xPosition < 0 ||
-                xPosition > HOR_LIMIT_DEFAULT - container.length ||
-                yPosition > VER_LIMIT_DEFAULT - container.length) {
+        if (xPosition < 0
+                || xPosition > HOR_LIMIT_DEFAULT - container.length
+                || yPosition > VER_LIMIT_DEFAULT - container.length) {
             return false;
         }
         return true;
@@ -144,7 +146,7 @@ public class Shape  {
             width = container[0].length - leftColumns;
             xInit = leftColumns;
         }
-        if (getTopRows() > 0 ) {
+        if (getTopRows() > 0) {
             height = container.length - topRows;
             yInit = topRows;
         }
