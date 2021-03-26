@@ -173,4 +173,12 @@ public class GameBoard {
     public int getScore() {
         return score;
     }
+
+    /**
+     *
+     * @param points score of game
+     */
+    public void setScore(final int points) {
+        this.score = points;
+    }
 }
