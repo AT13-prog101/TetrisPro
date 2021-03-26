@@ -24,7 +24,6 @@ public class Interface extends JFrame implements KeyListener {
     private static JLabel[][] labelArray;
     private Timer timer;
     private final GameOver gameOver = new GameOver();
-    private int onlyOneMovement = 0;
     private static final int SAFE_SPACE = 3;
     private static final int SAFE_ZONE = 8;
     private boolean gameInCourse = true;
@@ -172,7 +171,7 @@ public class Interface extends JFrame implements KeyListener {
      * Calls game over when losing game.
      */
     public void lose() {
-        gameOver.showGameOver(this, timer);
+        gameOver.showGameOver(this, timer, gameBoard);
     }
     /**
      * changes color of the label to other.
