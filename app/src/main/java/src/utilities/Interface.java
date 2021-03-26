@@ -20,9 +20,7 @@ public class Interface extends JFrame implements KeyListener {
     private int scaleHeight = gameBoard.getGameBoardHeight();
     private int sizeWindowWidth = scaleWidth * SIZE_IMAGE;
     private int sizeWindowHeight = scaleHeight * SIZE_IMAGE;
-    private static final int INITIAL_POSX_SHAPE = 3;
-    private static final int INITIAL_POSY_SHAPE = 0;
-    private static final int SPEED = 500;
+    private static final int SPEED = 200;
     private static JLabel[][] labelArray;
     private Timer timer;
 
@@ -33,13 +31,12 @@ public class Interface extends JFrame implements KeyListener {
      */
     public void init() {
         timer = new Timer();
+        randomShape = new RandomShape();
         setSize(sizeWindowWidth, sizeWindowHeight);
         setTitle("TETRIS");
         setLocationRelativeTo(null);
-
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setFocusable(true);
-        shape();
         labelArray = new JLabel[scaleHeight][scaleWidth];
         setLayout(new GridLayout(scaleHeight, scaleWidth));
         for (int row = 0; row < scaleHeight; row++) {
@@ -48,16 +45,13 @@ public class Interface extends JFrame implements KeyListener {
                 JLabel label = new JLabel();
                 label.setName("Tetris");
                 label.setOpaque(true);
-                if (gameBoard.getGameBoardArray()[row][col]) {
-                    label.setBackground(Color.red);
-                } else {
-                    label.setBackground(Color.black);
-                }
+                label.setBackground(Color.black);
                 label.setBorder(border);
                 labelArray[row][col] = label;
                 add(label);
             }
         }
+        shape();
         setVisible(true);
         addKeyListener(this);
         start();
@@ -66,9 +60,8 @@ public class Interface extends JFrame implements KeyListener {
      * Method to initialize and show a shape.
      */
     public void shape() {
-        randomShape = new RandomShape();
         shape = randomShape.getShape(randomShape.randomNumberGenerator());
-        printShape();
+        updateShape(Color.green);
     }
     /**
      * Refresh the icon of a label where it is our Alien.
@@ -91,16 +84,30 @@ public class Interface extends JFrame implements KeyListener {
     @Override
     public void keyPressed(final KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            updateShape(Color.black);
-            shape.moveRight();
+                if (!game.checkCollision(shape, gameBoard, DirectionType.Right)) {
+                    updateShape(Color.black);
+                    shape.moveRight();
+                    updateShape(Color.green);
+                }
         }
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            updateShape(Color.black);
-            shape.moveLeft();
+                if (!game.checkCollision(shape, gameBoard, DirectionType.Left)) {
+                    updateShape(Color.black);
+                    shape.moveLeft();
+                    updateShape(Color.green);
+                }
         }
         if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            if (!game.checkCollision(shape, gameBoard, DirectionType.Down)) {
+                updateShape(Color.black);
+                shape.moveDown();
+                updateShape(Color.green);
+            }
+        }
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
             updateShape(Color.black);
-            shape.moveDown();
+            shape.rotate();
+            updateShape(Color.green);
         }
     }
 
@@ -119,9 +126,17 @@ public class Interface extends JFrame implements KeyListener {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                updateShape(Color.black);
-                shape.moveDown();
-                updateShape(Color.green);
+                if (!game.checkCollision(shape, gameBoard, DirectionType.Down)) {
+                    updateShape(Color.black);
+                    shape.moveDown();
+                    updateShape(Color.green);
+                } else {
+                    gameBoard.setGameBoardArray(shape);
+                    gameBoard.updateLinesOnGameBoard();
+                    game.print(gameBoard, shape);
+                    updateGameboard();
+                    shape();
+                }
             }
         };
         timer.scheduleAtFixedRate(task, 0, SPEED);
@@ -148,4 +163,18 @@ public class Interface extends JFrame implements KeyListener {
         label.setBackground(color);
     }
 
+    /**
+     * changes color of the labels of gameboard.
+     */
+    public void updateGameboard() {
+        for (int row = 0; row < scaleHeight; row++) {
+            for (int col = 0; col < scaleWidth; col++) {
+                if (gameBoard.getGameBoardArray()[row][col]) {
+                    labelArray[row][col].setBackground(Color.red);
+                } else {
+                    labelArray[row][col].setBackground(Color.black);
+                }
+            }
+        }
+    }
 }

@@ -106,6 +106,7 @@ public class Menu {
                 break;
             }
             game.print(gameBoard, shape);
+            System.out.println("SCORE: " + gameBoard.getScore());
             System.out.println("Press next numbers to");
             System.out.println("1.- Move to Right");
             System.out.println("2.- Move to Left");
