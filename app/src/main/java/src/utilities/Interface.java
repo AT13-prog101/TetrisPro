@@ -20,7 +20,7 @@ public class Interface extends JFrame implements KeyListener {
     private int scaleHeight = gameBoard.getGameBoardHeight();
     private int sizeWindowWidth = scaleWidth * SIZE_IMAGE;
     private int sizeWindowHeight = scaleHeight * SIZE_IMAGE;
-    private static final int SPEED = 200;
+    private static final int SPEED = 300;
     private static JLabel[][] labelArray;
     private Timer timer;
 
@@ -106,8 +106,12 @@ public class Interface extends JFrame implements KeyListener {
         }
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             updateShape(Color.black);
-            shape.rotate();
-            updateShape(Color.green);
+            if (game.checkCollision(shape, gameBoard, DirectionType.Rotate)) {
+                shape.rotate();
+                shape.rotate();
+                shape.rotate();
+                updateShape(Color.green);
+            }
         }
     }
 
