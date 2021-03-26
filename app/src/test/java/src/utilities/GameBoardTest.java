@@ -1,4 +1,4 @@
-package src;
+package src.utilities;
 
 import org.junit.Test;
 import src.shapes.*;
@@ -47,14 +47,14 @@ public class GameBoardTest {
     @Test
     public void setGameBoardArray_1And2AndArrayOf2x2_UpdatedArray() {
         GameBoard gameBoard = new GameBoard();
-        Shape shape = new Shape(1,2, ShapeType.O);
+        Shape shape = new Shape(ShapeType.O);
         gameBoard.setGameBoardArray(shape);
         boolean[][] actual = gameBoard.getGameBoardArray();
         boolean [][] expected = new boolean[20][10];
-        expected[2][1] = true;
-        expected[2][2] = true;
-        expected[3][1] = true;
-        expected[3][2] = true;
+        expected[0][3] = true;
+        expected[0][4] = true;
+        expected[1][3] = true;
+        expected[1][4] = true;
         assertArrayEquals(expected, actual);
     }
 
