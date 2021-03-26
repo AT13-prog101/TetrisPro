@@ -23,6 +23,11 @@ public class Interface extends JFrame implements KeyListener {
     private static final int SPEED = 200;
     private static JLabel[][] labelArray;
     private Timer timer;
+    private final GameOver gameOver = new GameOver();
+    private int onlyOneMovement = 0;
+    private static final int SAFE_SPACE = 3;
+    private static final int SAFE_ZONE = 8;
+    private boolean gameInCourse = true;
 
     public Interface() { }
 
@@ -123,19 +128,26 @@ public class Interface extends JFrame implements KeyListener {
      * Method to initialize timer.
      */
     public void start() {
+
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                if (!game.checkCollision(shape, gameBoard, DirectionType.Down)) {
-                    updateShape(Color.black);
-                    shape.moveDown();
-                    updateShape(Color.green);
+                if (!validSpace()) {
+                    gameInCourse = false;
+                    lose();
+                    repaint();
                 } else {
-                    gameBoard.setGameBoardArray(shape);
-                    gameBoard.updateLinesOnGameBoard();
-                    game.print(gameBoard, shape);
-                    updateGameboard();
-                    shape();
+                    if (!game.checkCollision(shape, gameBoard, DirectionType.Down)) {
+                        updateShape(Color.black);
+                        shape.moveDown();
+                        updateShape(Color.green);
+                    } else {
+                        gameBoard.setGameBoardArray(shape);
+                        gameBoard.updateLinesOnGameBoard();
+                        game.print(gameBoard, shape);
+                        updateGameboard();
+                        shape();
+                    }
                 }
             }
         };
@@ -157,6 +169,12 @@ public class Interface extends JFrame implements KeyListener {
     }
 
     /**
+     * Calls game over when losing game.
+     */
+    public void lose() {
+        gameOver.showGameOver(this, timer);
+    }
+    /**
      * changes color of the label to other.
      */
     public void updateColorOfLabel(final JLabel label, final Color color) {
@@ -176,5 +194,20 @@ public class Interface extends JFrame implements KeyListener {
                 }
             }
         }
+    }
+
+    /**
+     * Method to check if there is enough space to put the shape.
+     */
+    private boolean validSpace() {
+        int count = 0;
+        for (int i = 0; i < 2; i++) {
+            for (int j = SAFE_SPACE; j < gameBoard.getGameBoardArray()[i].length - SAFE_SPACE; j++) {
+                if (!gameBoard.getGameBoardArray()[i][j]) {
+                    count++;
+                }
+            }
+        }
+        return count == SAFE_ZONE;
     }
 }
