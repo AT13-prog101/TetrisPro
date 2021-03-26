@@ -14,6 +14,7 @@ public class Shape  {
     private int rightColumns;
     private int leftColumns;
     private int downRows;
+    private int topRows;
 
     public Shape(final ShapeType type) {
         xPosition = X_POS_DEFAULT;
@@ -51,6 +52,13 @@ public class Shape  {
     public int getLeftColumns() {
         return leftColumns;
     }
+
+    /**
+     *
+     * @return an integer with the number of columns from above
+     */
+    public int getTopRows() { return topRows; }
+
     /**
      * @return a boolean that checks the lower bound
      */
@@ -110,6 +118,38 @@ public class Shape  {
      */
     public boolean[][] getContainer() {
         return container;
+    }
+
+    /**
+     * Gets the solid part of the shape
+     * @return the shape without empty row or column
+     */
+    public boolean[][] getPartialShape() {
+        int height = container.length;
+        int width = container[0].length;
+        int xInit = 0;
+        int yInit = 0;
+        if (getLeftColumns() > 0) {
+            width = container[0].length - leftColumns;
+            xInit = leftColumns;
+        }
+        if (getTopRows() > 0 ) {
+            height = container.length - topRows;
+            yInit = topRows;
+        }
+        if (getRightColumns() > 0) {
+            width = container[0].length - rightColumns;
+        }
+        if (getDownRows() > 0) {
+            height = container.length - downRows;
+        }
+        boolean[][] partialArray = new boolean[height][width];
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                partialArray[i][j] = container[i + yInit][j + xInit];
+            }
+        }
+        return partialArray;
     }
 
     /**
@@ -185,6 +225,29 @@ public class Shape  {
         return rowCounter;
     }
 
+
+    /**
+     * calculates free rows from down.
+     * @return An integer that represents how many free rows shape container has.
+     */
+    public int reviewFromUp(final boolean[][] mat) {
+        boolean topRowEmpty = true;
+        int rowCounter = 0;
+        int i = 0;
+        while (topRowEmpty && i < mat.length) {
+            int j = 0;
+            while (topRowEmpty && j < mat.length) {
+                topRowEmpty = topRowEmpty && !mat[i][j];
+                j++;
+            }
+            if (topRowEmpty) {
+                rowCounter++;
+            }
+            i++;
+        }
+        return rowCounter;
+    }
+
     /**
      * rotate the matrix.
      * @return An array of boolean with the rotate form of figure.
@@ -216,5 +279,6 @@ public class Shape  {
         rightColumns = reviewFromRight(container);
         leftColumns = reviewFromLeft(container);
         downRows = reviewFromDown(container);
+        topRows = reviewFromUp(container);
     }
 }
