@@ -20,8 +20,6 @@ public class Interface extends JFrame implements KeyListener {
     private int scaleHeight = gameBoard.getGameBoardHeight();
     private int sizeWindowWidth = scaleWidth * SIZE_IMAGE;
     private int sizeWindowHeight = scaleHeight * SIZE_IMAGE;
-    private static final int INITIAL_POSX_SHAPE = 3;
-    private static final int INITIAL_POSY_SHAPE = 0;
     private static final int SPEED = 200;
     private static JLabel[][] labelArray;
     private Timer timer;
@@ -37,10 +35,8 @@ public class Interface extends JFrame implements KeyListener {
         setSize(sizeWindowWidth, sizeWindowHeight);
         setTitle("TETRIS");
         setLocationRelativeTo(null);
-
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setFocusable(true);
-        //shape();
         labelArray = new JLabel[scaleHeight][scaleWidth];
         setLayout(new GridLayout(scaleHeight, scaleWidth));
         for (int row = 0; row < scaleHeight; row++) {
@@ -49,18 +45,13 @@ public class Interface extends JFrame implements KeyListener {
                 JLabel label = new JLabel();
                 label.setName("Tetris");
                 label.setOpaque(true);
-                //if (gameBoard.getGameBoardArray()[row][col]) {
-                //    label.setBackground(Color.red);
-                //} else {
-                    label.setBackground(Color.black);
-                //}
+                label.setBackground(Color.black);
                 label.setBorder(border);
                 labelArray[row][col] = label;
                 add(label);
             }
         }
         shape();
-        //updateShape(Color.green);
         setVisible(true);
         addKeyListener(this);
         start();
@@ -69,11 +60,8 @@ public class Interface extends JFrame implements KeyListener {
      * Method to initialize and show a shape.
      */
     public void shape() {
-        //randomShape = new RandomShape();
         shape = randomShape.getShape(randomShape.randomNumberGenerator());
         updateShape(Color.green);
-        //printShape();
-
     }
     /**
      * Refresh the icon of a label where it is our Alien.
