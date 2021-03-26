@@ -118,7 +118,7 @@ public class TetrisUI extends JFrame implements KeyListener {
             }
         }
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            System.exit(0);
+            lose();
         }
     }
 
