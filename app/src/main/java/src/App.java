@@ -6,7 +6,7 @@ package src.utilities;
 public class App {
 
     public static void main(final String[] args) {
-        Interface tetris = new Interface();
+        TetrisUI tetris = new TetrisUI();
         tetris.init();
     }
 }
