@@ -140,7 +140,6 @@ public class TetrisUI extends JFrame implements KeyListener {
                 } else {
                     gameBoard.setGameBoardArray(shape);
                     gameBoard.updateLinesOnGameBoard();
-                    game.print(gameBoard, shape);
                     updateGameboard();
                     shape();
                 }

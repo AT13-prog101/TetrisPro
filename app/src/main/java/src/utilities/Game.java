@@ -114,38 +114,4 @@ public class Game {
                 break;
         }
     }
-
-    /**
-     * Displays the shape and gameboard on the console
-     * @param gameBoard the game board array
-     * @param shape the figure to display
-     */
-    public void print(final GameBoard gameBoard, final Shape shape) {
-        int x = shape.getxPosition();
-        int y = shape.getyPosition();
-        int arrayLength = shape.getContainer().length;
-        for (int i = 0; i < gameBoard.getGameBoardArray().length; i++) {
-            for (int j = 0; j < gameBoard.getGameBoardArray()[i].length; j++) {
-                if (i >= y && i < (y + arrayLength) && j >= x && j < (x + arrayLength)) {
-                    if (shape.getContainer()[i - y][j - x]) {
-                        System.out.print("1");
-                    } else {
-                        if (gameBoard.getGameBoardArray()[i][j]) {
-                            System.out.print("1");
-                        } else {
-                            System.out.print("0");
-                        }
-                    }
-                } else {
-                    if (gameBoard.getGameBoardArray()[i][j]) {
-                        System.out.print("1");
-                    } else {
-                        System.out.print("0");
-                    }
-                }
-            }
-            System.out.println();
-        }
-        System.out.println();
-    }
 }
