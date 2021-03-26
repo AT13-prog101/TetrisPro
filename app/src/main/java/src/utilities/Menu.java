@@ -116,15 +116,13 @@ public class Menu {
             int option = scanner.nextInt();
             switch (option) {
                 case OPTION_1:
-                    if (game.checkCollision(shape, gameBoard, DirectionType.Right)) {
-                    } else {
+                    if (!game.checkCollision(shape, gameBoard, DirectionType.Right)) {
                         System.out.println("Moved to right");
                         shape.moveRight();
                     }
                     break;
                 case OPTION_2:
-                    if (game.checkCollision(shape, gameBoard, DirectionType.Left)) {
-                    } else {
+                    if (!game.checkCollision(shape, gameBoard, DirectionType.Left)) {
                         System.out.println("Moved to left");
                         shape.moveLeft();
                     }

@@ -10,7 +10,7 @@ import java.awt.event.KeyListener;
 import java.util.TimerTask;
 import java.util.Timer;
 
-public class Interface extends JFrame implements KeyListener {
+public class TetrisUI extends JFrame implements KeyListener {
     private GameBoard gameBoard = new GameBoard();
     private Game game = new Game();
     private RandomShape randomShape;
@@ -20,11 +20,11 @@ public class Interface extends JFrame implements KeyListener {
     private int scaleHeight = gameBoard.getGameBoardHeight();
     private int sizeWindowWidth = scaleWidth * SIZE_IMAGE;
     private int sizeWindowHeight = scaleHeight * SIZE_IMAGE;
-    private static final int SPEED = 200;
+    private static final int SPEED = 300;
     private static JLabel[][] labelArray;
     private Timer timer;
 
-    public Interface() { }
+    public TetrisUI() { }
 
     /**
      * Method initialize the graphical interface.
@@ -106,8 +106,15 @@ public class Interface extends JFrame implements KeyListener {
         }
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             updateShape(Color.black);
-            shape.rotate();
-            updateShape(Color.green);
+            if (game.checkCollision(shape, gameBoard, DirectionType.Rotate)) {
+                shape.rotate();
+                shape.rotate();
+                shape.rotate();
+                updateShape(Color.green);
+            }
+        }
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            System.exit(0);
         }
     }
 

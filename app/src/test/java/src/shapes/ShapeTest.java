@@ -1,4 +1,4 @@
-package src;
+package src.shapes;
 
 import org.junit.Test;
 import src.shapes.Shape;

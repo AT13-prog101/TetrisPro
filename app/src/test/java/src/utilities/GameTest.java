@@ -1,4 +1,4 @@
-package src;
+package src.utilities;
 
 import org.junit.Test;
 import src.shapes.*;
