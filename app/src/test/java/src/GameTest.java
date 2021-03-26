@@ -14,7 +14,7 @@ public class GameTest {
     public void checkCollision_ShapeIGameBoardDownMovement_True() {
         Game game = new Game();
         GameBoard gameBoard = new GameBoard();
-        Shape shape = new Shape(5,0,ShapeType.I);
+        Shape shape = new Shape(ShapeType.I);
         boolean[][] fullRow = {{true, true, true, true, true,true, true, true, true, true}};
         gameBoard.setGameBoardArray(0, 1,fullRow);
         boolean actual = game.checkCollision(shape, gameBoard, DirectionType.Down);
@@ -25,7 +25,7 @@ public class GameTest {
     public void checkCollision_ShapeIGameBoardDownMovement_False() {
         Game game = new Game();
         GameBoard gameBoard = new GameBoard();
-        Shape shape = new Shape(5,0,ShapeType.I);
+        Shape shape = new Shape(ShapeType.I);
         boolean[][] fullRow = {{true, true, true, true, true, false, true, true, true, true}};
         gameBoard.setGameBoardArray(0, 4,fullRow);
         boolean actual = game.checkCollision(shape, gameBoard, DirectionType.Down);
@@ -36,9 +36,9 @@ public class GameTest {
     public void checkCollision_ShapeJGameBoardRightMovement_True() {
         Game game = new Game();
         GameBoard gameBoard = new GameBoard();
-        Shape shape = new Shape(5,0,ShapeType.J);
+        Shape shape = new Shape(ShapeType.J);
         boolean[][] fullColumn = {{true}, {true}, {true}, {true}, {true}, {true}, {true}, {true}, {true}, {true}};
-        gameBoard.setGameBoardArray(8, 0,fullColumn);
+        gameBoard.setGameBoardArray(6, 0,fullColumn);
         boolean actual = game.checkCollision(shape, gameBoard, DirectionType.Right);
         assertTrue(actual);
     }
@@ -47,7 +47,7 @@ public class GameTest {
     public void checkCollision_ShapeJGameBoardRightMovement_False() {
         Game game = new Game();
         GameBoard gameBoard = new GameBoard();
-        Shape shape = new Shape(5,0,ShapeType.J);
+        Shape shape = new Shape(ShapeType.J);
         boolean[][] fullColumn = {{true}, {true}, {true}, {true}, {true}, {true}, {true}, {true}, {true}, {true}};
         gameBoard.setGameBoardArray(9, 0,fullColumn);
         boolean actual = game.checkCollision(shape, gameBoard, DirectionType.Right);
@@ -58,9 +58,9 @@ public class GameTest {
     public void checkCollision_ShapeLGameBoarLeftMovement_True() {
         Game game = new Game();
         GameBoard gameBoard = new GameBoard();
-        Shape shape = new Shape(5,0,ShapeType.L);
+        Shape shape = new Shape(ShapeType.L);
         boolean[][] fullColumn = {{true}, {true}, {true}, {true}, {true}, {true}, {true}, {true}, {true}, {true}};
-        gameBoard.setGameBoardArray(4, 0,fullColumn);
+        gameBoard.setGameBoardArray(2, 0,fullColumn);
         boolean actual = game.checkCollision(shape, gameBoard, DirectionType.Left);
         assertTrue(actual);
     }
@@ -69,9 +69,9 @@ public class GameTest {
     public void checkCollision_ShapeLGameBoardLeftMovement_False() {
         Game game = new Game();
         GameBoard gameBoard = new GameBoard();
-        Shape shape = new Shape(5,0, ShapeType.L);
+        Shape shape = new Shape(ShapeType.L);
         boolean[][] fullColumn = {{true}, {true}, {true}, {true}, {true}, {true}, {true}, {true}, {true}, {true}};
-        gameBoard.setGameBoardArray(3, 0,fullColumn);
+        gameBoard.setGameBoardArray(0, 0,fullColumn);
         boolean actual = game.checkCollision(shape, gameBoard, DirectionType.Left);
         assertFalse(actual);
     }
@@ -80,7 +80,10 @@ public class GameTest {
     public void checkCollision_ShapeIGameBoardDownMovementLimitReached_True() {
         Game game = new Game();
         GameBoard gameBoard = new GameBoard();
-        Shape shape = new Shape(5,19, ShapeType.I);
+        Shape shape = new Shape(ShapeType.I);
+        for (int i = 0; i < 20; i++) {
+            shape.moveDown();
+        }
         boolean actual = game.checkCollision(shape, gameBoard, DirectionType.Down);
         assertTrue(actual);
     }
@@ -89,10 +92,13 @@ public class GameTest {
     public void checkCollision_ShapeIGameBoardLeftMovementLimitReached_True() {
         Game game = new Game();
         GameBoard gameBoard = new GameBoard();
-        Shape shape = new Shape(0,0, ShapeType.I);
-        shape.rotate();
-        shape.rotate();
-        shape.rotate();
+        Shape shape = new Shape(ShapeType.I);
+        for (int i = 0; i < 4; i++) {
+            shape.rotate();
+        }
+        for (int i = 0; i < 10; i++) {
+            shape.moveLeft();
+        }
         game.checkCollision(shape, gameBoard, DirectionType.Right);
         int actual = game.getLeftEmptyColumns();
         int expected = shape.getLeftColumns();
@@ -102,7 +108,7 @@ public class GameTest {
     @Test
     public void selectDirection_ShapeJGameBoardDownMovement_YMovement1() {
         Game game = new Game();
-        Shape shape = new Shape(5,0, ShapeType.J);
+        Shape shape = new Shape(ShapeType.J);
         game.selectDirection(DirectionType.Down,shape);
         int actual = game.getyMovement();
         int expected = 1;
@@ -112,7 +118,10 @@ public class GameTest {
     @Test
     public void selectDirection_ShapeJGameBoardDownMovement_DownLimitReached() {
         Game game = new Game();
-        Shape shape = new Shape(5,18, ShapeType.J);
+        Shape shape = new Shape(ShapeType.J);
+        for (int i = 0; i < 19; i++) {
+            shape.moveDown();
+        }
         game.selectDirection(DirectionType.Down,shape);
         boolean actual = game.getdownLimitReached();
         assertTrue(actual);
@@ -121,7 +130,10 @@ public class GameTest {
     @Test
     public void selectDirection_ShapeJGameBoardLeftMovement_XMovement0() {
         Game game = new Game();
-        Shape shape = new Shape(0,0, ShapeType.J);
+        Shape shape = new Shape(ShapeType.J);
+        for (int i = 0; i < 4; i++) {
+            shape.moveLeft();
+        }
         game.selectDirection(DirectionType.Left,shape);
         int actual = game.getxMovement();
         int expected = 0;
@@ -131,7 +143,7 @@ public class GameTest {
     @Test
     public void selectDirection_ShapeJGameBoardLeftMovement_XMovementNegative1() {
         Game game = new Game();
-        Shape shape = new Shape(5,0, ShapeType.J);
+        Shape shape = new Shape(ShapeType.J);
         game.selectDirection(DirectionType.Left,shape);
         int actual = game.getxMovement();
         int expected = -1;
@@ -141,7 +153,10 @@ public class GameTest {
     @Test
     public void selectDirection_ShapeJGameBoardRightMovement_XMovement0() {
         Game game = new Game();
-        Shape shape = new Shape(7,0, ShapeType.J);
+        Shape shape = new Shape(ShapeType.J);
+        for (int i = 0; i < 5; i++) {
+            shape.moveRight();
+        }
         game.selectDirection(DirectionType.Right, shape);
         int actual = game.getxMovement();
         int expected = 0;
@@ -151,7 +166,7 @@ public class GameTest {
     @Test
     public void selectDirection_ShapeJGameBoardRightMovement_XMovement1() {
         Game game = new Game();
-        Shape shape = new Shape(5,0, ShapeType.J);
+        Shape shape = new Shape(ShapeType.J);
         game.selectDirection(DirectionType.Right,shape);
         int actual = game.getxMovement();
         int expected = 1;

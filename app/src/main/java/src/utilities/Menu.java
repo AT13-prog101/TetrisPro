@@ -10,8 +10,6 @@ public class Menu {
     private static final int OPTION_3 = 3;
     private static final int OPTION_4 = 4;
     private static final int OPTION_5 = 5;
-    private static final int INITIAL_POSX_SHAPE = 3;
-    private static final int INITIAL_POSY_SHAPE = 0;
     private GameBoard gameBoard;
     private RandomShape randomShape;
     private Shape shape;
@@ -102,7 +100,7 @@ public class Menu {
         gameBoard = new GameBoard();
         game = new Game();
         randomShape = new RandomShape();
-        shape = randomShape.getShape(randomShape.randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE);
+        shape = randomShape.getShape(randomShape.randomNumberGenerator());
         boolean gameInCourse = true;
         boolean collision = false;
         Scanner scanner = new Scanner(System.in);
@@ -155,7 +153,7 @@ public class Menu {
                         }
                         gameBoard.updateLinesOnGameBoard();
                         randomShape = new RandomShape();
-                        shape = randomShape.getShape(randomShape.randomNumberGenerator(), INITIAL_POSX_SHAPE, INITIAL_POSY_SHAPE);
+                        shape = randomShape.getShape(randomShape.randomNumberGenerator());
                     } else {
                         System.out.println("Went Down");
                         onlyOneMovement++;
