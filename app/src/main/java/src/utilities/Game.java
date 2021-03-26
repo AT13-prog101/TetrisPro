@@ -7,15 +7,27 @@ public class Game {
     private int yMovement;
     private boolean downLimitReached = false;
 
-    public int getyMovement() {
+    /**
+     * Gets the yMovement value
+     * @return an int with the value
+     */
+    public int getYMovement() {
         return yMovement;
     }
 
-    public boolean getdownLimitReached() {
+    /**
+     * Gets the downLimitReached value
+     * @return a boolean with the value
+     */
+    public boolean getDownLimitReached() {
         return downLimitReached;
     }
 
-    public int getxMovement() {
+    /**
+     * Gets the xMovement value
+     * @return an int with the value
+     */
+    public int getXMovement() {
         return xMovement;
     }
 
@@ -33,7 +45,9 @@ public class Game {
         }
         int shapeHeight = shape.getPartialShape().length;
         int shapeWidth = shape.getPartialShape()[0].length;
-        boolean[][] matchArray = gameBoard.getPartialGameBoardArray(shape.getxPosition() + xMovement + shape.getLeftColumns(), shape.getyPosition() + yMovement + shape.getTopRows(), shapeHeight, shapeWidth);
+        int xInitial = shape.getxPosition() + xMovement + shape.getLeftColumns();
+        int yInitial = shape.getyPosition() + yMovement + shape.getTopRows();
+        boolean[][] matchArray = gameBoard.getPartialGameBoardArray(xInitial, yInitial, shapeHeight, shapeWidth);
         return compareArrays(matchArray, shape.getPartialShape(), shapeHeight, shapeWidth);
     }
 
@@ -43,9 +57,9 @@ public class Game {
      * @param secondArray to compare
      * @param height of the arrays
      * @param width of the arrays
-     * @return
+     * @return a boolean with the result
      */
-    public boolean compareArrays(boolean[][] firstArray, boolean[][] secondArray, int height, int width) {
+    public boolean compareArrays(final boolean[][] firstArray, final boolean[][] secondArray, final int height, final int width) {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 if (firstArray[i][j] && secondArray[i][j]) {
@@ -61,7 +75,7 @@ public class Game {
      * @param direction the shape's current direction
      * @param shape that is moving
      */
-    public void selectDirection(DirectionType direction, Shape shape) {
+    public void selectDirection(final DirectionType direction, final Shape shape) {
         xMovement = 0;
         yMovement = 0;
         downLimitReached = false;
@@ -86,6 +100,17 @@ public class Game {
                 } else {
                     xMovement = 1;
                 }
+                break;
+            case Rotate:
+                if (shape.checkRotation()) {
+                    shape.rotate();
+                }
+                break;
+            case Hold:
+                System.out.println("Hold Position");
+                break;
+            default:
+                System.out.println("Invalid entry");
                 break;
         }
     }

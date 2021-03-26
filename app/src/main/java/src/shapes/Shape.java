@@ -1,6 +1,8 @@
 package src.shapes;
 
 
+import src.utilities.GameBoard;
+
 public class Shape  {
     private int xPosition;
     private int yPosition;
@@ -77,6 +79,15 @@ public class Shape  {
      */
     public boolean checkLeftLimit() {
         return xPosition + leftColumns == 0;
+    }
+
+    public boolean checkRotation() {
+        if (xPosition < 0 ||
+                xPosition > HOR_LIMIT_DEFAULT - container.length ||
+                yPosition > VER_LIMIT_DEFAULT - container.length) {
+            return false;
+        }
+        return true;
     }
 
     /**

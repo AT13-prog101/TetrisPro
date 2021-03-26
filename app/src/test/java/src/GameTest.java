@@ -93,7 +93,7 @@ public class GameTest {
         Game game = new Game();
         Shape shape = new Shape(ShapeType.J);
         game.selectDirection(DirectionType.Down,shape);
-        int actual = game.getyMovement();
+        int actual = game.getYMovement();
         int expected = 1;
         assertEquals(expected, actual);
     }
@@ -106,7 +106,7 @@ public class GameTest {
             shape.moveDown();
         }
         game.selectDirection(DirectionType.Down,shape);
-        boolean actual = game.getdownLimitReached();
+        boolean actual = game.getDownLimitReached();
         assertTrue(actual);
     }
 
@@ -118,7 +118,7 @@ public class GameTest {
             shape.moveLeft();
         }
         game.selectDirection(DirectionType.Left,shape);
-        int actual = game.getxMovement();
+        int actual = game.getXMovement();
         int expected = 0;
         assertEquals(expected, actual);
     }
@@ -128,7 +128,7 @@ public class GameTest {
         Game game = new Game();
         Shape shape = new Shape(ShapeType.J);
         game.selectDirection(DirectionType.Left,shape);
-        int actual = game.getxMovement();
+        int actual = game.getXMovement();
         int expected = -1;
         assertEquals(expected, actual);
     }
@@ -141,7 +141,7 @@ public class GameTest {
             shape.moveRight();
         }
         game.selectDirection(DirectionType.Right, shape);
-        int actual = game.getxMovement();
+        int actual = game.getXMovement();
         int expected = 0;
         assertEquals(expected, actual);
     }
@@ -151,7 +151,7 @@ public class GameTest {
         Game game = new Game();
         Shape shape = new Shape(ShapeType.J);
         game.selectDirection(DirectionType.Right,shape);
-        int actual = game.getxMovement();
+        int actual = game.getXMovement();
         int expected = 1;
         assertEquals(expected, actual);
     }

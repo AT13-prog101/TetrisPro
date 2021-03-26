@@ -139,8 +139,15 @@ public class Menu {
                     }
                     break;
                 case OPTION_3:
-                    System.out.println("Rotated shape");
-                    shape.rotate();
+                    if (game.checkCollision(shape, gameBoard, DirectionType.Rotate)) {
+                        shape.rotate();
+                        shape.rotate();
+                        shape.rotate();
+                        collision = true;
+                    } else {
+                        System.out.println("Rotated shape");
+//                        shape.rotate();
+                    }
                     break;
                 case OPTION_4:
                     if (game.checkCollision(shape, gameBoard, DirectionType.Down)) {
