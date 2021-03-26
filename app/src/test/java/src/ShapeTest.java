@@ -132,4 +132,42 @@ public class ShapeTest {
                                 {false, false, false}};
         assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void getPartialShape_ShapeI_I() {
+        Shape shape = new Shape(ShapeType.I);
+        boolean[][] actual = shape.getPartialShape();
+        boolean[][] expected = {{true, true, true, true}};
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void getPartialShape_ShapeIRotatedOneTime_I() {
+        Shape shape = new Shape(ShapeType.I);
+        shape.rotate();
+        boolean[][] actual = shape.getPartialShape();
+        boolean[][] expected = {{true},{true},{true},{true}};
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void getPartialShape_ShapeIRotatedTwoTimes_I() {
+        Shape shape = new Shape(ShapeType.I);
+        shape.rotate();
+        shape.rotate();
+        boolean[][] actual = shape.getPartialShape();
+        boolean[][] expected = {{true, true, true, true}};
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void getPartialShape_ShapeIRotatedThreeTimes_I() {
+        Shape shape = new Shape(ShapeType.I);
+        shape.rotate();
+        shape.rotate();
+        shape.rotate();
+        boolean[][] actual = shape.getPartialShape();
+        boolean[][] expected = {{true},{true},{true},{true}};
+        assertArrayEquals(expected, actual);
+    }
 }

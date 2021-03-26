@@ -89,23 +89,6 @@ public class GameTest {
     }
 
     @Test
-    public void checkCollision_ShapeIGameBoardLeftMovementLimitReached_True() {
-        Game game = new Game();
-        GameBoard gameBoard = new GameBoard();
-        Shape shape = new Shape(ShapeType.I);
-        for (int i = 0; i < 4; i++) {
-            shape.rotate();
-        }
-        for (int i = 0; i < 10; i++) {
-            shape.moveLeft();
-        }
-        game.checkCollision(shape, gameBoard, DirectionType.Right);
-        int actual = game.getLeftEmptyColumns();
-        int expected = shape.getLeftColumns();
-        assertEquals(expected, actual);
-    }
-
-    @Test
     public void selectDirection_ShapeJGameBoardDownMovement_YMovement1() {
         Game game = new Game();
         Shape shape = new Shape(ShapeType.J);
